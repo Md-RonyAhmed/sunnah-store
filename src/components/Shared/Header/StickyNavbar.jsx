@@ -94,7 +94,7 @@ export function StickyNavbar() {
 
   return (
     <div>
-      <Navbar className="sticky top-0 z-10 max-w-full rounded-none py-2 lg:py-4 shadow-none px-0">
+      <Navbar className="fixed top-0 z-10 w-full rounded-none py-2 lg:py-4 shadow-none px-0">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
@@ -115,9 +115,8 @@ export function StickyNavbar() {
             <div className="flex items-center gap-x-1">
               <NavLink to={"/auth/signin"}>
                 <Button
-                  variant="gradient"
                   size="sm"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block bg-[#00BF63]"
                 >
                   <span>Sign in</span>
                 </Button>
