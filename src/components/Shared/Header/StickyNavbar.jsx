@@ -20,7 +20,7 @@ export function StickyNavbar() {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -93,13 +93,11 @@ export function StickyNavbar() {
   );
 
   return (
-    <div>
-      <Navbar className="fixed top-0 z-10 w-full rounded-none py-2 lg:py-4 shadow-none px-0">
+    <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
+      <Navbar className="rounded-none py-1 shadow-none mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="mr-4 cursor-pointer font-medium"
           >
             <Link to={"/"}>
               <div className="flex items-center justify-center">
