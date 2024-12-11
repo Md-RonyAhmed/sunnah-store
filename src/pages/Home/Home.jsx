@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import Ebook from "../../components/Ebook";
 import Banner from "../../components/Shared/Header/Banner/Banner";
 import AdvertisementModal from "../../components/AdvertisementModal";
+import OfferTimer from "./OfferTimer";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
+  const targetDate = "2024-12-15T00:00:00";
 
   useEffect(() => {
     // Check the localStorage value and update the state
@@ -22,7 +24,7 @@ const Home = () => {
     const resetTimer = setTimeout(() => {
       localStorage.setItem("modal", "false");
       checkModalState();
-    }, 50000); // 24 hours in milliseconds
+    }, 100000);
 
     // Cleanup the timer
     return () => clearTimeout(resetTimer);
@@ -33,7 +35,7 @@ const Home = () => {
       <div>
         <Banner />
       </div>
-      <h1>Home</h1>
+      <OfferTimer targetDate={targetDate} />
       <Ebook />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
     </>
