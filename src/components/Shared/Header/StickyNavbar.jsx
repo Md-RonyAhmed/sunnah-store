@@ -4,6 +4,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Input,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -96,15 +97,37 @@ export function StickyNavbar() {
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
       <Navbar className="rounded-none py-1 shadow-none mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            className="mr-4 cursor-pointer font-medium"
-          >
+          <Typography className="mr-4 cursor-pointer font-medium">
             <Link to={"/"}>
-              <div className="flex items-center justify-center">
-                <img src={logo} alt="logo" className="w-20" />
-                <span className="text-2xl font-semibold text-[#00BF63]">
-                  Sunnah Store
-                </span>
+              <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6">
+
+                {/* Logo file */}
+                <div className="flex items-center justify-center">
+                  <img src={logo} alt="logo" className="w-20" />
+                  <span className="text-2xl font-semibold text-[#00BF63]">
+                    Sunnah Store
+                  </span>
+                </div>
+
+                {/* Product Search Box */}
+                <div className="relative hidden md:flex w-full gap-2 md:w-max">
+                  <Input
+                    type="search"
+                    color="gray"
+                    label="Type here..."
+                    className="pr-20"
+                    containerProps={{
+                      className: "md:min-w-[360px]",
+                    }}
+                  />
+                  <Button
+                    size="sm"
+                    color="green"
+                    className="!absolute right-1 top-1 rounded"
+                  >
+                    Search
+                  </Button>
+                </div>
               </div>
             </Link>
           </Typography>
