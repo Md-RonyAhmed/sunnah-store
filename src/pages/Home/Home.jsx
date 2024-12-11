@@ -24,7 +24,7 @@ const Home = () => {
     const resetTimer = setTimeout(() => {
       localStorage.setItem("modal", "false");
       checkModalState();
-    }, 100000);
+    }, 1000000);
 
     // Cleanup the timer
     return () => clearTimeout(resetTimer);
