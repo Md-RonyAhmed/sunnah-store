@@ -35,24 +35,38 @@ const OfferTimer = ({ targetDate }) => {
     return <div className="text-red-500">The offer has started!</div>;
   }
 
+  // Format the time parts with leading zeros
+  const days = String(timeLeft.days).padStart(2, "0");
+  const hours = String(timeLeft.hours).padStart(2, "0");
+  const minutes = String(timeLeft.minutes).padStart(2, "0");
+  const seconds = String(timeLeft.seconds).padStart(2, "0");
+
   return (
     <div className="bg-green-500 text-white p-4 shadow-md text-center mb-10 rounded">
       <h2 className="text-3xl font-bold mb-4">Upcoming Offer</h2>
       <div className="flex justify-center space-x-4 text-lg">
         <div>
-          <span className="block text-4xl font-bold border ">{timeLeft.days}</span>
+          <span className="block text-4xl font-bold border rounded px-3">
+            {days}
+          </span>
           <span>Days</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold border">{timeLeft.hours}</span>
+          <span className="block text-4xl font-bold border rounded px-3">
+            {hours}
+          </span>
           <span>Hours</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold border">{timeLeft.minutes}</span>
+          <span className="block text-4xl font-bold border rounded px-3">
+            {minutes}
+          </span>
           <span>Minutes</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold border">{timeLeft.seconds}</span>
+          <span className="block text-4xl font-bold border rounded">
+            {seconds}
+          </span>
           <span>Seconds</span>
         </div>
       </div>
