@@ -36,23 +36,23 @@ const OfferTimer = ({ targetDate }) => {
   }
 
   return (
-    <div className="bg-green-400 text-white p-4 rounded-lg shadow-md text-center my-10">
-      <h2 className="text-2xl font-bold mb-2">Upcoming Offer</h2>
+    <div className="bg-green-500 text-white p-4 shadow-md text-center mb-10 rounded">
+      <h2 className="text-3xl font-bold mb-4">Upcoming Offer</h2>
       <div className="flex justify-center space-x-4 text-lg">
         <div>
-          <span className="block text-4xl font-bold">{timeLeft.days}</span>
+          <span className="block text-4xl font-bold border ">{timeLeft.days}</span>
           <span>Days</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold">{timeLeft.hours}</span>
+          <span className="block text-4xl font-bold border">{timeLeft.hours}</span>
           <span>Hours</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold">{timeLeft.minutes}</span>
+          <span className="block text-4xl font-bold border">{timeLeft.minutes}</span>
           <span>Minutes</span>
         </div>
         <div>
-          <span className="block text-4xl font-bold">{timeLeft.seconds}</span>
+          <span className="block text-4xl font-bold border">{timeLeft.seconds}</span>
           <span>Seconds</span>
         </div>
       </div>
