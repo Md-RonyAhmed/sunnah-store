@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import App from "../App";
-import SignIn from "../pages/Auth/SignIn/SignIn";
+
 import AuthLayout from "../Layout/AuthLayout";
 import SignUp from "../pages/Auth/SignUp/SignUp";
 import Products from "../pages/Products/Products";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
+import { SimpleRegistrationForm } from "../pages/Auth/SignIn/SimpleRegistrationForm";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "signin",
-        element: <SignIn />,
+        path: "SimpleRegistrationForm",
+        element: <SimpleRegistrationForm />,
       },
       {
         path: "signup",

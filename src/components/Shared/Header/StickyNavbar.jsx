@@ -94,11 +94,9 @@ export function StickyNavbar() {
 
   return (
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
-      <Navbar className="rounded-none py-1 shadow-none mx-auto">
+      <Navbar className="py-1 mx-auto rounded-none shadow-none">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            className="mr-4 cursor-pointer font-medium"
-          >
+          <Typography className="mr-4 font-medium cursor-pointer">
             <Link to={"/"}>
               <div className="flex items-center justify-center">
                 <img src={logo} alt="logo" className="w-20" />
@@ -109,9 +107,9 @@ export function StickyNavbar() {
             </Link>
           </Typography>
           <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
+            <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <NavLink to={"/auth/signin"}>
+              <NavLink to={"/auth/SimpleRegistrationForm"}>
                 <Button
                   size="sm"
                   className="hidden lg:inline-block bg-[#00BF63]"
@@ -122,7 +120,7 @@ export function StickyNavbar() {
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="w-6 h-6 ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={true}
               onClick={() => setOpenNav(!openNav)}
             >
@@ -130,7 +128,7 @@ export function StickyNavbar() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -144,7 +142,7 @@ export function StickyNavbar() {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={2}
