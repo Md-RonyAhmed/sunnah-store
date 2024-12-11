@@ -3,6 +3,7 @@ import Ebook from "../../components/Ebook";
 import Banner from "../../components/Shared/Header/Banner/Banner";
 import AdvertisementModal from "../../components/AdvertisementModal";
 import OfferTimer from "./OfferTimer";
+import Categories from "./categories/Categories";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -35,6 +36,8 @@ const Home = () => {
       <div>
         <Banner />
       </div>
+      
+      <Categories />
       <OfferTimer targetDate={targetDate} />
       <Ebook />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
