@@ -96,10 +96,9 @@ export function StickyNavbar() {
   return (
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
-        <div className="flex items-center justify-between text-blue-gray-900">
-          
+        <div className="flex items-center flex-wrap justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
-          <div className="cursor-pointer font-medium">
+          <div className="cursor-pointer font-medium order-1">
             <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6">
               <Link>
                 {/* Logo file */}
@@ -110,31 +109,31 @@ export function StickyNavbar() {
                   </span>
                 </div>
               </Link>
-
-              {/* Product Search Box */}
-              <div className="relative hidden md:flex w-full gap-2 md:w-max">
-                <Input
-                  type="search"
-                  color="gray"
-                  label="Type here..."
-                  className="pr-20"
-                  containerProps={{
-                    className: "md:min-w-[360px]",
-                  }}
-                />
-                <Button
-                  size="sm"
-                  color="green"
-                  className="!absolute right-1 top-1 rounded"
-                >
-                  Search
-                </Button>
-              </div>
             </div>
           </div>
 
+          {/* Product Search Box */}
+          <div className="relative md:flex w-full gap-2 md:w-max order-3 md:order-2 m-4 md:m-0">
+            <Input
+              type="search"
+              color="gray"
+              label="Type here..."
+              className="pr-20"
+              containerProps={{
+                className: "md:min-w-[360px]",
+              }}
+            />
+            <Button
+              size="sm"
+              color="green"
+              className="!absolute right-1 top-1 rounded"
+            >
+              Search
+            </Button>
+          </div>
+
           {/* Nav Links */}
-          <div className="pr-4 flex items-center gap-4">
+          <div className="pr-4 flex items-center gap-4 order-2 md:order-3">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               <NavLink to={"/auth/signin"}>
