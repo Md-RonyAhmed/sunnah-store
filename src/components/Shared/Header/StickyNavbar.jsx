@@ -3,6 +3,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Input,
   Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
@@ -94,18 +95,45 @@ export function StickyNavbar() {
 
   return (
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
-      <Navbar className="rounded-none py-1 shadow-none mx-auto">
+      <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center justify-between text-blue-gray-900">
+          {/* Logo & Search Bar */}
           <div className="mr-4 cursor-pointer font-medium">
             <Link to={"/"}>
-              <div className="flex items-center justify-center">
-                <img src={logo} alt="logo" className="w-20" />
-                <span className="text-2xl font-semibold text-[#00BF63]">
-                  Sunnah Store
-                </span>
+              <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6 ">
+
+                {/* Logo file */}
+                <div className="flex items-center justify-center">
+                  <img src={logo} alt="logo" className="w-20" />
+                  <span className="text-2xl font-semibold text-[#00BF63]">
+                    Sunnah Store
+                  </span>
+                </div>
+
+                {/* Product Search Box */}
+                <div className="relative hidden md:flex w-full gap-2 md:w-max">
+                  <Input
+                    type="search"
+                    color="gray"
+                    label="Type here..."
+                    className="pr-20"
+                    containerProps={{
+                      className: "md:min-w-[360px]",
+                    }}
+                  />
+                  <Button
+                    size="sm"
+                    color="green"
+                    className="!absolute right-1 top-1 rounded"
+                  >
+                    Search
+                  </Button>
+                </div>
               </div>
             </Link>
           </div>
+
+          {/* Nav Links */}
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
@@ -128,7 +156,7 @@ export function StickyNavbar() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  className="h-6 w-6"
+                  className="h-6 w-6 -translate-x-4 md:-translate-x-0z-[99]"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -142,7 +170,7 @@ export function StickyNavbar() {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-6 w-6 -translate-x-4 md:-translate-x-0 z-[100]"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -158,6 +186,7 @@ export function StickyNavbar() {
           </div>
         </div>
         <Collapse open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -167,6 +196,7 @@ export function StickyNavbar() {
               <span>Sign in</span>
             </Button>
           </div>
+        </Collapse>
         </Collapse>
       </Navbar>
     </div>
