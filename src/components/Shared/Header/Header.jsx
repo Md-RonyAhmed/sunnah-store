@@ -2,9 +2,9 @@ import { StickyNavbar } from "./StickyNavbar";
 
 const Header = () => {
   return (
-    <div>
+    <>
       <StickyNavbar />
-    </div>
+    </>
   );
 };
 

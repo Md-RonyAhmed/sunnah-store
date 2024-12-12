@@ -186,6 +186,7 @@ export function StickyNavbar() {
           </div>
         </div>
         <Collapse open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -195,6 +196,7 @@ export function StickyNavbar() {
               <span>Sign in</span>
             </Button>
           </div>
+        </Collapse>
         </Collapse>
       </Navbar>
     </div>
