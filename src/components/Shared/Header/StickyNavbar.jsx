@@ -1,10 +1,10 @@
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
   Input,
+  Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -97,9 +97,10 @@ export function StickyNavbar() {
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography className="mr-4 cursor-pointer font-medium">
+          {/* Logo & Search Bar */}
+          <div className="mr-4 cursor-pointer font-medium">
             <Link to={"/"}>
-              <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6">
+              <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6 ">
 
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
@@ -130,7 +131,9 @@ export function StickyNavbar() {
                 </div>
               </div>
             </Link>
-          </Typography>
+          </div>
+
+          {/* Nav Links */}
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
@@ -153,7 +156,7 @@ export function StickyNavbar() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  className="h-6 w-6"
+                  className="h-6 w-6 -translate-x-4 md:-translate-x-0z-[99]"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -167,7 +170,7 @@ export function StickyNavbar() {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-6 w-6 -translate-x-4 md:-translate-x-0 z-[100]"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={2}
@@ -182,7 +185,7 @@ export function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -192,7 +195,7 @@ export function StickyNavbar() {
               <span>Sign in</span>
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );
