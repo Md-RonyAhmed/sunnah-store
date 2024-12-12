@@ -1,10 +1,4 @@
-import {
-  Navbar,
-  MobileNav,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-tailwind/react";
+import { Navbar, Button, IconButton, Collapse } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
@@ -21,12 +15,7 @@ export function StickyNavbar() {
 
   const navList = (
     <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
+      <li color="blue-gray" className="p-1 text-sm font-normal">
         <NavLink
           to={"/"}
           className={({ isActive }) =>
@@ -37,13 +26,8 @@ export function StickyNavbar() {
         >
           Home
         </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
+      </li>
+      <li color="blue-gray" className="p-1 text-sm font-sm">
         <NavLink
           to={"/products"}
           className={({ isActive }) =>
@@ -54,13 +38,8 @@ export function StickyNavbar() {
         >
           Products
         </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
+      </li>
+      <li color="blue-gray" className="p-1 text-sm font-normal">
         <NavLink
           to={"/about"}
           className={({ isActive }) =>
@@ -71,13 +50,8 @@ export function StickyNavbar() {
         >
           About
         </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
+      </li>
+      <li color="blue-gray" className="p-1 text-sm font-normal">
         <NavLink
           to={"/contact"}
           className={({ isActive }) =>
@@ -88,7 +62,7 @@ export function StickyNavbar() {
         >
           Contact
         </NavLink>
-      </Typography>
+      </li>
     </ul>
   );
 
@@ -96,7 +70,7 @@ export function StickyNavbar() {
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
       <Navbar className="py-1 mx-auto rounded-none shadow-none">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography className="mr-4 font-medium cursor-pointer">
+          <div className="mr-4 font-medium cursor-pointer">
             <Link to={"/"}>
               <div className="flex items-center justify-center">
                 <img src={logo} alt="logo" className="w-20" />
@@ -105,7 +79,7 @@ export function StickyNavbar() {
                 </span>
               </div>
             </Link>
-          </Typography>
+          </div>
           <div className="flex items-center gap-4">
             <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
@@ -157,7 +131,7 @@ export function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -167,7 +141,7 @@ export function StickyNavbar() {
               <span>Sign up</span>
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );

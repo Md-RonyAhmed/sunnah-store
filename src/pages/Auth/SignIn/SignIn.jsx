@@ -1,28 +1,20 @@
 import { FaGithub, FaFacebook, FaGoogle } from "react-icons/fa";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Input, Checkbox, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 export function SingIn() {
   return (
     <div className="flex justify-center my-28">
       <Card color="transparent" shadow={false}>
-        <Typography variant="h4" className="text-[#00BF63]">
-          Sign In
-        </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
+        <div className="text-[#00BF63] text-2xl font-bold">Sign In</div>
+        <div color="gray" className="mt-1 font-normal">
           Nice to meet you! Enter your details to sign in.
-        </Typography>
+        </div>
         <form className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96">
           <div className="flex flex-col gap-6 mb-1">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <div color="blue-gray" className="-mb-3 text-base font-bold">
               Your Name
-            </Typography>
+            </div>
             <Input
               size="lg"
               placeholder="name@mail.com"
@@ -31,9 +23,9 @@ export function SingIn() {
                 className: "before:content-none after:content-none",
               }}
             />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <div color="blue-gray" className="-mb-3 text-base font-bold">
               Your Email
-            </Typography>
+            </div>
             <Input
               size="lg"
               placeholder="name@mail.com"
@@ -42,9 +34,9 @@ export function SingIn() {
                 className: "before:content-none after:content-none",
               }}
             />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <div color="blue-gray" className="-mb-3 text-base font-bold">
               Password
-            </Typography>
+            </div>
             <Input
               type="password"
               size="lg"
@@ -57,10 +49,9 @@ export function SingIn() {
           </div>
           <Checkbox
             label={
-              <Typography
-                variant="small"
+              <div
                 color="gray"
-                className="flex items-center font-normal"
+                className="flex items-center text-sm font-normal"
               >
                 I agree the
                 <a
@@ -69,7 +60,7 @@ export function SingIn() {
                 >
                   &nbsp;Terms and Conditions
                 </a>
-              </Typography>
+              </div>
             }
             containerProps={{ className: "-ml-2.5" }}
           />
@@ -95,7 +86,7 @@ export function SingIn() {
             </button>
           </div>
 
-          <Typography color="gray" className="mt-4 font-normal text-center">
+          <div color="gray" className="mt-4 font-normal text-center">
             Dont have an account?
             <Link
               to={"/auth/signup"}
@@ -103,7 +94,7 @@ export function SingIn() {
             >
               Sign Up
             </Link>
-          </Typography>
+          </div>
         </form>
       </Card>
     </div>
