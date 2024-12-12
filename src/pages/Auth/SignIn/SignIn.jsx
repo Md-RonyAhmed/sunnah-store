@@ -1,3 +1,4 @@
+import { FaGithub, FaFacebook, FaGoogle } from "react-icons/fa";
 import {
   Card,
   Input,
@@ -7,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-export function SimpleRegistrationForm() {
+export function SingIn() {
   return (
     <div className="flex justify-center my-28">
       <Card color="transparent" shadow={false}>
@@ -75,6 +76,25 @@ export function SimpleRegistrationForm() {
           <Button className="mt-6 bg-[#00BF63]" fullWidth>
             sign In
           </Button>
+
+          <div className="flex items-center justify-center gap-2 my-5">
+            <hr className="w-1/4 h-1 bg-gray-600" />
+            <p>Or Contiue</p>
+            <hr className="w-1/4 h-1 bg-gray-600" />
+          </div>
+
+          <div className="flex items-center justify-between w-1/2 mx-auto text-3xl">
+            <button>
+              <FaGoogle className="hover:text-[#00BF63]" />
+            </button>
+            <button>
+              <FaFacebook className="hover:text-[#00BF63]" />
+            </button>
+            <button>
+              <FaGithub className="hover:text-[#00BF63]" />
+            </button>
+          </div>
+
           <Typography color="gray" className="mt-4 font-normal text-center">
             Dont have an account?
             <Link

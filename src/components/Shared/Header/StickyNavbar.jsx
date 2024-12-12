@@ -109,7 +109,7 @@ export function StickyNavbar() {
           <div className="flex items-center gap-4">
             <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <NavLink to={"/auth/SimpleRegistrationForm"}>
+              <NavLink to={"/auth/singin"}>
                 <Button
                   size="sm"
                   className="hidden lg:inline-block bg-[#00BF63]"
@@ -161,10 +161,10 @@ export function StickyNavbar() {
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
+              <span>Sign in</span>
             </Button>
             <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+              <span>Sign up</span>
             </Button>
           </div>
         </MobileNav>

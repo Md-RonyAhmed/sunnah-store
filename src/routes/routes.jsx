@@ -8,7 +8,7 @@ import Products from "../pages/Products/Products";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
-import { SimpleRegistrationForm } from "../pages/Auth/SignIn/SimpleRegistrationForm";
+import { SingIn } from "../pages/Auth/SignIn/SignIn";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +38,8 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "SimpleRegistrationForm",
-        element: <SimpleRegistrationForm />,
+        path: "singin",
+        element: <SingIn />,
       },
       {
         path: "signup",
