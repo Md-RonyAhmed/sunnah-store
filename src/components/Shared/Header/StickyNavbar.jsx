@@ -1,9 +1,9 @@
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -96,9 +96,7 @@ export function StickyNavbar() {
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
       <Navbar className="rounded-none py-1 shadow-none mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            className="mr-4 cursor-pointer font-medium"
-          >
+          <div className="mr-4 cursor-pointer font-medium">
             <Link to={"/"}>
               <div className="flex items-center justify-center">
                 <img src={logo} alt="logo" className="w-20" />
@@ -107,7 +105,7 @@ export function StickyNavbar() {
                 </span>
               </div>
             </Link>
-          </Typography>
+          </div>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
@@ -159,7 +157,7 @@ export function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -169,7 +167,7 @@ export function StickyNavbar() {
               <span>Sign in</span>
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );
