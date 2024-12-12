@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import App from "../App";
 import SignIn from "../pages/Auth/SignIn/SignIn";
@@ -13,9 +13,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
+        element: <Navigate to="/books" replace />,
+      },
+      {
+        path: ":key",
         element: <Home />,
       },
       {
