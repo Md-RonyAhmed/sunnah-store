@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AdvertisementModal = ({ showModal, setShowModal }) => {
   if (!showModal) return null;
 
@@ -40,15 +42,18 @@ const AdvertisementModal = ({ showModal, setShowModal }) => {
         </p>
 
         <div className="flex justify-center gap-6">
-          <button
-            className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all"
-            onClick={() => alert("Shop Now Clicked")}
-          >
-            Shop Now
-          </button>
+          <Link to={"/products"}>
+            <button className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all">
+              Shop Now
+            </button>
+          </Link>
+
           <button
             className="bg-gray-200 text-gray-600 px-8 py-3 rounded-lg hover:bg-gray-300"
-            onClick={() => setShowModal(false)}
+            onClick={() => {
+              // localStorage.removeItem("modal")
+              setShowModal(false);
+            }}
           >
             Close
           </button>
