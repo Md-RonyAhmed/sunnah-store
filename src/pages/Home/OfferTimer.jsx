@@ -42,36 +42,29 @@ const OfferTimer = ({ targetDate }) => {
   const seconds = String(timeLeft.seconds).padStart(2, "0");
 
   return (
-    <div className="bg-green-500 text-white p-4 shadow-md text-center mb-10 rounded">
-      <h2 className="text-3xl font-bold mb-4">Upcoming Offer</h2>
-      <div className="flex justify-center space-x-2 text-lg">
-        <div>
-          <span className="block text-4xl font-bold border rounded px-3">
-            {days}
-          </span>
-          <span>Days</span>
-        </div>
-        <div className="text-4xl">:</div>
-        <div>
-          <span className="block text-4xl font-bold border rounded px-3">
-            {hours}
-          </span>
-          <span>Hours</span>
-        </div>
-        <div className="text-4xl">:</div>
-        <div>
-          <span className="block text-4xl font-bold border rounded px-3">
-            {minutes}
-          </span>
-          <span>Minutes</span>
-        </div>
-        <div className="text-4xl">:</div>
-        <div>
-          <span className="block text-4xl font-bold border rounded">
-            {seconds}
-          </span>
-          <span>Seconds</span>
-        </div>
+    <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-6 shadow-lg rounded-lg text-center mb-10">
+      <h2 className="text-4xl font-extrabold mb-6 tracking-wide">
+        Upcoming Offer
+      </h2>
+      <div className="flex justify-center space-x-4 text-lg">
+        {[
+          { label: "Days", value: days },
+          { label: "Hours", value: hours },
+          { label: "Minutes", value: minutes },
+          { label: "Seconds", value: seconds },
+        ].map((time, index) => (
+          <div key={time.label} className="flex flex-col items-center">
+            <span className="block text-5xl font-bold bg-white text-green-500 rounded-md px-4 py-2 shadow-md">
+              {time.value}
+            </span>
+            <span className="mt-2 text-sm uppercase tracking-wide font-medium">
+              {time.label}
+            </span>
+            {index < 3 && (
+              <span className="text-4xl text-white font-bold mx-2">:</span>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
