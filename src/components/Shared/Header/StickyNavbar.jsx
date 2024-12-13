@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
+import Marquee from "./Marquee";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -95,13 +96,13 @@ export function StickyNavbar() {
 
   return (
     <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
+      {<Marquee />}
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
           <div className="mr-4 cursor-pointer font-medium">
             <Link to={"/"}>
               <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6 ">
-
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
@@ -186,17 +187,17 @@ export function StickyNavbar() {
           </div>
         </div>
         <Collapse open={openNav}>
-        <Collapse open={openNav}>
-          {navList}
-          <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
-            </Button>
-          </div>
-        </Collapse>
+          <Collapse open={openNav}>
+            {navList}
+            <div className="flex items-center gap-x-1">
+              <Button fullWidth variant="text" size="sm" className="">
+                <span>Log In</span>
+              </Button>
+              <Button fullWidth variant="gradient" size="sm" className="">
+                <span>Sign in</span>
+              </Button>
+            </div>
+          </Collapse>
         </Collapse>
       </Navbar>
     </div>
