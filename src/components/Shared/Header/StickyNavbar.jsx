@@ -94,7 +94,7 @@ export function StickyNavbar() {
   );
 
   return (
-    <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
+    <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center flex-wrap justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
