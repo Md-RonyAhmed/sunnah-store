@@ -36,14 +36,14 @@ const AdvertisementModal = ({ showModal, setShowModal }) => {
         <p className="text-gray-600 text-center mb-8 text-lg">
           Enjoy <span className="font-bold text-pink-500">20% off</span> on your
           first purchase. Use code:{" "}
-          <span className="font-mono bg-gray-100 px-3 py-1 rounded text-gray-800">
+          <span className="font-mono bg-gray-200 px-3 py-1 rounded text-gray-800">
             FIRST20
           </span>
         </p>
 
         <div className="flex justify-center gap-6">
           <Link to={"/products"}>
-            <button className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all">
+            <button className="bg-[#00BF63] text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all">
               Shop Now
             </button>
           </Link>
