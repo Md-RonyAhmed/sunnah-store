@@ -1,4 +1,3 @@
-import React from 'react';
 
 const NotFound = () => {
   return (
@@ -8,11 +7,11 @@ const NotFound = () => {
         Oops! Page not found.
       </h2>
       <p className="mt-2 text-gray-500">
-        The page you're looking for doesn't exist or has been moved.
+        The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
       <a
         href="/"
-        className="mt-6 px-6 py-3 text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 transition-all"
+        className="mt-6 px-6 py-3 text-white bg-green-500 rounded-md shadow hover:bg-green-700 transition-all"
       >
         Go Back Home
       </a>

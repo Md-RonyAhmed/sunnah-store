@@ -23,7 +23,7 @@ const About = () => {
         <h3 className="text-2xl font-semibold mb-4">
           Our Legacy: As Sunnah Foundation
         </h3>
-        {/* <p className=" text-justify mb-6">
+        <p className=" text-justify mb-6">
           At the heart of Sunnah Store lies the vision of{" "}
           <Link
             className="text-blue-700 font-semibold"
@@ -35,10 +35,10 @@ const About = () => {
           education, community empowerment, and sustainable initiatives. By
           shopping with us, you support a greater mission of promoting ethical
           living and fostering positive change in society.
-        </p> */}
+        </p>
         <p>
           The As-Sunnah Foundation is a non-political, non-profitable
-          government-registered organization dedicated to education, da'wah and
+          government-registered organization dedicated to education, da&apos;wah and
           full human welfare. It was established in 2017 by Shaikh Ahmadullah.
           He is the chairman of the organization and manages it directly.
           As-Sunnah Foundation was registered in 2019 from Joint Stock, Whose
@@ -51,7 +51,7 @@ const About = () => {
           welfare. One of the goals of As-Sunnah Foundation is to build life and
           society based on the Quran and Sunnah and to propagate and spread
           authentic knowledge. It is our policy to adopt a moderate approach
-          based on the Qur'an and Sunnah following the path of the righteous
+          based on the Qur&apos;an and Sunnah following the path of the righteous
           predecessors.
         </p>{" "}
         <h4 className="text-gray-800 font-semibold mt-5 mb-4">What We Offer</h4>

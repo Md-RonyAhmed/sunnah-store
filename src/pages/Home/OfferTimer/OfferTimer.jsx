@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
+import TimeLeft from "./TimeLeft";
 
 const OfferTimer = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
@@ -32,7 +33,7 @@ const OfferTimer = ({ targetDate }) => {
   }, [targetDate]);
 
   if (!timeLeft) {
-    return <div className="text-red-500">The offer has started!</div>;
+    return <TimeLeft />;
   }
 
   // Format the time parts with leading zeros

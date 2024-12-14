@@ -8,6 +8,7 @@ import Products from "../pages/Products/Products";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,16 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+        loader: () =>
+          axios.get("https://sunnah-store-server-azure.vercel.app/products"),
+      },
+      {
+        path: "products/:key",
+        element: <Products />,
+        loader: ({ params }) =>
+          axios.get(
+            `https://sunnah-store-server-azure.vercel.app/products/${params.key}`
+          ),
       },
       {
         path: "about",
@@ -38,7 +49,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "auth",
+    path: "",
     element: <AuthLayout />,
     children: [
       {

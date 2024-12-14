@@ -1,0 +1,1624 @@
+[
+    {
+        "_id": "675ac0e7c9f4a578ad85e34c",
+        "image": "https://www.startech.com.bd/image/cache/catalog/mouse/logitech/m240/m240-02-228x228.webp",
+        "name": "Logitech M240 Silent Bluetooth mouse",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 1500,
+        "description": "The Logitech M240 Silent Bluetooth mouse is a low noise mouse.",
+        "keyFeatures": {
+            "brand": "Logitech",
+            "model": "M240"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e34d",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/gigabyte/b450m-k/b450m-k-01-228x228.webp",
+        "name": "GIGABYTE B450M DS3H AMD AM4 Micro ATX Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 8800,
+        "description": "GIGABYTE B450M DS3H AMD AM4 Micro ATX Motherboard use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "GIGABYTE",
+            "model": "GIGABYTE B450M DS3H"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e34e",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/cosair/vengeance-rgb-rs/vengeance-rgb-rs-01-228x228.jpg",
+        "name": "Corsair Vengeance LPX 16GB (2x8GB) DDR4 3200MHz RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 6200,
+        "description": "Corsair Vengeance LPX DDR4 16GB (2x8GB) RAM offers excellent performance with a speed of 3200MHz.",
+        "keyFeatures": {
+            "brand": "Corsair",
+            "model": "Vengeance LPX"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e34f",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/msi/b450-a-pro-max/b450-a-pro-max-228x228.jpg",
+        "name": "MSI B450-A PRO MAX AMD AM4 Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 13200,
+        "description": "MSI B450-A PRO MAX AMD AM4 Motherboard use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "MSI",
+            "model": "MSI B450-A PRO MAX"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e350",
+        "image": "https://www.startech.com.bd/image/cache/catalog/HDD/Western%20Digital/WD%20INT%20Blue%201TB-228x228.jpg",
+        "name": "WD Blue 1TB SATA Internal HDD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 4000,
+        "description": "The WD Blue 1TB SATA Internal HDD offers reliable performance and ample storage capacity for your data needs.",
+        "keyFeatures": {
+            "brand": "Western Digital",
+            "model": "WD Blue",
+            "capacity": "1TB"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e351",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ssd/kingston/kc3000/kc3000-02-228x228.jpg",
+        "name": "Kingston A2000 500GB NVMe M.2 Internal SSD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 4400,
+        "description": "The Kingston A2000 NVMe SSD delivers reliable and high-speed performance, perfect for fast OS booting and quicker loading of applications.",
+        "keyFeatures": {
+            "brand": "Kingston",
+            "model": "A2000",
+            "capacity": "500GB"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e352",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/asus/vp32aq/vp32aq-01-228x228.jpg",
+        "name": "ASUS VG279Q 27\" Full HD IPS Gaming Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 29900,
+        "description": "ASUS VG279Q is a 27-inch Full HD IPS gaming monitor with a fast 144Hz refresh rate and Adaptive-Sync technology.",
+        "keyFeatures": {
+            "brand": "ASUS",
+            "model": "VG279Q",
+            "resolution": "Full HD (1920 x 1080)"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e353",
+        "image": "https://www.startech.com.bd/image/cache/catalog/keyboard/a4tech/fbk25/fbk25-01-228x228.jpg",
+        "name": "A4TECH Fstyler FBK25 Bluetooth & 2.4G Wireless Keyboard with Bangla",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 1900,
+        "description": "LK Optic switch has a life span of over 100 million key strokes.",
+        "keyFeatures": {
+            "brand": "A4TECH",
+            "model": "FBK25"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e354",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/zadak/moab/moab-001-228x228.jpg",
+        "name": "HyperX Fury 16GB (2x8GB) DDR4 3200MHz RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 6400,
+        "description": "HyperX Fury DDR4 16GB (2x8GB) RAM offers high-quality performance and reliability with a speed of 3200MHz.",
+        "keyFeatures": {
+            "brand": "HyperX",
+            "model": "Fury"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e355",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/lg-monitor/32ml600m/32ml600m-01-228x228.jpg",
+        "name": "LG 27UK850-W 27\" 4K UHD IPS Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 42900,
+        "description": "LG 27UK850-W features a 27-inch 4K UHD IPS display with HDR10 support and USB-C connectivity.",
+        "keyFeatures": {
+            "brand": "LG",
+            "model": "27UK850-W",
+            "resolution": "4K UHD (3840 x 2160)"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e356",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/msi/b450-gaming-plus-max/b450-gaming-plus-max-1-228x228.jpg",
+        "name": "MSI B450 GAMING PLUS MAX AM4 AMD ATX Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 14200,
+        "description": "MSI B450 GAMING PLUS MAX AM4 AMD ATX Motherboard use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "MSI",
+            "model": "MSI B450 GAMING PLUS MAX"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e357",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/asus/prime-a520m-a-ii/prime-a520m-a-ii-01-228x228.webp",
+        "name": "ASUS ROG STRIX B450-F GAMING AMD AM4 Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 15500,
+        "description": "ASUS ROG STRIX B450-F GAMING AMD AM4 Motherboard use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "ASUS",
+            "model": "ASUS ROG STRIX B450-F GAMING"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e358",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/pny/xlr8/xlr8-01-228x228.jpg",
+        "name": "PNY XLR8 8GB DDR4 3200MHz Desktop Gaming RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 2800,
+        "description": "PNY XLR8 Desktop Gaming RAM comes with 6GB DDR4 3200MHz CL16 (PC4-25600) Frequency Speed.",
+        "keyFeatures": {
+            "brand": "PNY",
+            "model": "PNY XLR8"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e359",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/Intel/i3-10100/i3-10100-228x228.jpg",
+        "name": "Intel 10th Gen Core i3 10100F Processor",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 8200,
+        "description": "Intel 10th Generation Core i3-10100F Processor has 4 processor cores, 8 threads, and an astonishingly efficient 45-65W TDP.",
+        "keyFeatures": {
+            "brand": "INTEL",
+            "model": "Intel Core i3 10100F",
+            "clockSpeed": "3.60 GHz",
+            "port": "USB 3.0",
+            "type": "Quad-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.4,
+        "averageRating": 4.3,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35a",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/gigabyte/b550m-ds3h-ac-ud/b550m-ds3h-ac-ud-228x228.jpg",
+        "name": "GIGABYTE B550M DS3H AC Micro ATX AMD Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 15200,
+        "description": "GIGABYTE UD series motherboards use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "GIGABYTE",
+            "model": "Gigabyte B550M DS3H AC UD"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35b",
+        "image": "https://www.startech.com.bd/image/cache/catalog/keyboard/a4-tech/b180r/bloody-b810r-228x228.jpg",
+        "name": "A4TECH Bloody B810R RGB Light Strike RGB Animation Gaming Keyboard",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 1900,
+        "description": "LK Optic switch has a life span of over 100 million key strokes.",
+        "keyFeatures": {
+            "brand": "A4TECH",
+            "model": "Bloody B810R"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35c",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/gamdias/kratos-m1-750b/kratos-m1-750b-01-228x228.jpg",
+        "name": "EVGA 600 BQ 600W 80+ Bronze Semi-Modular Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 5000,
+        "description": "The EVGA 600 BQ offers reliable power delivery with an 80+ Bronze efficiency rating and semi-modular cables for easier cable management.",
+        "keyFeatures": {
+            "brand": "EVGA",
+            "model": "600 BQ",
+            "power": "600W",
+            "voltage": "220V"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35d",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/adata/lancer/lancer-01-228x228.jpg",
+        "name": "ADATA XPG GAMMIX D30 16GB (2x8GB) DDR4 3200MHz RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 5900,
+        "description": "ADATA XPG GAMMIX D30 DDR4 16GB (2x8GB) RAM offers high-performance memory with a speed of 3200MHz.",
+        "keyFeatures": {
+            "brand": "ADATA",
+            "model": "XPG GAMMIX D30"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35e",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/msi/mpg-a750gf/a750gf-228x228.jpg",
+        "name": "Cooler Master MWE Gold 750 V2 750W 80+ Gold Fully Modular Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 8600,
+        "description": "The Cooler Master MWE Gold 750 V2 provides stable and efficient power delivery with fully modular cables for easy cable management.",
+        "keyFeatures": {
+            "brand": "Cooler Master",
+            "model": "MWE Gold 750 V2",
+            "power": "750W",
+            "voltage": "220V"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e35f",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/gskill/trident-z-rgb-8gb/trident-z-rgb-8gb-1-228x228.jpg",
+        "name": "G.Skill Trident Z Royal 16GB (2x8GB) DDR4 3600MHz RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 7800,
+        "description": "G.Skill Trident Z Royal DDR4 16GB (2x8GB) RAM offers dazzling RGB lighting and high performance with a speed of 3600MHz.",
+        "keyFeatures": {
+            "brand": "G.Skill",
+            "model": "Trident Z Royal"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e360",
+        "image": "https://www.startech.com.bd/image/cache/catalog/mouse/havit/ms1008/ms1008-01-228x228.jpg",
+        "name": "Havit MS1008 RGB Backlit Optical Gaming Mouse",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 1000,
+        "description": "Havit MS1008 RGB Backlit Optical Gaming Mouse is a low noise mouse.",
+        "keyFeatures": {
+            "brand": "Havit",
+            "model": "MS1008"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e361",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/gigabyte/p650b/p650b-228x228.jpg",
+        "name": "SilverStone Strider Plus 500W 80+ Bronze Modular Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 4200,
+        "description": "The SilverStone Strider Plus 500W offers reliable power delivery with an 80+ Bronze efficiency rating and modular cables for improved cable management.",
+        "keyFeatures": {
+            "brand": "SilverStone",
+            "model": "Strider Plus 500W",
+            "power": "500W",
+            "voltage": "240v"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e362",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/dell/d1918h/d1918h-01-228x228.jpg",
+        "name": "Dell Ultrasharp U2719D 27\" QHD IPS Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 38500,
+        "description": "Dell Ultrasharp U2719D features a 27-inch QHD IPS display with USB-C connectivity for easy device compatibility.",
+        "keyFeatures": {
+            "brand": "Dell",
+            "model": "U2719D",
+            "resolution": "QHD (2560 x 1440)"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e363",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/corsair/cv650/cv650-1-228x228.jpg",
+        "name": "Corsair CX650M 650W 80+ Bronze Semi-Modular Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 5800,
+        "description": "The Corsair CX650M provides reliable and efficient power delivery with semi-modular cables for easy cable management.",
+        "keyFeatures": {
+            "brand": "Corsair",
+            "model": "CX650M",
+            "power": "650W",
+            "voltage": "220V"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e364",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/AMD/ryzen-3-4100/amd-ryzen-3-4100-01-228x228.jpg",
+        "name": "AMD Ryzen 3 4100 Processor",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 10300,
+        "description": "AMD Ryzen 3 4100 Processor has 4 processor cores, 8 threads, and an astonishingly efficient 45-65W TDP.",
+        "keyFeatures": {
+            "brand": "AMD",
+            "model": "Ryzen 3 4100",
+            "clockSpeed": "3.8 GHz",
+            "port": "USB 3.0",
+            "type": "Quad-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e365",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/samsung/lf22t350fhnxza/lf22t350fhnxza-228x228.jpg",
+        "name": "SAMSUNG LF22T350 22\" Full HD IPS LED Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 14200,
+        "description": "SAMSUNG LF22T350 comes with 22\" 75Hz Full HD IPS LED Display.",
+        "keyFeatures": {
+            "brand": "Samsung",
+            "model": "LF22T350",
+            "resolution": "Full HD1920 x 1080)"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e366",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/Intel/i5-10400/i5-10400-1-228x228.jpg",
+        "name": "Intel 10th Gen Core i5 10400F Processor",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 12400,
+        "description": "Intel 10th Generation Core i5-10400F Processor has 6 processor cores, 12 threads, and an astonishingly efficient 65-125W TDP.",
+        "keyFeatures": {
+            "brand": "INTEL",
+            "model": "Intel Core i5 10400F",
+            "clockSpeed": "2.90 GHz",
+            "port": "USB 3.0",
+            "type": "Hexa-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e367",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ram/patriot/viper-steel-8/viper-steel-8-228x228.jpg",
+        "name": "Patriot Viper Steel 16GB (2x8GB) DDR4 3200MHz RAM",
+        "category": "Electronics",
+        "sub-category": "RAM",
+        "status": true,
+        "price": 6000,
+        "description": "Patriot Viper Steel DDR4 16GB (2x8GB) RAM offers high performance and reliability with 3200MHz speed.",
+        "keyFeatures": {
+            "brand": "Patriot",
+            "model": "Viper Steel"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e368",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/amd/amd-ryzen-7-5700x/amd-ryzen-7-5700x-01-228x228.jpg",
+        "name": "AMD Ryzen 7 5800X Processor",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 24500,
+        "description": "AMD Ryzen 7 5800X Processor has 8 processor cores, 16 threads, and an astonishingly efficient 105W TDP.",
+        "keyFeatures": {
+            "brand": "AMD",
+            "model": "AMD Ryzen 7 5800X",
+            "clockSpeed": "3.80 GHz",
+            "port": "USB 3.0",
+            "type": "Octa-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e369",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ssd/western/240gb/240gb-228x228.jpg",
+        "name": "WD Black SN750 1TB NVMe Internal Gaming SSD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 8500,
+        "description": "The WD Black SN750 NVMe SSD delivers top-tier performance for gaming and hardware enthusiasts who demand ultra-high performance and reliability.",
+        "keyFeatures": {
+            "brand": "Western Digital",
+            "model": "WD Black SN750",
+            "capacity": "1TB"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36a",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ssd/samsung/980-500gb/980-500gb-228x228.jpg",
+        "name": "Samsung 980 500GB PCIe 3.0 M.2 NVMe SSD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 4000,
+        "description": "Samsung 980 500GB PCIe 3.0 M.2 NVMe SSD offers reliable performance and ample storage capacity for your data needs.",
+        "keyFeatures": {
+            "brand": "Samsung",
+            "model": "980 500GB",
+            "capacity": "500GB"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36b",
+        "image": "https://www.startech.com.bd/image/cache/catalog/Component/HDD/Seagate%20/seagate-1-228x228.jpg",
+        "name": "Seagate Internal 1TB SATA Barracuda HDD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 4400,
+        "description": "Built on proven reliability and innovation, BarraCuda hard drives are available in a versatile mix of capacity",
+        "keyFeatures": {
+            "brand": "Seagate",
+            "model": "BarraCuda",
+            "capacity": "1TB"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36c",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/viewsonic/va2406-h/va2406-h-01-228x228.webp",
+        "name": "ViewSonic VX2458-C-MHD 24\" Full HD Curved Gaming Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 17900,
+        "description": "ViewSonic VX2458-C-MHD is a 24-inch Full HD curved gaming monitor with a fast 144Hz refresh rate and AMD FreeSync technology.",
+        "keyFeatures": {
+            "brand": "ViewSonic",
+            "model": "VX2458-C-MHD",
+            "resolution": "Full HD (1920 x 1080)"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36d",
+        "image": "https://www.startech.com.bd/image/cache/catalog/ssd/gigabyte/aorus-1tb-pcie/aorus-1tb-pcie-228x228.png",
+        "name": "Crucial MX500 1TB SATA 2.5-inch Internal SSD",
+        "category": "Electronics",
+        "sub-category": "Storage Device",
+        "status": true,
+        "price": 7600,
+        "description": "The Crucial MX500 SATA SSD provides sequential reads/writes up to 560/510 MB/s and random reads/writes up to 95k/90k on all file types.",
+        "keyFeatures": {
+            "brand": "Crucial",
+            "model": "MX500",
+            "capacity": "1TB"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36e",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/power-train/pt-p200b/pt-p200b-01-228x228.webp",
+        "name": "Power Train PT-P200B 200W Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 1600,
+        "description": "The POWER TRAIN PT-P200B is a reliable and efficient power supply option.",
+        "keyFeatures": {
+            "brand": "Power Train",
+            "model": "PT-P200B",
+            "power": "200W",
+            "voltage": "220V"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e36f",
+        "image": "https://www.startech.com.bd/image/cache/catalog/monitor/xiaomi/redmi-34-curved/redmi-34-curved-228x228.jpg",
+        "name": "AOC C24G1 24\" Full HD Curved Gaming Monitor",
+        "category": "Electronics",
+        "sub-category": "Monitor",
+        "status": true,
+        "price": 18900,
+        "description": "AOC C24G1 is a 24-inch Full HD curved gaming monitor with a fast 144Hz refresh rate and AMD FreeSync technology.",
+        "keyFeatures": {
+            "brand": "AOC",
+            "model": "C24G1",
+            "resolution": "Full HD (1920 x 1080)"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e370",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/Intel/core-i7-13700k/core-i7-13700k-01-228x228.webp",
+        "name": "Intel 11th Gen Core i7 11700 Processor",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 29900,
+        "description": "Intel 11th Generation Core i7-11700 Processor has 8 processor cores, 16 threads, and an astonishingly efficient 65-125W TDP.",
+        "keyFeatures": {
+            "brand": "INTEL",
+            "model": "Intel Core i7 11700",
+            "clockSpeed": "2.50 GHz",
+            "port": "USB 3.0",
+            "type": "Octa-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e371",
+        "image": "https://www.startech.com.bd/image/cache/catalog/processor/amd/ryzen-5-5600g/ryzen-5-5600g-228x228.jpg",
+        "name": "AMD Ryzen 5 5600G Processor with Radeon Graphics",
+        "category": "Electronics",
+        "sub-category": "CPU / Processor",
+        "status": true,
+        "price": 14200,
+        "description": "AMD Ryzen 5 5600G Processor with Radeon Graphics has 6 processor cores, 12 threads, and an astonishingly efficient 45-65W TDP.",
+        "keyFeatures": {
+            "brand": "AMD",
+            "model": "AMD Ryzen 5 5600G",
+            "clockSpeed": "3.90 GHz",
+            "port": "USB 3.0",
+            "type": "Hexa-core",
+            "voltage": "110V - 240V"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e372",
+        "image": "https://www.startech.com.bd/image/cache/catalog/graphics-card/zotac/gaming-gtx-1650-amp/gaming-gtx-1650-amp-228x228.jpg",
+        "name": "Zotac Gaming GeForce GTX 1650 AMP Core 4GB GDDR6 Graphics Card",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 38500,
+        "description": "The Zotac Gaming GeForce GTX 1650 AMP Core GDDR6 Graphics Card are based on the new NVIDIA Turing architecture.",
+        "keyFeatures": {
+            "brand": "ZOTAC",
+            "model": "Zotac Gaming GTX 1650 AMP Core"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e373",
+        "image": "https://www.startech.com.bd/image/cache/catalog/motherboard/asus/tuf-gaming-b660m-e-d4/tuf-gaming-b660m-e-01-228x228.jpg",
+        "name": "ASUS TUF B450-PRO GAMING AMD AM4 Motherboard",
+        "category": "Electronics",
+        "sub-category": "Motherboard",
+        "status": true,
+        "price": 13200,
+        "description": "ASUS TUF B450-PRO GAMING AMD AM4 Motherboard use a 5+3 phases pure digital PWM + Low RDS(on) MOSFETs design to support the 3rd Gen AMD Ryzen CPUs",
+        "keyFeatures": {
+            "brand": "ASUS",
+            "model": "ASUS TUF B450-PRO GAMING"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e374",
+        "image": "https://www.startech.com.bd/image/cache/catalog/power-supply/thermaltake/toughpower-gf1/toughpower-gf1-02-228x228.jpg",
+        "name": "Thermaltake Toughpower GX1 500W 80+ Gold Power Supply",
+        "category": "Electronics",
+        "sub-category": "Power Supply Unit",
+        "status": true,
+        "price": 4600,
+        "description": "The Thermaltake Toughpower GX1 offers reliable and stable power delivery with an 80+ Gold efficiency rating.",
+        "keyFeatures": {
+            "brand": "Thermaltake",
+            "model": "Toughpower GX1",
+            "power": "500W",
+            "voltage": "220V"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e375",
+        "image": "https://www.startech.com.bd/image/cache/catalog/graphics-card/asus/phoenix-geforce-gtx-1630-4gb/phoenix-geforce-gtx-1630-4gb-01-228x228.webp",
+        "name": "Asus Phoenix GeForce GTX 1630 4GB GDDR6 Graphics Card",
+        "category": "Electronics",
+        "sub-category": "Others",
+        "status": true,
+        "price": 37500,
+        "description": "Asus Phoenix GeForce GTX 1630 4GB GDDR6 Graphics Card are based on the new NVIDIA Turing architecture.",
+        "keyFeatures": {
+            "brand": "ASUS",
+            "model": "Phoenix GeForce GTX 1630 4GB"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e376",
+        "image": "https://example.com/images/book1.jpg",
+        "name": "Learning JavaScript: The Complete Guide",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 2500,
+        "description": "A comprehensive guide to mastering JavaScript.",
+        "keyFeatures": {
+            "author": "John Doe",
+            "pages": 450
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e377",
+        "image": "https://example.com/images/book2.jpg",
+        "name": "Python for Data Science",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 3200,
+        "description": "A beginner's guide to Python in data science.",
+        "keyFeatures": {
+            "author": "Jane Smith",
+            "pages": 350
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e378",
+        "image": "https://example.com/images/book3.jpg",
+        "name": "Modern CSS Design",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 1800,
+        "description": "Explore modern CSS techniques and layouts.",
+        "keyFeatures": {
+            "author": "Mark Johnson",
+            "pages": 300
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e379",
+        "image": "https://example.com/images/book4.jpg",
+        "name": "React Essentials",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 2700,
+        "description": "Learn React for building dynamic UIs.",
+        "keyFeatures": {
+            "author": "Emily Clark",
+            "pages": 420
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37a",
+        "image": "https://example.com/images/book5.jpg",
+        "name": "Node.js in Action",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 3100,
+        "description": "Practical guide to server-side JavaScript.",
+        "keyFeatures": {
+            "author": "Alan Thomson",
+            "pages": 380
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37b",
+        "image": "https://example.com/images/book6.jpg",
+        "name": "Git and GitHub Mastery",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 2000,
+        "description": "Version control best practices with Git.",
+        "keyFeatures": {
+            "author": "Sarah Lee",
+            "pages": 250
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37c",
+        "image": "https://example.com/images/book7.jpg",
+        "name": "Data Structures & Algorithms",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 3500,
+        "description": "Foundational concepts of data structures.",
+        "keyFeatures": {
+            "author": "Robert King",
+            "pages": 500
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37d",
+        "image": "https://example.com/images/book8.jpg",
+        "name": "HTML5 & Web Standards",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 1900,
+        "description": "Learn the latest HTML5 web standards.",
+        "keyFeatures": {
+            "author": "Laura Chen",
+            "pages": 320
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37e",
+        "image": "https://example.com/images/book9.jpg",
+        "name": "DevOps Fundamentals",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 2800,
+        "description": "CI/CD pipelines and DevOps culture.",
+        "keyFeatures": {
+            "author": "Brian Scott",
+            "pages": 400
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e37f",
+        "image": "https://example.com/images/book10.jpg",
+        "name": "Artificial Intelligence Basics",
+        "category": "Books",
+        "sub-category": "",
+        "status": true,
+        "price": 3300,
+        "description": "Intro to AI concepts and applications.",
+        "keyFeatures": {
+            "author": "Nina Patel",
+            "pages": 450
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e380",
+        "image": "https://example.com/images/apple.jpg",
+        "name": "Organic Apples (1kg)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 300,
+        "description": "Fresh organic apples.",
+        "keyFeatures": {
+            "brand": "Farm Fresh",
+            "quantity": "1kg"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e381",
+        "image": "https://example.com/images/tomatoes.jpg",
+        "name": "Ripe Tomatoes (500g)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 150,
+        "description": "Red ripe tomatoes perfect for salads.",
+        "keyFeatures": {
+            "brand": "Fresh Farms",
+            "quantity": "500g"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e382",
+        "image": "https://example.com/images/rice.jpg",
+        "name": "Basmati Rice (5kg)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 800,
+        "description": "Premium basmati rice with aromatic flavor.",
+        "keyFeatures": {
+            "brand": "Golden Harvest",
+            "quantity": "5kg"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e383",
+        "image": "https://example.com/images/milk.jpg",
+        "name": "Organic Whole Milk (1L)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 120,
+        "description": "Fresh organic whole milk.",
+        "keyFeatures": {
+            "brand": "Dairy Best",
+            "quantity": "1L"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e384",
+        "image": "https://example.com/images/honey.jpg",
+        "name": "Raw Honey (500g)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 500,
+        "description": "Pure raw honey, unfiltered and natural.",
+        "keyFeatures": {
+            "brand": "Sweet Hive",
+            "quantity": "500g"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e385",
+        "image": "https://example.com/images/olive_oil.jpg",
+        "name": "Extra Virgin Olive Oil (1L)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 900,
+        "description": "High-quality extra virgin olive oil.",
+        "keyFeatures": {
+            "brand": "Mediterranean",
+            "quantity": "1L"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e386",
+        "image": "https://example.com/images/bread.jpg",
+        "name": "Whole Wheat Bread (1 loaf)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 80,
+        "description": "Freshly baked whole wheat bread.",
+        "keyFeatures": {
+            "brand": "Baker's Hub",
+            "quantity": "1 loaf"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e387",
+        "image": "https://example.com/images/eggs.jpg",
+        "name": "Free-Range Eggs (12pcs)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 180,
+        "description": "Free-range eggs, rich in nutrients.",
+        "keyFeatures": {
+            "brand": "Happy Hens",
+            "quantity": "12pcs"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e388",
+        "image": "https://example.com/images/chicken.jpg",
+        "name": "Organic Chicken Breast (1kg)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 600,
+        "description": "Lean organic chicken breast.",
+        "keyFeatures": {
+            "brand": "Nature's Farm",
+            "quantity": "1kg"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e389",
+        "image": "https://example.com/images/pasta.jpg",
+        "name": "Whole Grain Pasta (500g)",
+        "category": "Groceries & Foods",
+        "sub-category": "",
+        "status": true,
+        "price": 200,
+        "description": "High-fiber whole grain pasta.",
+        "keyFeatures": {
+            "brand": "Italian Harvest",
+            "quantity": "500g"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38a",
+        "image": "https://example.com/images/offer1.jpg",
+        "name": "50% Off on Electronics",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Special offer: Get 50% off on selected electronics.",
+        "keyFeatures": {
+            "discount": "50%",
+            "validity": "30th December 2024"
+        },
+        "individualRating": 5,
+        "averageRating": 5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38b",
+        "image": "https://example.com/images/offer2.jpg",
+        "name": "Buy 1 Get 1 Free on Clothing",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Buy one clothing item, get another free.",
+        "keyFeatures": {
+            "discount": "BOGO",
+            "validity": "15th January 2025"
+        },
+        "individualRating": 5,
+        "averageRating": 5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38c",
+        "image": "https://example.com/images/offer3.jpg",
+        "name": "20% Off on All Books",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Get 20% discount on all books.",
+        "keyFeatures": {
+            "discount": "20%",
+            "validity": "1st March 2025"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.9,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38d",
+        "image": "https://example.com/images/offer4.jpg",
+        "name": "Free Shipping on Orders Over $50",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Enjoy free shipping for orders above $50.",
+        "keyFeatures": {
+            "shipping": "Free",
+            "validity": "No end date"
+        },
+        "individualRating": 5,
+        "averageRating": 5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38e",
+        "image": "https://example.com/images/offer5.jpg",
+        "name": "10% Off on Groceries",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Save 10% on all groceries and foods.",
+        "keyFeatures": {
+            "discount": "10%",
+            "validity": "30th April 2025"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e38f",
+        "image": "https://example.com/images/offer6.jpg",
+        "name": "Clearance Sale on Monitors",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Clearance sale: Huge discounts on monitors.",
+        "keyFeatures": {
+            "discount": "Up to 40%",
+            "validity": "Until stock lasts"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e390",
+        "image": "https://example.com/images/offer7.jpg",
+        "name": "Festive Offer on RAM",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Festive deals on RAM modules.",
+        "keyFeatures": {
+            "discount": "15%",
+            "validity": "7th January 2025"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.9,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e391",
+        "image": "https://example.com/images/offer8.jpg",
+        "name": "Seasonal Discount on SSDs",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Seasonal sale: Get special discounts on SSDs.",
+        "keyFeatures": {
+            "discount": "25%",
+            "validity": "End of season"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e392",
+        "image": "https://example.com/images/offer9.jpg",
+        "name": "Limited Time Offer on CPUs",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Limited time CPU offer.",
+        "keyFeatures": {
+            "discount": "5%",
+            "validity": "This weekend"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e393",
+        "image": "https://example.com/images/offer10.jpg",
+        "name": "Special Deal on Power Supplies",
+        "category": "Offers",
+        "sub-category": "",
+        "status": true,
+        "price": 0,
+        "description": "Special deal: Discount on all power supplies.",
+        "keyFeatures": {
+            "discount": "10%",
+            "validity": "15th February 2025"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e394",
+        "image": "https://example.com/images/clothing1.jpg",
+        "name": "Men's Casual T-Shirt",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 999,
+        "description": "Comfortable men's casual t-shirt.",
+        "keyFeatures": {
+            "brand": "Fashion Hub",
+            "material": "Cotton",
+            "size": "M, L, XL"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e395",
+        "image": "https://example.com/images/clothing2.jpg",
+        "name": "Women's Summer Dress",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1599,
+        "description": "Light and breezy summer dress.",
+        "keyFeatures": {
+            "brand": "Sunny Fashion",
+            "material": "Polyester",
+            "size": "S, M, L"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e396",
+        "image": "https://example.com/images/clothing3.jpg",
+        "name": "Men's Formal Shirt",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1299,
+        "description": "Smart men's formal shirt.",
+        "keyFeatures": {
+            "brand": "Gentleman's Wear",
+            "material": "Cotton",
+            "size": "M, L, XL"
+        },
+        "individualRating": 4.4,
+        "averageRating": 4.3,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e397",
+        "image": "https://example.com/images/clothing4.jpg",
+        "name": "Women's Cardigan",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1799,
+        "description": "Warm cardigan for women.",
+        "keyFeatures": {
+            "brand": "Cozy Knit",
+            "material": "Wool",
+            "size": "S, M, L"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e398",
+        "image": "https://example.com/images/clothing5.jpg",
+        "name": "Men's Jeans",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1499,
+        "description": "Durable and stylish men's jeans.",
+        "keyFeatures": {
+            "brand": "Urban Styles",
+            "material": "Denim",
+            "size": "30, 32, 34"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e399",
+        "image": "https://example.com/images/clothing6.jpg",
+        "name": "Women's Blouse",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1299,
+        "description": "Elegant blouse for women.",
+        "keyFeatures": {
+            "brand": "Chic Wear",
+            "material": "Silk",
+            "size": "S, M, L"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39a",
+        "image": "https://example.com/images/clothing7.jpg",
+        "name": "Men's Hoodie",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1899,
+        "description": "Comfortable hoodie for men.",
+        "keyFeatures": {
+            "brand": "Street Style",
+            "material": "Fleece",
+            "size": "M, L, XL"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39b",
+        "image": "https://example.com/images/clothing8.jpg",
+        "name": "Women's Leggings",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 699,
+        "description": "Stretchable leggings for daily wear.",
+        "keyFeatures": {
+            "brand": "Active Fit",
+            "material": "Spandex",
+            "size": "S, M, L"
+        },
+        "individualRating": 4.4,
+        "averageRating": 4.3,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39c",
+        "image": "https://example.com/images/clothing9.jpg",
+        "name": "Men's Jacket",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 2499,
+        "description": "Stylish men's jacket for all seasons.",
+        "keyFeatures": {
+            "brand": "Explorer",
+            "material": "Polyester",
+            "size": "M, L, XL"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39d",
+        "image": "https://example.com/images/clothing10.jpg",
+        "name": "Women's Maxi Dress",
+        "category": "Clothing",
+        "sub-category": "",
+        "status": true,
+        "price": 1999,
+        "description": "Flowy maxi dress for special occasions.",
+        "keyFeatures": {
+            "brand": "Graceful",
+            "material": "Chiffon",
+            "size": "S, M, L"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39e",
+        "image": "https://example.com/images/accessory1.jpg",
+        "name": "Wireless Earbuds",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 2500,
+        "description": "High-quality wireless earbuds with noise cancellation.",
+        "keyFeatures": {
+            "brand": "SoundX",
+            "model": "AirBuds"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e39f",
+        "image": "https://example.com/images/accessory2.jpg",
+        "name": "Fitness Tracker",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 3000,
+        "description": "Track your daily steps, heart rate, and sleep.",
+        "keyFeatures": {
+            "brand": "FitLife",
+            "model": "TrackPro"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a0",
+        "image": "https://example.com/images/accessory3.jpg",
+        "name": "Smart Home Assistant",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 4500,
+        "description": "Control your home with voice commands.",
+        "keyFeatures": {
+            "brand": "HomeSmart",
+            "model": "Assistant V2"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a1",
+        "image": "https://example.com/images/accessory4.jpg",
+        "name": "Portable Bluetooth Speaker",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 1200,
+        "description": "Portable speaker with rich bass and clear sound.",
+        "keyFeatures": {
+            "brand": "SoundBeat",
+            "model": "MiniBoom"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a2",
+        "image": "https://example.com/images/accessory5.jpg",
+        "name": "Power Bank (10000mAh)",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 1500,
+        "description": "High capacity power bank for charging on the go.",
+        "keyFeatures": {
+            "brand": "ChargeUp",
+            "model": "Power10K"
+        },
+        "individualRating": 4.5,
+        "averageRating": 4.4,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a3",
+        "image": "https://example.com/images/accessory6.jpg",
+        "name": "Laptop Cooling Pad",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 800,
+        "description": "Keep your laptop cool during intense use.",
+        "keyFeatures": {
+            "brand": "CoolTech",
+            "model": "ChillMat"
+        },
+        "individualRating": 4.6,
+        "averageRating": 4.5,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a4",
+        "image": "https://example.com/images/accessory7.jpg",
+        "name": "USB-C Hub",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 1000,
+        "description": "Expand your USB-C port into multiple ports.",
+        "keyFeatures": {
+            "brand": "MultiConnect",
+            "model": "HubX"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a5",
+        "image": "https://example.com/images/accessory8.jpg",
+        "name": "Noise Cancelling Headphones",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 3500,
+        "description": "Immerse yourself with noise cancelling headphones.",
+        "keyFeatures": {
+            "brand": "QuietSound",
+            "model": "SilencePro"
+        },
+        "individualRating": 4.9,
+        "averageRating": 4.8,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a6",
+        "image": "https://example.com/images/accessory9.jpg",
+        "name": "Smart Watch",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 5000,
+        "description": "Track your fitness and stay connected.",
+        "keyFeatures": {
+            "brand": "TimeWise",
+            "model": "WatchX"
+        },
+        "individualRating": 4.8,
+        "averageRating": 4.7,
+        "reviews": []
+    },
+    {
+        "_id": "675ac0e7c9f4a578ad85e3a7",
+        "image": "https://example.com/images/accessory10.jpg",
+        "name": "Portable SSD (500GB)",
+        "category": "Others",
+        "sub-category": "",
+        "status": true,
+        "price": 4200,
+        "description": "Fast and portable SSD storage.",
+        "keyFeatures": {
+            "brand": "DataSwift",
+            "model": "SpeedDrive 500"
+        },
+        "individualRating": 4.7,
+        "averageRating": 4.6,
+        "reviews": []
+    }
+]
