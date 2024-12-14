@@ -137,7 +137,7 @@ export function StickyNavbar() {
           <div className="pr-4 flex items-center gap-4 order-2 md:order-3">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <NavLink to={"/auth/signin"}>
+              <NavLink to={"/signin"}>
                 <Button
                   size="sm"
                   className="hidden lg:inline-block bg-[#00BF63]"

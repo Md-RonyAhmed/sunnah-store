@@ -90,7 +90,7 @@ const SignIn = () => {
             <div color="gray" className="mt-4 font-normal text-center">
               Dont have an account?
               <Link
-                to={"/auth/signup"}
+                to={"/signup"}
                 className="ml-2 font-medium text-[#00BF63]"
               >
                 Sign Up
