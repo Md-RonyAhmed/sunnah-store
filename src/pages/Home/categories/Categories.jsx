@@ -82,9 +82,9 @@ function Categories() {
           {category?.catName}
         </h2>
         {/* Products list */}
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
-            filteredProducts.slice(0, 4).map((product) => (
+            filteredProducts.slice(0, 5).map((product) => (
               <div key={product._id} className="border rounded-lg p-4">
                 <img
                   src={product.image}
