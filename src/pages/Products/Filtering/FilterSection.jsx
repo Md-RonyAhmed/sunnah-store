@@ -16,8 +16,8 @@ const FilterSection = ({ setSortBy }) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center border-b pb-2 bg-white rounded-lg ">
-      <h3 className="text-lg ">Filter Items</h3>
+    <div className="flex flex-col lg:flex-row justify-between items-center border-b pb-2 mb-2 bg-white rounded-lg ">
+      <h3 className="text-xl ">Filter Items</h3>
       <div className="relative">
         <label htmlFor="sortBy" className="sr-only">
           Sort By
