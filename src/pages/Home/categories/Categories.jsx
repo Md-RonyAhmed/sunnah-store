@@ -19,10 +19,10 @@ function Categories() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/database/products.json")
+    fetch("https://sunnah-store-server-azure.vercel.app/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.data);
       })
       .catch((err) => console.log(err))
       .finally(() => {
