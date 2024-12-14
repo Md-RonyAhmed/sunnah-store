@@ -4,6 +4,7 @@ import Banner from "../../components/Shared/Header/Banner/Banner";
 import AdvertisementModal from "../../components/AdvertisementModal";
 import OfferTimer from "./OfferTimer";
 import Categories from "./categories/Categories";
+import Pride from "../../components/pride/Pride";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -41,6 +42,7 @@ const Home = () => {
       <OfferTimer targetDate={targetDate} />
       <Ebook />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
+      <Pride />
     </>
   );
 };
