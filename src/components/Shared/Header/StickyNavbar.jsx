@@ -90,6 +90,23 @@ export function StickyNavbar() {
           Contact
         </NavLink>
       </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to={"/cart"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          Cart
+        </NavLink>
+      </Typography>
     </ul>
   );
 
