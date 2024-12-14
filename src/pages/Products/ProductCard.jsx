@@ -15,9 +15,9 @@ const ProductCard = ({ product }) => {
   return (
     <Card
       shadow={false}
-      className=" hover:shadow-xl transition duration-300 relative border "
+      className=" hover:shadow-xl transition duration-300 relative border  "
     >
-      <CardHeader shadow={false} floated={false} className="min-h-40 flex justify-center items-center">
+      <CardHeader shadow={false} floated={false} className="min-h-40 flex justify-center items-center ">
         <img src={image} alt={name} className=" object-cover" />
       </CardHeader>
       <CardBody className="flex-grow py-3 px-4">
