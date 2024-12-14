@@ -9,6 +9,7 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
 import axios from "axios";
+import ProductDetails from "../pages/Products/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
           axios.get(
             `https://sunnah-store-server-azure.vercel.app/products/${params.key}`
           ),
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetails />,
       },
       {
         path: "about",

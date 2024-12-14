@@ -17,13 +17,13 @@ const ProductCard = ({ product }) => {
       shadow={false}
       className=" hover:shadow-xl transition duration-300 relative border "
     >
-      <CardHeader shadow={false} floated={false} className="">
+      <CardHeader shadow={false} floated={false} className="min-h-40 flex justify-center items-center">
         <img src={image} alt={name} className=" object-cover" />
       </CardHeader>
       <CardBody className="flex-grow py-3 px-4">
         <Typography className="font-medium">{name}</Typography>
         <Typography className="font-medium border absolute top-3 left-3 p-1 rounded-md px-2 bg-gray-50 text-primary ">
-          ${price}
+        ৳ {price}
         </Typography>
       </CardBody>
       <CardFooter className="pt-0 flex-1 px-4">
