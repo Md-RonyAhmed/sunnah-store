@@ -7,7 +7,7 @@ import Categories from "./categories/Categories";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-  const targetDate = "2024-12-15T00:00:00";
+  const targetDate = "2024-12-14T00:00:00";
 
   useEffect(() => {
     // Check the sessionStorage value and update the state

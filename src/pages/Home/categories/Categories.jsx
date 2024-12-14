@@ -56,7 +56,7 @@ function Categories() {
   return (
     <div>
       {/* Tabs */}
-      <div className="border-b border-gray-300 mt-2">
+      <div className="border-b border-gray-300 mt-8">
         <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
           {categoryData.map((category) => (
             <NavLink
