@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
+import TimeLeft from "./TimeLeft";
 
 const OfferTimer = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate));
@@ -32,16 +33,8 @@ const OfferTimer = ({ targetDate }) => {
   }, [targetDate]);
 
   if (!timeLeft) {
-    return (
-      <div className="relative w-full overflow-hidden bg-green-500 p-4 rounded shadow h-16 flex items-center">
-      {/* The moving text container */}
-      <div className="whitespace-nowrap text-white font-bold text-xl animate-marquee">
-        The offer has started! Grab now exclusive offer...
-      </div>
-    </div>
-    );
+    return <TimeLeft />;
   }
-  
 
   // Format the time parts with leading zeros
   const days = String(timeLeft.days).padStart(2, "0");

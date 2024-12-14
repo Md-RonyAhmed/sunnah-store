@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Ebook from "../../components/Ebook";
 import Banner from "../../components/Shared/Header/Banner/Banner";
 import AdvertisementModal from "../../components/AdvertisementModal";
-import OfferTimer from "./OfferTimer";
+import OfferTimer from "./OfferTimer/OfferTimer";
 import Categories from "./categories/Categories";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-  const targetDate = "2024-12-14T00:00:00";
+  const targetDate = "2024-12-15T00:00:00";
 
   useEffect(() => {
     // Check the sessionStorage value and update the state
@@ -20,10 +20,10 @@ const Home = () => {
     };
 
     // Initial check on component mount
-    const initialModalLoad = setTimeout(()=> {
+    const initialModalLoad = setTimeout(() => {
       checkModalState();
-    }, 3000);
-    
+    }, 2000);
+
     // Set a timer to reset the sessionStorage value to "false" after 30 mins
     const resetTimer = setTimeout(() => {
       sessionStorage.setItem("modal", "false");
@@ -35,7 +35,6 @@ const Home = () => {
       clearTimeout(initialModalLoad);
       clearTimeout(resetTimer);
     };
-
   }, [showModal, setShowModal]);
 
   return (
