@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
+import { FiShoppingCart } from "react-icons/fi";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -104,7 +105,7 @@ export function StickyNavbar() {
               : "text-black flex items-center"
           }
         >
-          Cart
+          <FiShoppingCart className="mr-2 size-5" /> Cart
         </NavLink>
       </Typography>
     </ul>
