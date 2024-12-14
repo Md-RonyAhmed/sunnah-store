@@ -1,35 +1,34 @@
-import { NavLink, useParams, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useParams, Navigate, Link } from "react-router-dom";
+import Loading from "../../../components/Shared/Loading";
+import { Button } from "@material-tailwind/react";
+
+// Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
+const categoryData = [
+  { catName: "Books", path: "/books" },
+  { catName: "Electronics", path: "/electronics" },
+  { catName: "Groceries & Foods", path: "/groceries" },
+  { catName: "Clothing", path: "/clothing" },
+  { catName: "Offers", path: "/offers" },
+  { catName: "Others", path: "/others" },
+];
 
 function Categories() {
-  /*
-  Note: Sir, The "Products" tab can be removed from the navbar as the "Categories" section now handles product navigation dynamically.
-  */
-  const categoryData = [
-    {
-      catName: "Books",
-      path: "/books",
-    },
-    {
-      catName: "Electronics",
-      path: "/electronics",
-    },
-    {
-      catName: "Groceries & Fruits",
-      path: "/groceries",
-    },
-    {
-      catName: "Clothing",
-      path: "/clothing",
-    },
-    {
-      catName: "Offers",
-      path: "/offers",
-    },
-    {
-      catName: "Others",
-      path: "/others",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/database/products.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const { key } = useParams(); // Get the dynamic key from the URL
   const category = categoryData.find((cat) => cat.path === `/${key}`); // Match the key with a category
@@ -42,6 +41,16 @@ function Categories() {
   // The error will be thrown and caught by the errorElement in the router.jsx app.
   if (!category) {
     throw new Error("Invalid key");
+  }
+
+  // Filter products based on the selected category
+  const filteredProducts = products.filter(
+    (product) =>
+      product.category.toLowerCase() === category?.catName.toLowerCase()
+  );
+
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -72,15 +81,33 @@ function Categories() {
         <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
           {category?.catName}
         </h2>
-        <p className="text-sm sm:text-base text-gray-600">
-          Here you can find all items related to {category?.catName}.
-        </p>
-
-        <div className="mt-4">
-          <p className="text-sm sm:text-base">
-            Items will be displayed here...
-          </p>
+        {/* Products list */}
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.slice(0, 4).map((product) => (
+              <div key={product._id} className="border rounded-lg p-4">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-auto rounded-md"
+                />
+                <h3 className="mt-2 text-lg font-bold">{product.name}</h3>
+                <p className="text-sm text-gray-600">{product.description}</p>
+                <p className="mt-2 text-lg font-semibold">
+                  Price:{product.price} BDT
+                </p>
+              </div>
+            ))
+          ) : (
+            <p>No products available in this category.</p>
+          )}
         </div>
+        {filteredProducts && (
+          <Link to={`/products/${key}`}>
+            {" "}
+            <Button className="bg-[#00BF63] mt-6">Load More</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

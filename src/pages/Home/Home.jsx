@@ -33,12 +33,9 @@ const Home = () => {
 
   return (
     <>
-      <div>
-        <Banner />
-      </div>
-      
-      <Categories />
+      <Banner />
       <OfferTimer targetDate={targetDate} />
+      <Categories />
       <Ebook />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
     </>

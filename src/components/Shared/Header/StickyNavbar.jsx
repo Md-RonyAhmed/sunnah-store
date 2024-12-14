@@ -29,7 +29,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/"}
+          to={"/books"}
           className={({ isActive }) =>
             isActive
               ? "text-[#00BF63] underline underline-offset-4 flex items-center"
