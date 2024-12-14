@@ -32,7 +32,7 @@ export function StickyNavbar() {
           to={"/books"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -49,7 +49,7 @@ export function StickyNavbar() {
           to={"/products"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -66,7 +66,7 @@ export function StickyNavbar() {
           to={"/about"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -83,7 +83,7 @@ export function StickyNavbar() {
           to={"/contact"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -105,7 +105,7 @@ export function StickyNavbar() {
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
-                  <span className="text-2xl font-semibold text-[#00BF63]">
+                  <span className="text-2xl font-semibold text-primary">
                     Sunnah Store
                   </span>
                 </div>
@@ -123,8 +123,8 @@ export function StickyNavbar() {
                   />
                   <Button
                     size="sm"
-                    color="green"
-                    className="!absolute right-1 top-1 rounded"
+                    
+                    className="!absolute right-1 top-1 rounded bg-primary"
                   >
                     Search
                   </Button>
@@ -140,7 +140,7 @@ export function StickyNavbar() {
               <NavLink to={"/auth/signin"}>
                 <Button
                   size="sm"
-                  className="hidden lg:inline-block bg-[#00BF63]"
+                  className="hidden lg:inline-block bg-primary"
                 >
                   <span>Sign in</span>
                 </Button>
@@ -192,7 +192,7 @@ export function StickyNavbar() {
             <Button fullWidth variant="text" size="sm" className="">
               <span>Log In</span>
             </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
+            <Button fullWidth variant="gradient" size="sm" className="bg-primary">
               <span>Sign in</span>
             </Button>
           </div>
