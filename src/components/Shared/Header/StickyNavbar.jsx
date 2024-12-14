@@ -117,11 +117,12 @@ export function StickyNavbar() {
             <Input
               type="search"
               color="gray"
-              label="Type here..."
-              className="pr-20"
+              label="Search Products"
+              className="pr-[5.5rem]"
               containerProps={{
                 className: "md:min-w-[360px]",
               }}
+              placeholder="search by products name"
             />
             <Button
               size="sm"
