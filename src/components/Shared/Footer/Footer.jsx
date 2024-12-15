@@ -31,7 +31,7 @@ export default function Footer() {
               <Typography
                 variant="small"
                 color="current"
-                className="mb-4 font-bold uppercase text border-b-2 border-b-white w-fit"
+                className="mb-4 font-bold uppercase text-white border-b-2 border-b-white w-fit"
               >
                 {title}
               </Typography>

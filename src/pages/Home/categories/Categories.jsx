@@ -57,7 +57,7 @@ function Categories() {
   return (
     <div>
       {/* Tabs */}
-      <div className="border-b border-gray-300 mt-2">
+      <div className="border-b border-gray-300 mt-8">
         <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
           {categoryData.map((category) => (
             <NavLink
@@ -83,10 +83,15 @@ function Categories() {
           {category?.catName}
         </h2>
         {/* Products list */}
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
-            filteredProducts.slice(0, 4).map((product) => (
+
+            filteredProducts.slice(0, 5).map((product) => (
               <ProductCard key={product?._id} product={product}/>
+
+           
+             
+
             ))
           ) : (
             <p>No products available in this category.</p>
