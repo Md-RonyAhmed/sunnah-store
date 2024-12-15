@@ -9,15 +9,18 @@ export default withMT({
         center: true,
         padding: "1.25rem",
       },
-    },
-    keyframes: {
-      marquee: {
-        "0%": { transform: "translateX(100%)" },
-        "100%": { transform: "translateX(-100%)" },
+      colors:{
+        primary : "#00BF63"
       },
-    },
-    animation: {
-      marquee: "marquee 10s linear infinite",
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 10s linear infinite",
+      },
     },
   },
   plugins: [],
