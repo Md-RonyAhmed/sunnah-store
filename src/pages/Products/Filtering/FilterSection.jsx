@@ -12,16 +12,12 @@ const FilterSection = ({ setSortBy }) => {
   const handleChange = (e) => {
     const selectedValue = parseInt(e.target.value); // Get selected integer value
     setSortBy(selectedValue); // Trigger the sorting function
-    console.log(selectedValue);
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center border-b pb-2 mb-2 bg-white rounded-lg ">
+    <div className="flex flex-col lg:flex-row justify-between items-center border-b pb-2 mb-2 bg-white rounded-lg">
       <h3 className="text-xl ">Filter Items</h3>
       <div className="relative">
-        <label htmlFor="sortBy" className="sr-only">
-          Sort By
-        </label>
         <select
           id="sortBy"
           className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"

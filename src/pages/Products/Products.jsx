@@ -14,7 +14,7 @@ const Products = () => {
 
   const { key } = useParams();
 
-  // Sorting 
+  // Sorting
   useEffect(() => {
     let sorted = [...products];
     switch (sortBy) {
@@ -27,11 +27,11 @@ const Products = () => {
       case 3: // Rating
         sorted.sort((a, b) => b.averageRating - a.averageRating);
         break;
-      case 4: // Top Sales 
+      case 4: // Top Sales
         sorted.sort((a, b) => b.individualRating - a.individualRating);
         break;
       default:
-         // 0 : restore raw array (products)
+        // 0 : restore raw array (products)
         break;
     }
     setSortedProducts(sorted);
