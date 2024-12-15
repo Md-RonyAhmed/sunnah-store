@@ -44,11 +44,8 @@ const Home = () => {
       <OfferTimer targetDate={targetDate} />
       <Categories />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
-<<<<<<< HEAD
-      <Pride />
-=======
       <Ebook />
->>>>>>> master
+      <Pride />
     </>
   );
 };

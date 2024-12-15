@@ -39,17 +39,17 @@ const Marquee = () => {
       aria-label="scrolling text"
       className="bg-[#f2f2f2] py-2 md:py-4 overflow-hidden relative"
     >
-      <div className=" mx-auto relative overflow-hidden">
+      <div className=" container mx-auto relative overflow-hidden">
         {/* Forward-scrolling marquee */}
-        <div className="flex animate-marquee space-x-8 min-w-max pr-8">
-          {marqueeContent}
+        <div className="flex  space-x-8 min-w-max pr-8">
+          {/* {marqueeContent} */}
           {marqueeContent} {/* Duplicate for seamless scrolling */}
         </div>
         {/* Backward-scrolling marquee */}
-        <div className="flex animate-marqueeBack space-x-8 min-w-max pr-8 absolute top-0 left-0">
+        {/* <div className="flex animate-marquee space-x-8 min-w-max pr-8 absolute top-0 left-0">
           {marqueeContent}
           {marqueeContent}
-        </div>
+        </div> */}
       </div>
     </section>
   );

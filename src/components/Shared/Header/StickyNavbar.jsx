@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
-import Marquee from "./Marquee";
+import Marquee from "./Marquee"
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -95,24 +95,14 @@ export function StickyNavbar() {
   );
 
   return (
-<<<<<<< HEAD
-    <div className="w-full fixed top-0 z-10 bg-[#FBFFFF] shadow-sm">
-      {<Marquee />}
-=======
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
->>>>>>> master
+      <Marquee />
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center flex-wrap justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
-<<<<<<< HEAD
-          <div className="mr-4 cursor-pointer font-medium">
-            <Link to={"/"}>
-              <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6 ">
-=======
           <div className="cursor-pointer font-medium order-1">
             <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6">
               <Link>
->>>>>>> master
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
