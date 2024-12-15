@@ -12,6 +12,7 @@ const Products = () => {
 
   const [sortBy, setSortBy] = useState(0);
   const [sortedProducts, setSortedProducts] = useState(products);
+  const [inStock, setInStock] = useState(false);
 
   const { key } = useParams();
 
@@ -35,8 +36,12 @@ const Products = () => {
         // 0 : restore raw array (products)
         break;
     }
+    // Filter by stock if inStock is true
+    if (inStock) {
+      sorted = sorted.filter((product) => product.status === true);
+    }
     setSortedProducts(sorted);
-  }, [sortBy, products]);
+  }, [sortBy, products, inStock]);
 
   return (
     <div className="mt-28">
@@ -53,8 +58,14 @@ const Products = () => {
         </h1>
 
         <div className="flex items-center space-x-2 mt-3">
-          <Switch id="in-stock" />
-          <label htmlFor="in-stock" className="text-primary">In stock</label>
+          <Switch
+            id="in-stock"
+            checked={inStock}
+            onChange={(e) => setInStock(e.target.checked)}
+          />
+          <label htmlFor="in-stock" className="text-primary">
+            In stock
+          </label>
         </div>
       </div>
 
