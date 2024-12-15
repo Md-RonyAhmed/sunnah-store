@@ -6,36 +6,78 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
+import { Rating } from "@smastrom/react-rating";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { _id, image, name, price } = product || {};
+  const { _id, image, name, price, individualRating } = product || {};
 
   return (
-    <Card
-      shadow={false}
-      className=" hover:shadow-xl transition duration-300 relative border  "
-    >
-      <CardHeader shadow={false} floated={false} className="min-h-40 flex justify-center items-center ">
-        <img src={image} alt={name} className=" object-cover" />
-      </CardHeader>
-      <CardBody className="flex-grow py-3 px-4">
-        <Typography className="font-medium">{name}</Typography>
-        <Typography className="font-medium border absolute top-3 left-3 p-1 rounded-md px-2 bg-gray-50 text-primary ">
+    <Card className="relative border hover:shadow-lg transition-shadow duration-300">
+      {/* Wishlist Icon */}
+      <button
+        className="absolute top-3 right-3 p-2 z-30 bg-white/80 rounded-full shadow hover:bg-white transition"
+        aria-label="Add to Wishlist"
+      >
+        <FaHeart className="text-red-500" />
+      </button>
+
+      <Link to={`/product/${_id}`}>
+        <CardHeader
+          floated={false}
+          shadow={false}
+          className="flex justify-center items-center h-48 bg-gray-50 cursor-pointer"
+        >
+          <img
+            src={image}
+            alt={name}
+            className="object-contain h-full w-auto transition-transform duration-200 hover:scale-105"
+          />
+        </CardHeader>
+      </Link>
+
+      {/* Price Badge */}
+      <span className="absolute top-3 left-3 bg-white/90 text-primary font-semibold px-3 py-1 rounded-full text-sm shadow">
         ৳ {price}
+      </span>
+
+      <CardBody className="py-4 px-4 flex-grow space-y-3">
+      <div className="flex items-center gap-2 mt-2">
+          {/* Star Rating */}
+          <Rating value={individualRating} readOnly style={{ maxWidth: 100 }} />
+          {/* Show numeric rating */}
+          <Typography className="text-sm text-gray-600">
+            {individualRating.toFixed(1)}/5
+          </Typography>
+        </div>
+        <Typography className="font-semibold text-gray-800 line-clamp-2">
+          {name}
         </Typography>
+        
       </CardBody>
-      <CardFooter className="pt-0 flex-1 px-4">
-        <Link to={`/product/${_id}`}>
+      <CardFooter className="pt-0 pb-4 px-4 flex flex-1 items-center justify-between space-x-3">
+        {/* See Details Button */}
+        <Link to={`/product/${_id}`} className="flex-1">
           <Button
-            ripple={false}
-            fullWidth={true}
-            className="2 bg-primary/10 text-primary shadow-none hover:shadow-none border flex  justify-center items-center gap-3"
+            variant="outlined"
+            color="green"
+            fullWidth
+            className="flex items-center justify-center gap-2 border-green-500 text-green-500 hover:bg-green-50"
           >
-            See Details <FaArrowRightLong />
+            See Details
+            <FaArrowRightLong />
           </Button>
         </Link>
+
+        {/* Add to Cart Button */}
+        <button
+          className="p-2 bg-green-500 hover:bg-green-600 text-white rounded shadow-md flex items-center justify-center"
+          aria-label="Add to Cart"
+        >
+          <FaShoppingCart />
+        </button>
       </CardFooter>
     </Card>
   );

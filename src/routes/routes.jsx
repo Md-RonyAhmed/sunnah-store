@@ -11,6 +11,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import axios from "axios";
 import ProductDetails from "../pages/Products/ProductDetails";
 import Cart from "../pages/Cart/Cart";
+import WishList from "../pages/WishList/WishList";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart/>,
+      },
+      {
+        path: "wishlist",
+        element: <WishList/>,
       }
     ],
   },

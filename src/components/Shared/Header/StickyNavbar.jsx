@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -22,24 +23,7 @@ export function StickyNavbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to={"/books"}
-          className={({ isActive }) =>
-            isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
-              : "text-black flex items-center"
-          }
-        >
-          Home
-        </NavLink>
-      </Typography>
+    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6"> 
       <Typography
         as="li"
         variant="small"
@@ -106,6 +90,23 @@ export function StickyNavbar() {
           }
         >
           <FiShoppingCart className="mr-2 size-5" />
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to={"/wishlist"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          <FaHeart className="mr-2 size-5 text-red-500" />
         </NavLink>
       </Typography>
     </ul>

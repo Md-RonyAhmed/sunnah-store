@@ -6,7 +6,7 @@ const AuthLayout = () => {
   return (
     <div>
       <Header />
-      <div>
+      <div className="min-h-screen container">
         <Outlet />
       </div>
       <Footer/>
