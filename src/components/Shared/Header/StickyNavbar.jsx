@@ -11,6 +11,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
+import Marquee from "./Marqee";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -114,6 +115,7 @@ export function StickyNavbar() {
 
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
+      <Marquee />
       <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
         <div className="flex items-center flex-wrap justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
