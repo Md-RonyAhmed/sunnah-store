@@ -10,10 +10,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
-<<<<<<< HEAD
-=======
 import { FaHeart } from "react-icons/fa";
->>>>>>> 48f6e69cede072f4ec23577511dd12e9b881ec63
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -88,13 +85,6 @@ export function StickyNavbar() {
           to={"/cart"}
           className={({ isActive }) =>
             isActive
-<<<<<<< HEAD
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
-              : "text-black flex items-center"
-          }
-        >
-          <FiShoppingCart className="mr-2 size-5" /> Cart
-=======
               ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
@@ -117,7 +107,6 @@ export function StickyNavbar() {
           }
         >
           <FaHeart className="mr-2 size-5 text-red-500" />
->>>>>>> 48f6e69cede072f4ec23577511dd12e9b881ec63
         </NavLink>
       </Typography>
     </ul>
