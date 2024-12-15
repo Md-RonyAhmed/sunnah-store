@@ -32,7 +32,7 @@ export function StickyNavbar() {
           to={"/books"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -49,7 +49,7 @@ export function StickyNavbar() {
           to={"/products"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -66,7 +66,7 @@ export function StickyNavbar() {
           to={"/about"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -83,7 +83,7 @@ export function StickyNavbar() {
           to={"/contact"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -104,7 +104,7 @@ export function StickyNavbar() {
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
-                  <span className="text-2xl font-semibold text-[#00BF63]">
+                  <span className="text-2xl font-semibold text-primary">
                     Sunnah Store
                   </span>
                 </div>
@@ -112,35 +112,37 @@ export function StickyNavbar() {
             </div>
           </div>
 
-          {/* Product Search Box */}
-          <div className="relative md:flex w-full gap-2 md:w-max order-3 md:order-2 m-4 md:m-0">
-            <Input
-              type="search"
-              color="gray"
-              label="Search Products"
-              className="pr-[5.5rem]"
-              containerProps={{
-                className: "md:min-w-[360px]",
-              }}
-              placeholder="search by products name"
-            />
-            <Button
-              size="sm"
-              color="green"
-              className="!absolute right-1 top-1 rounded"
-            >
-              Search
-            </Button>
-          </div>
 
-          {/* Nav Links */}
+                {/* Product Search Box */}
+                <div className="relative hidden md:flex w-full gap-2 md:w-max">
+                  <Input
+                    type="search"
+                    color="gray"
+                    label="Type here..."
+                    className="pr-20"
+                    containerProps={{
+                      className: "md:min-w-[360px]",
+                    }}
+                  />
+                  <Button
+                    size="sm"
+                    
+                    className="!absolute right-1 top-1 rounded bg-primary"
+                  >
+                    Search
+                  </Button>
+                </div>
+              </div>
+            </Link>
+
+         {/* Nav Links */}
           <div className="pr-4 flex items-center gap-4 order-2 md:order-3">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               <NavLink to={"/signin"}>
                 <Button
                   size="sm"
-                  className="hidden lg:inline-block bg-[#00BF63]"
+                  className="hidden lg:inline-block bg-primary"
                 >
                   <span>Sign in</span>
                 </Button>
@@ -186,18 +188,17 @@ export function StickyNavbar() {
           </div>
         </div>
         <Collapse open={openNav}>
-          <Collapse open={openNav}>
-            {navList}
-            <div className="flex items-center gap-x-1">
-              <Button fullWidth variant="text" size="sm" className="">
-                <span>Log In</span>
-              </Button>
-              <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Sign in</span>
-              </Button>
-            </div>
-          </Collapse>
+          {navList}
+          <div className="flex items-center gap-x-1">
+            <Button fullWidth variant="text" size="sm" className="">
+              <span>Log In</span>
+            </Button>
+            <Button fullWidth variant="gradient" size="sm" className="bg-primary">
+              <span>Sign in</span>
+            </Button>
+          </div>
         </Collapse>
+
       </Navbar>
     </div>
   );
