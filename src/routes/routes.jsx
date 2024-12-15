@@ -9,7 +9,13 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
 import axios from "axios";
+<<<<<<< HEAD
 import Cart from "../pages/Cart/Cart";
+=======
+import ProductDetails from "../pages/Products/ProductDetails";
+import Cart from "../pages/Cart/Cart";
+import WishList from "../pages/WishList/WishList";
+>>>>>>> 48f6e69cede072f4ec23577511dd12e9b881ec63
 
 const router = createBrowserRouter([
   {
@@ -40,6 +46,10 @@ const router = createBrowserRouter([
           ),
       },
       {
+        path: "product/:id",
+        element: <ProductDetails />,
+      },
+      {
         path: "about",
         element: <About />,
       },
@@ -50,6 +60,13 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart/>,
+<<<<<<< HEAD
+=======
+      },
+      {
+        path: "wishlist",
+        element: <WishList/>,
+>>>>>>> 48f6e69cede072f4ec23577511dd12e9b881ec63
       }
     ],
   },

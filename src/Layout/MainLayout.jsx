@@ -8,7 +8,7 @@ const MainLayout = () => {
   return (
     <div>
       <Header />
-      <div className="min-h-full container">
+      <div className="min-h-screen container">
         {navigation.state === "loading" ? <Loading /> : <Outlet />}
       </div>
       <Footer />

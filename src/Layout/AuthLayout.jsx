@@ -1,15 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import Header from "../components/Shared/Header/Header";
 import Footer from "../components/Shared/Footer/Footer";
+import Loading from "../components/Shared/Loading";
 
 const AuthLayout = () => {
+  const navigation = useNavigation();
   return (
     <div>
       <Header />
-      <div>
-        <Outlet />
+      <div className="min-h-screen container">
+        {navigation.state === "loading" ? <Loading /> : <Outlet />}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
