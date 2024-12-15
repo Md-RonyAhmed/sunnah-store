@@ -7,13 +7,14 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -29,100 +30,143 @@ const ProductDetails = () => {
       }
     };
     fetchData();
-    //
   }, [id]);
-  /**
-   * {
-    "_id": "675ac0e7c9f4a578ad85e377",
-    "image": "https://example.com/images/book2.jpg",
-    "name": "Python for Data Science",
-    "category": "Books",
-    "sub-category": "",
-    "status": true,
-    "price": 3200,
-    "description": "A beginner's guide to Python in data science.",
-    "keyFeatures": {
-        "author": "Jane Smith",
-        "pages": 350
-    },
-    "individualRating": 4.7,
-    "averageRating": 4.6,
-    "reviews": []
-}
-   */
+
   if (loading) {
     return <Loading />;
   }
+
+  // Safely handle product and keyFeatures
+  const {
+    image,
+    name,
+    description,
+    category,
+    price,
+    individualRating,
+    averageRating,
+    keyFeatures = {},
+  } = product || {};
+
   return (
-    <div className="flex justify-center items-center mt-44 py-10 ">
-      <Card className="relative border p-6 shadow-lg sm:w-11/12 lg:flex-row">
+    <div className="flex relative justify-center items-center mt-44 py-10 px-4">
+      <Card className="relative border p-6 shadow-lg w-full max-w-6xl lg:flex-row bg-white">
         <CardHeader
           shadow={false}
           floated={false}
-          className="m-0 flex-1  justify-center items-center flex bg-transparent shadow-sm"
+          className="flex-1 flex justify-center items-center shadow-sm"
         >
           <img
-            src={product?.image}
-            alt={product?.name}
-            className="w-80 object-cover"
+            src={image}
+            alt={name}
+            className="w-80 object-contain transition-transform duration-200 hover:scale-105"
           />
         </CardHeader>
-        <CardBody className=" p-0 pt-6 lg:p-6 flex-1">
+        <CardBody className="flex-1 lg:ml-8 p-0 pt-6 lg:pt-0 lg:p-6">
           <Typography
-            variant="h3"
+            variant="h2"
             color="blue-gray"
-            className="mb-4 text-xl sm:text-3xl "
+            className="mb-4 text-2xl sm:text-3xl font-bold"
           >
-            {product?.name}
+            {name}
           </Typography>
-          <Typography color="gray" className="mb-8 font-normal">
-            {product?.description}
-          </Typography>
-          <Typography variant="h6" color="gray" className="">
-            Brand:{" "}
-            <span className="text-green-400">
-              {product?.keyFeatures?.brand}
-            </span>
-          </Typography>
-          <Typography variant="h6" color="gray" className="">
-            Model:{" "}
-            <span className="text-green-400">
-              {product?.keyFeatures?.model}
-            </span>
-          </Typography>
-          <Typography variant="h6" color="gray" className="mb-4">
-            Category:{" "}
-            <span className="text-green-400">{product?.category}</span>
-          </Typography>
-          <Typography color="gray" className="mb-3 font-normal">
-            Individual Rating:
-            <span className="text-green-400 ">
-              {" "}
-              {product?.individualRating}
-            </span>
-          </Typography>
-          <Typography color="gray" className="mb-3 font-normal">
-            Average Rating:
-            <span className="text-green-400 "> {product?.averageRating}</span>
+          <Typography className="absolute top-4 right-5 mb-4 text-lg">
+            {product?.status ? (
+              <span className="text-primary bg-gray-200 py-1 px-2.5 rounded">
+                In stock
+              </span>
+            ) : (
+              <span className="text-red-600 bg-gray-200 py-1 px-2.5 rounded">
+                Out of stock
+              </span>
+            )}
           </Typography>
 
-          <Typography color="gray" variant="h3" className=" font-normal">
-            <span className="text-green-400">৳ {product?.price}</span>
+          <Typography color="gray" className="mb-4 text-sm sm:text-base">
+            {description}
           </Typography>
-          <Typography className="text-xs mb-3">
+          {/* Dynamic Key Features */}
+          <div className="mb-2 space-y-2">
+            <Typography variant="h5" color="blue-gray" className="font-bold">
+              Key Features:
+            </Typography>
+            {Object.entries(keyFeatures).length > 0 ? (
+              Object.entries(keyFeatures).map(([featureKey, featureValue]) => (
+                <Typography
+                  key={featureKey}
+                  variant="h6"
+                  color="gray"
+                  className="flex items-center text-sm sm:text-base"
+                >
+                  <span className="capitalize mr-2">{featureKey}:</span>{" "}
+                  <span className="text-green-500 font-medium">
+                    {featureValue}
+                  </span>
+                </Typography>
+              ))
+            ) : (
+              <Typography color="gray" className="text-sm">
+                No specific key features available.
+              </Typography>
+            )}
+          </div>
+
+          <Typography
+            variant="h6"
+            color="gray"
+            className="mb-2 text-sm sm:text-base"
+          >
+            Category:{" "}
+            <span className="text-green-500 font-medium">{category}</span>
+          </Typography>
+
+          <div className="mb-2 space-y-2">
+            <Typography color="gray" className="text-sm sm:text-base font-bold">
+              Individual Rating:{" "}
+              <span className="text-green-500 font-medium">
+                {individualRating}
+              </span>
+            </Typography>
+            <Typography color="gray" className="text-sm sm:text-base font-bold">
+              Average Rating:{" "}
+              <span className="text-green-500 font-medium">
+                {averageRating}
+              </span>
+            </Typography>
+          </div>
+
+          <Typography
+            color="blue-gray"
+            variant="h4"
+            className="mb-2 font-normal text-lg sm:text-2xl"
+          >
+            Price:{" "}
+            <span className="text-green-500 font-semibold">৳ {price}</span>
+          </Typography>
+          <Typography className="text-xs text-gray-400 mb-4">
             *Shipping and taxes extra
           </Typography>
-          <div className="flex gap-4 flex-col sm:flex-row flex-1">
+
+          <div className="flex flex-col sm:flex-row gap-4">
             <Button
               size="md"
-              variant=""
-              className="border-primary border bg-transparent text-primary hover:bg-primary hover:text-white transition duration-500"
+              variant="outlined"
+              className="border-green-500 text-green-500 hover:bg-green-50 transition duration-500"
             >
               Add to Wishlist
             </Button>
-            <Button size="md" className="bg-primary">
-              Add to Cart
-            </Button>
+            <Link to={"/cart"}>
+              <button
+                className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
+                  product?.status
+                    ? "bg-green-600 hover:bg-green-400 cursor-pointer"
+                    : "cursor-not-allowed bg-gray-400"
+                }`}
+                disabled={!product?.status}
+              >
+                Add to Cart
+              </button>
+            </Link>
           </div>
         </CardBody>
       </Card>
