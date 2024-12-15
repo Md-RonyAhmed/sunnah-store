@@ -85,14 +85,11 @@ function Categories() {
         {/* Products list */}
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
-
-            filteredProducts.slice(0, 5).map((product) => (
-              <ProductCard key={product?._id} product={product}/>
-
-           
-             
-
-            ))
+            filteredProducts
+              .slice(0, 5)
+              .map((product) => (
+                <ProductCard key={product?._id} product={product} />
+              ))
           ) : (
             <p>No products available in this category.</p>
           )}
@@ -100,7 +97,7 @@ function Categories() {
         {filteredProducts && (
           <Link to={`/products/${key}`}>
             {" "}
-            <Button className="bg-[#00BF63] mt-6">Load More</Button>
+            <Button className="bg-primary mt-6">Load More</Button>
           </Link>
         )}
       </div>

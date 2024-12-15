@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
       </span>
 
       <CardBody className="py-4 px-4 flex-grow space-y-3">
-      <div className="flex items-center gap-2 mt-2">
+        <div className="flex items-center gap-2 mt-2">
           {/* Star Rating */}
           <Rating value={individualRating} readOnly style={{ maxWidth: 100 }} />
           {/* Show numeric rating */}
@@ -55,7 +55,17 @@ const ProductCard = ({ product }) => {
         <Typography className="font-semibold text-gray-800 line-clamp-2">
           {name}
         </Typography>
-        
+        <Typography className="text-sm">
+          {product?.status ? (
+            <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">
+              In stock
+            </span>
+          ) : (
+            <span className="text-red-600 bg-gray-200 py-1 px-2.5 rounded-2xl">
+              Out of stock
+            </span>
+          )}
+        </Typography>
       </CardBody>
       <CardFooter className="pt-0 pb-4 px-4 flex flex-1 items-center justify-between space-x-3">
         {/* See Details Button */}
@@ -72,12 +82,19 @@ const ProductCard = ({ product }) => {
         </Link>
 
         {/* Add to Cart Button */}
-        <button
-          className="p-2 bg-green-500 hover:bg-green-600 text-white rounded shadow-md flex items-center justify-center"
-          aria-label="Add to Cart"
-        >
-          <FaShoppingCart />
-        </button>
+        <Link to={"/cart"}>
+          <button
+            className={`p-2 text-white rounded shadow-md flex items-center justify-center ${
+              product?.status
+                ? "bg-green-500 hover:bg-green-600"
+                : "bg-gray-500 cursor-not-allowed"
+            }`}
+            aria-label="Add to Cart"
+            disabled={!product?.status}
+          >
+            <FaShoppingCart />
+          </button>
+        </Link>
       </CardFooter>
     </Card>
   );

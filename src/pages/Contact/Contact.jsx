@@ -157,7 +157,7 @@ export function Contact() {
                 }}
               />
             </div>
-            <Button type="submit" className="w-full bg-[#00BF63]">
+            <Button type="submit" className="w-full bg-primary">
               Send message
             </Button>
           </form>

@@ -8,13 +8,15 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/Shared/Loading";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-
     const fetchData = async () => {
+      setLoading(true);
       try {
         const { data } = await axios.get(
           `https://sunnah-store-server-azure.vercel.app/product/${id}`
@@ -22,6 +24,8 @@ const ProductDetails = () => {
         setProduct(data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -46,15 +50,16 @@ const ProductDetails = () => {
     "reviews": []
 }
    */
- 
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
-    <div className="flex justify-center items-center mt-20  py-10  ">
+    <div className="flex justify-center items-center mt-44 py-10 ">
       <Card className="relative border p-6 shadow-lg sm:w-11/12 lg:flex-row">
         <CardHeader
           shadow={false}
           floated={false}
-          className="m-0 flex-1  justify-center items-center flex bg-transparent shadow"
+          className="m-0 flex-1  justify-center items-center flex bg-transparent shadow-sm"
         >
           <img
             src={product?.image}
@@ -90,9 +95,17 @@ const ProductDetails = () => {
             <span className="text-green-400">{product?.category}</span>
           </Typography>
           <Typography color="gray" className="mb-3 font-normal">
-            Average Rating:
-            <span className="text-green-400 ">{product?.averageRating}</span>
+            Individual Rating:
+            <span className="text-green-400 ">
+              {" "}
+              {product?.individualRating}
+            </span>
           </Typography>
+          <Typography color="gray" className="mb-3 font-normal">
+            Average Rating:
+            <span className="text-green-400 "> {product?.averageRating}</span>
+          </Typography>
+
           <Typography color="gray" variant="h3" className=" font-normal">
             <span className="text-green-400">৳ {product?.price}</span>
           </Typography>

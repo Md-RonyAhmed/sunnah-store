@@ -1,31 +1,20 @@
-import { Button, Card, Checkbox, Input } from "@material-tailwind/react";
+import { Button, Card, Input } from "@material-tailwind/react";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
-    <div className="flex justify-center my-32">
+    <div className="flex justify-center mt-40">
       <div>
         <Card color="transparent" shadow={false}>
-          <div className="text-[#00BF63] text-2xl font-bold">Sign In</div>
+          <div className="text-primary text-3xl font-bold">Sign In</div>
           <div color="gray" className="mt-1 font-normal">
-            Nice to meet you! Enter your details to sign in.
+            Enter your details to sign in.
           </div>
-          <form className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96 shadow-md p-6 rounded-md">
+          <form className="max-w-screen-lg mt-8 mb-2 w-full sm:w-96 shadow-md p-6 rounded-md">
             <div className="flex flex-col gap-6 mb-1">
               <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Your Name
-              </div>
-              <Input
-                size="lg"
-                placeholder="name@mail.com"
-                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-              />
-              <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Your Email
+                Email
               </div>
               <Input
                 size="lg"
@@ -41,31 +30,15 @@ const SignIn = () => {
               <Input
                 type="password"
                 size="lg"
-                placeholder="********"
+                placeholder="enter your password"
                 className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
                 }}
               />
             </div>
-            <Checkbox
-              label={
-                <div
-                  color="gray"
-                  className="flex items-center text-sm font-normal"
-                >
-                  I agree the
-                  <a
-                    href="#"
-                    className="font-medium transition-colors hover:text-gray-900"
-                  >
-                    &nbsp;Terms and Conditions
-                  </a>
-                </div>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
-            <Button className="mt-6 bg-[#00BF63]" fullWidth>
+
+            <Button className="mt-6 bg-primary" fullWidth>
               sign In
             </Button>
 
@@ -77,22 +50,19 @@ const SignIn = () => {
 
             <div className="flex items-center justify-between w-1/2 mx-auto text-3xl">
               <button>
-                <FaGoogle className="hover:text-[#00BF63]" />
+                <FaGoogle className="hover:text-primary" />
               </button>
               <button>
-                <FaFacebook className="hover:text-[#00BF63]" />
+                <FaFacebook className="hover:text-primary" />
               </button>
               <button>
-                <FaGithub className="hover:text-[#00BF63]" />
+                <FaGithub className="hover:text-primary" />
               </button>
             </div>
 
             <div color="gray" className="mt-4 font-normal text-center">
               Dont have an account?
-              <Link
-                to={"/signup"}
-                className="ml-2 font-medium text-[#00BF63]"
-              >
+              <Link to={"/signup"} className="ml-2 font-medium text-primary">
                 Sign Up
               </Link>
             </div>

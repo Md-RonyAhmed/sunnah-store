@@ -144,8 +144,7 @@ export function StickyNavbar() {
             />
             <Button
               size="sm"
-              color="green"
-              className="!absolute right-1 top-1 rounded"
+              className="!absolute right-1 top-1 rounded bg-primary"
             >
               Search
             </Button>

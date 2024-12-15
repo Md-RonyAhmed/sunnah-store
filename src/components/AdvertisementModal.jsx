@@ -43,7 +43,7 @@ const AdvertisementModal = ({ showModal, setShowModal }) => {
 
         <div className="flex justify-center gap-6">
           <Link to={"/products"}>
-            <button className="bg-[#00BF63] text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all">
+            <button className="bg-primary text-white px-8 py-3 rounded-lg shadow-lg hover:scale-105 transform transition-all">
               Shop Now
             </button>
           </Link>

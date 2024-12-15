@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import ProductsPagination from "./ProductsPagination";
 import { useState, useEffect } from "react";
 import FilterSection from "./Filtering/FilterSection";
+import { Switch } from "@material-tailwind/react";
 
 const Products = () => {
   const {
@@ -41,14 +42,22 @@ const Products = () => {
     <div className="mt-28">
       <FilterSection setSortBy={setSortBy} />
 
-      <h1 className="text-2xl border-b-4 border-[#00BF63] w-fit capitalize">
-        {key
-          ? key === "groceries"
-            ? "groceries & foods"
-            : key
-          : "all products"}{" "}
-        ({sortedProducts.length})
-      </h1>
+      <div className="flex items-center justify-between mt-3">
+        <h1 className="text-2xl border-b-4 border-primary w-fit capitalize">
+          {key
+            ? key === "groceries"
+              ? "groceries & foods"
+              : key
+            : "all products"}{" "}
+          ({sortedProducts.length})
+        </h1>
+
+        <div className="flex items-center space-x-2 mt-3">
+          <Switch id="in-stock" />
+          <label htmlFor="in-stock" className="text-primary">In stock</label>
+        </div>
+      </div>
+
       <div className="mb-8 mt-6 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {sortedProducts.map((product) => (
           <ProductCard key={product._id} product={product} />
