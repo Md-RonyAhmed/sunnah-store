@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
+import { FiShoppingCart } from "react-icons/fi";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -32,7 +33,7 @@ export function StickyNavbar() {
           to={"/books"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -49,7 +50,7 @@ export function StickyNavbar() {
           to={"/products"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -66,7 +67,7 @@ export function StickyNavbar() {
           to={"/about"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -83,11 +84,28 @@ export function StickyNavbar() {
           to={"/contact"}
           className={({ isActive }) =>
             isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              ? "text-primary underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
           Contact
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to={"/cart"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          <FiShoppingCart className="mr-2 size-5" />
         </NavLink>
       </Typography>
     </ul>
@@ -104,14 +122,13 @@ export function StickyNavbar() {
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
-                  <span className="text-2xl font-semibold text-[#00BF63]">
+                  <span className="text-2xl font-semibold text-primary">
                     Sunnah Store
                   </span>
                 </div>
               </Link>
             </div>
           </div>
-
           {/* Product Search Box */}
           <div className="relative md:flex w-full gap-2 md:w-max order-3 md:order-2 m-4 md:m-0">
             <Input
@@ -132,7 +149,6 @@ export function StickyNavbar() {
               Search
             </Button>
           </div>
-
           {/* Nav Links */}
           <div className="pr-4 flex items-center gap-4 order-2 md:order-3">
             <div className="mr-4 hidden lg:block">{navList}</div>
@@ -140,7 +156,7 @@ export function StickyNavbar() {
               <NavLink to={"/signin"}>
                 <Button
                   size="sm"
-                  className="hidden lg:inline-block bg-[#00BF63]"
+                  className="hidden lg:inline-block bg-primary"
                 >
                   <span>Sign in</span>
                 </Button>

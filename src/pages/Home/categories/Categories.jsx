@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams, Navigate, Link } from "react-router-dom";
 import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
+import ProductCard from "../../Products/ProductCard";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
 const categoryData = [
@@ -84,19 +85,13 @@ function Categories() {
         {/* Products list */}
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
+
             filteredProducts.slice(0, 5).map((product) => (
-              <div key={product._id} className="border rounded-lg p-4">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-auto rounded-md"
-                />
-                <h3 className="mt-2 text-lg font-bold">{product.name}</h3>
-                <p className="text-sm text-gray-600">{product.description}</p>
-                <p className="mt-2 text-lg font-semibold">
-                  Price:{product.price} BDT
-                </p>
-              </div>
+              <ProductCard key={product?._id} product={product}/>
+
+           
+             
+
             ))
           ) : (
             <p>No products available in this category.</p>
