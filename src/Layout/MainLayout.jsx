@@ -4,14 +4,19 @@ import Header from "../components/Shared/Header/Header";
 import Footer from "../components/Shared/Footer/Footer";
 import Loading from "../components/Shared/Loading";
 import ScrollToTopBtn from "../components/Shared/ScroollToTop/ScrollToTopBtn";
+import { categoryData } from "../pages/Home/categories/Categories";
 
 const MainLayout = () => {
   const navigation = useNavigation();
-  
+
   const location = useLocation();
   // Scroll to top when the location changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Check if the current path is in the excluded routes
+    const excludedPaths = categoryData.map((item) => item.path);
+    if (!excludedPaths.includes(location.pathname)) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [location]);
 
   return (
