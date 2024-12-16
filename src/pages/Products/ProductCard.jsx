@@ -12,7 +12,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { _id, image, name, price, individualRating } = product || {};
+  const { _id, image, name, price, individualRating, status } = product || {};
 
   return (
     <Card className="relative border hover:shadow-lg transition-shadow duration-300">
@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
           {name}
         </Typography>
         <Typography className="text-sm">
-          {product?.status ? (
+          {status ? (
             <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">
               In stock
             </span>
@@ -81,20 +81,31 @@ const ProductCard = ({ product }) => {
           </Button>
         </Link>
 
-        {/* Add to Cart Button */}
-        <Link to={"/cart"}>
-          <button
-            className={`p-2 text-white rounded shadow-md flex items-center justify-center ${
-              product?.status
-                ? "bg-green-500 hover:bg-green-600"
-                : "bg-gray-500 cursor-not-allowed"
-            }`}
-            aria-label="Add to Cart"
-            disabled={!product?.status}
+        <div className="relative group inline-block">
+          <Link to="/cart">
+            <button
+              className={`p-2 text-white rounded shadow-md flex items-center justify-center ${
+                status
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-gray-500 cursor-not-allowed"
+              }`}
+              aria-label="Add to Cart"
+              disabled={!status}
+            >
+              <FaShoppingCart />
+            </button>
+          </Link>
+
+          {/* Custom Tooltip */}
+          <span
+            className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 
+                   px-2 py-1 bg-primary text-white text-sm rounded 
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
           >
-            <FaShoppingCart />
-          </button>
-        </Link>
+            {" "}
+            Add to Cart
+          </span>
+        </div>
       </CardFooter>
     </Card>
   );

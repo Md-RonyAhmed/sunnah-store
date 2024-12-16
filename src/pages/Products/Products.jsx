@@ -1,23 +1,37 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import ProductsPagination from "./ProductsPagination";
 import { useState, useEffect } from "react";
 import FilterSection from "./Filtering/FilterSection";
 import { Switch } from "@material-tailwind/react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "../../components/Shared/Loading";
 
 const Products = () => {
-  const {
-    data: { data: products },
-  } = useLoaderData();
-
+  const { key } = useParams();
   const [sortBy, setSortBy] = useState(0);
-  const [sortedProducts, setSortedProducts] = useState(products);
+
   const [inStock, setInStock] = useState(false);
 
-  const { key } = useParams();
+  const { data: products, isLoading } = useQuery({
+    queryKey: key ? ["products", key] : ["products"],
+    queryFn: async () => {
+      let url = "https://sunnah-store-server-azure.vercel.app/products";
+      if (key) {
+        url = `https://sunnah-store-server-azure.vercel.app/products/${key}`;
+      }
+      const res = await axios.get(url);
+      return res.data.data;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const [sortedProducts, setSortedProducts] = useState([]);
 
   // Sorting
   useEffect(() => {
+    if (!products) return;
     let sorted = [...products];
     switch (sortBy) {
       case 1: // Price: Low to High
@@ -43,6 +57,9 @@ const Products = () => {
     setSortedProducts(sorted);
   }, [sortBy, products, inStock]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="mt-28">
       <FilterSection setSortBy={setSortBy} />
@@ -70,7 +87,7 @@ const Products = () => {
       </div>
 
       <div className="mb-8 mt-6 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {sortedProducts.map((product) => (
+        {sortedProducts?.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>

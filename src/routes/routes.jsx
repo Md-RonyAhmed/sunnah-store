@@ -8,7 +8,6 @@ import Products from "../pages/Products/Products";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import NotFound from "../pages/NotFound/NotFound";
-import axios from "axios";
 import ProductDetails from "../pages/Products/ProductDetails";
 import Cart from "../pages/Cart/Cart";
 import WishList from "../pages/WishList/WishList";
@@ -30,16 +29,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
-        loader: () =>
-          axios.get("https://sunnah-store-server-azure.vercel.app/products"),
       },
       {
         path: "products/:key",
         element: <Products />,
-        loader: ({ params }) =>
-          axios.get(
-            `https://sunnah-store-server-azure.vercel.app/products/${params.key}`
-          ),
       },
       {
         path: "product/:id",

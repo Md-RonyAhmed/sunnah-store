@@ -43,6 +43,7 @@ const ProductDetails = () => {
     description,
     category,
     price,
+    status,
     individualRating,
     averageRating,
     keyFeatures = {},
@@ -91,19 +92,23 @@ const ProductDetails = () => {
               Key Features:
             </Typography>
             {Object.entries(keyFeatures).length > 0 ? (
-              Object.entries(keyFeatures).map(([featureKey, featureValue]) => (
-                <Typography
-                  key={featureKey}
-                  variant="h6"
-                  color="gray"
-                  className="flex items-center text-sm sm:text-base"
-                >
-                  <span className="capitalize mr-2">{featureKey}:</span>{" "}
-                  <span className="text-green-500 font-medium">
-                    {featureValue}
-                  </span>
-                </Typography>
-              ))
+              Object.entries(keyFeatures).map(
+                (
+                  [featureKey, featureValue] //keyFeatures=[[key,value]]
+                ) => (
+                  <Typography
+                    key={featureKey}
+                    variant="h6"
+                    color="gray"
+                    className="flex items-center text-sm sm:text-base"
+                  >
+                    <span className="capitalize mr-2">{featureKey}:</span>{" "}
+                    <span className="text-green-500 font-medium">
+                      {featureValue}
+                    </span>
+                  </Typography>
+                )
+              )
             ) : (
               <Typography color="gray" className="text-sm">
                 No specific key features available.
@@ -158,11 +163,11 @@ const ProductDetails = () => {
             <Link to={"/cart"}>
               <button
                 className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
-                  product?.status
+                  status
                     ? "bg-green-600 hover:bg-green-400 cursor-pointer"
                     : "cursor-not-allowed bg-gray-400"
                 }`}
-                disabled={!product?.status}
+                disabled={!status}
               >
                 Add to Cart
               </button>
