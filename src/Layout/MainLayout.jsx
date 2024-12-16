@@ -8,11 +8,11 @@ const MainLayout = () => {
   const navigation = useNavigation();
   return (
     <div>
+      <ScrollToTopBtn />
       <Header />
       <div className="container min-h-screen">
         {navigation.state === "loading" ? <Loading /> : <Outlet />}
       </div>
-      <ScrollToTopBtn />
       <Footer />
     </div>
   );
