@@ -12,12 +12,12 @@ const Marquee = () => {
       </div>
 
       <div className="flex items-center">
-        <div className="flex items-center gap-2 mr-4 text-xs">
-          <BiSupport className="text-base text-[#4caf50]" />
+        <div className="flex items-center gap-2  text-xs">
+          <BiSupport className="text-base text-[#4caf50] " />
           24/7 Support
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 ml-2">
           <span className="text-xs">Contact</span>
           <a
             className="inline-flex items-center gap-2 text-xs"
@@ -41,10 +41,10 @@ const Marquee = () => {
   return (
     <section
       aria-label="scrolling text"
-      className="bg-[#f2f2f2] py-2 md:py-4 overflow-hidden relative"
+      className="overflow-hidden relative"
     >
-      <div className="container mx-auto relative overflow-hidden">
-        <div className="flex justify-between space-x-8 min-w-max pr-8">
+      <div className="container mx-auto bg-[#f2f2f2] py-3 rounded-sm relative overflow-hidden">
+        <div className="flex justify-between space-x-8 min-w-max  px-0">
           {marqueeContent}
         </div>
       </div>
@@ -53,4 +53,3 @@ const Marquee = () => {
 };
 
 export default Marquee;
-
