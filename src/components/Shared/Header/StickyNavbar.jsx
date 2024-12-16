@@ -23,7 +23,7 @@ export function StickyNavbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6"> 
+    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -106,7 +106,7 @@ export function StickyNavbar() {
               : "text-black flex items-center"
           }
         >
-          <FaHeart className="mr-2 size-5 text-red-500" />
+          <FaHeart className="mr-2 text-red-500 size-5" />
         </NavLink>
       </Typography>
     </ul>
@@ -114,11 +114,11 @@ export function StickyNavbar() {
 
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
-      <Navbar className="rounded-none py-1 shadow-none mx-auto px-0">
-        <div className="flex items-center flex-wrap justify-between text-blue-gray-900">
+      <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
+        <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
-          <div className="cursor-pointer font-medium order-1">
-            <div className="flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center gap-6">
+          <div className="order-1 font-medium cursor-pointer">
+            <div className="flex flex-col items-start justify-start gap-6 md:flex-row md:items-center md:justify-center">
               <Link>
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
@@ -131,7 +131,7 @@ export function StickyNavbar() {
             </div>
           </div>
           {/* Product Search Box */}
-          <div className="relative md:flex w-full gap-2 md:w-max order-3 md:order-2 m-4 md:m-0">
+          <div className="relative order-3 w-full gap-2 m-4 md:flex md:w-max md:order-2 md:m-0">
             <Input
               type="search"
               color="gray"
@@ -150,21 +150,18 @@ export function StickyNavbar() {
             </Button>
           </div>
           {/* Nav Links */}
-          <div className="pr-4 flex items-center gap-4 order-2 md:order-3">
-            <div className="mr-4 hidden lg:block">{navList}</div>
+          <div className="flex items-center order-2 gap-4 pr-4 md:order-3">
+            <div className="hidden mr-4 lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               <NavLink to={"/signin"}>
-                <Button
-                  size="sm"
-                  className="hidden lg:inline-block bg-primary"
-                >
+                <Button size="sm" className="hidden lg:inline-block bg-primary">
                   <span>Sign in</span>
                 </Button>
               </NavLink>
             </div>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="w-6 h-6 ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={true}
               onClick={() => setOpenNav(!openNav)}
             >
