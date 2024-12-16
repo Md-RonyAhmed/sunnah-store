@@ -5,7 +5,7 @@ const ScrollToTopBtn = () => {
     <ScrollToTop
       smooth
       color="#fff"
-      top="400"
+      top="100"
       className="!z-50 flex items-center justify-center animate-bounce !bg-primary !ring-2 !ring-white"
     />
   );
