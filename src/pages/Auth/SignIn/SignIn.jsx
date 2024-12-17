@@ -5,8 +5,10 @@ import { Button, Card, Input } from "@material-tailwind/react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
   // State for form data
   const [formData, setFormData] = useState({
     email: "",
@@ -53,8 +55,8 @@ const SignIn = () => {
     // Password Validation
     if (!formData.password) {
       newErrors.password = "Password is required.";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
     }
 
     return newErrors;
@@ -134,24 +136,41 @@ const SignIn = () => {
                 >
                   Password
                 </label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  size="lg"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
-                    errors.password ? "!border-red-500 focus:!border-red-500" : ""
-                  }`}
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    size="lg"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
+                      errors.password
+                        ? "!border-red-500 focus:!border-red-500"
+                        : ""
+                    }`}
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                  />
+                  <div
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <VscEyeClosed size={24} />
+                  ) : (
+                    <VscEye size={24} />
+                  )}
+                </div>
+                  
+                </div>
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-                )}
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.password}
+                    </p>
+                  )}
               </div>
             </div>
 
