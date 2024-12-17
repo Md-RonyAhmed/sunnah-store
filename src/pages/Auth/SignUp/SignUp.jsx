@@ -162,7 +162,7 @@ const SignUp = () => {
             Enter your details to Register or Sign Up.
           </div>
           <form
-            className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-[450px]"
+            className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-[480px]"
             onSubmit={handleSubmit}
             noValidate
           >

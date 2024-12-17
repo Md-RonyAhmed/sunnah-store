@@ -95,7 +95,7 @@ const SignIn = () => {
             Enter your details to sign in.
           </div>
           <form
-            className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-96"
+            className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-[480px]"
             onSubmit={handleSubmit}
             noValidate
           >
