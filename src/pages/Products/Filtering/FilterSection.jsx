@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { categoryData } from "../../Home/categories/Categories";
 
-const FilterSection = ({ setSortBy }) => {
+const FilterSection = ({ sortBy, setSortBy }) => {
   const navigate = useNavigate();
   const { key } = useParams();
   // Options for sorting
@@ -36,6 +36,7 @@ const FilterSection = ({ setSortBy }) => {
           id="sortBy"
           className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
           onChange={handleSortChange}
+          value={sortBy}
         >
           {sortOptions.map((option) => (
             <option key={option.id} value={option.id}>
