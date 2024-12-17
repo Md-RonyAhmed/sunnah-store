@@ -7,11 +7,12 @@ import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../components/Shared/Loading";
+import CategoryFilter from "./Filtering/CategoryFiltering";
 
 const Products = () => {
   const { key } = useParams();
   const [sortBy, setSortBy] = useState(0);
-
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
 
   const { data: products, isLoading } = useQuery({
@@ -57,6 +58,21 @@ const Products = () => {
     setSortedProducts(sorted);
   }, [sortBy, products, inStock]);
 
+  // filtering products by category
+
+  useEffect(() => {
+    if (!products) return;
+
+    let filteredProducts = [...products];
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === selectedCategory
+      );
+    }
+
+    setSortedProducts(filteredProducts);
+  }, [selectedCategory, products]);
+
   if (isLoading) {
     return <Loading />;
   }
@@ -65,14 +81,29 @@ const Products = () => {
       <FilterSection setSortBy={setSortBy} />
 
       <div className="flex items-center justify-between mt-3">
-        <h1 className="text-2xl border-b-4 border-primary w-fit capitalize">
-          {key
-            ? key === "groceries"
-              ? "groceries & foods"
-              : key
-            : "all products"}{" "}
-          ({sortedProducts.length})
-        </h1>
+        <div className="flex gap-5">
+          {/* Title and Number of Products */}
+          {selectedCategory && (
+            <h1 className="text-2xl border-b-4 border-primary w-fit capitalize">
+              {selectedCategory ? selectedCategory : ""} (
+              {sortedProducts.length})
+            </h1>
+          )}
+          <h1
+            className={`text-2xl border-b-4 border-primary w-fit capitalize ${
+              selectedCategory ? "hidden" : "block"
+            }`}
+          >
+            {key
+              ? key === "groceries"
+                ? "groceries & foods"
+                : key
+              : "all products"}{" "}
+            ({sortedProducts.length})
+          </h1>
+          {/* Filter by Categories Dropdown menu */}
+          <CategoryFilter onSelectedCategory={setSelectedCategory} />
+        </div>
 
         <div className="flex items-center space-x-2 mt-3">
           <Switch
