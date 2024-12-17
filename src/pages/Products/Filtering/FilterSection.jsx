@@ -30,22 +30,6 @@ const FilterSection = ({ sortBy, setSortBy }) => {
     <div className="flex flex-col lg:flex-row justify-start gap-2 items-center pb-4 mb-4 bg-white rounded-lg space-y-3 lg:space-y-0">
       <h3 className="text-xl">Filter Items</h3>
 
-      {/* Sorting Dropdown */}
-      <div className="relative">
-        <select
-          id="sortBy"
-          className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-          onChange={handleSortChange}
-          value={sortBy}
-        >
-          {sortOptions.map((option) => (
-            <option key={option.id} value={option.id}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
       {/* Category Dropdown */}
       <div className="relative">
         <select
@@ -58,6 +42,22 @@ const FilterSection = ({ sortBy, setSortBy }) => {
           {categoryData.map((category) => (
             <option key={category.path} value={category.path}>
               {category.catName}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Sorting Dropdown */}
+      <div className="relative">
+        <select
+          id="sortBy"
+          className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+          onChange={handleSortChange}
+          value={sortBy}
+        >
+          {sortOptions.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
             </option>
           ))}
         </select>
