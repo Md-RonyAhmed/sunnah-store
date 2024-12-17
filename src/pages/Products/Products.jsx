@@ -57,7 +57,7 @@ const Products = () => {
     setSortedProducts(sorted);
   }, [sortBy, products, inStock]);
 
-  if (isLoading || (sortedProducts.length === 0 && products.length > 0)) {
+  if (isLoading/* || (sortedProducts.length === 0 && products.length > 0)*/) {
     // handle waiting time with a loading screen when program is running to set data properly!
     return <Loading />;
   }
