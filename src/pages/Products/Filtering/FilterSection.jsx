@@ -15,20 +15,19 @@ const FilterSection = ({ setSortBy }) => {
 
   // Handle sorting selection change
   const handleSortChange = (e) => {
-    const selectedValue = parseInt(e.target.value); // Get selected integer value
-    setSortBy(selectedValue); // Trigger the sorting function
+    const selectedValue = parseInt(e.target.value);
+    setSortBy(selectedValue);
   };
 
   // Handle category selection change
   const handleCategoryChange = (e) => {
     const selectedPath = e.target.value;
-    if (selectedPath) {
-      navigate(`/products${selectedPath}`); // Redirect to the selected category
-    }
+    // Redirect to the selected category
+    navigate(`/products${selectedPath}`);
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-start gap-5 items-center pb-4 mb-4 bg-white rounded-lg space-y-3 lg:space-y-0">
+    <div className="flex flex-col lg:flex-row justify-start gap-2 items-center pb-4 mb-4 bg-white rounded-lg space-y-3 lg:space-y-0">
       <h3 className="text-xl">Filter Items</h3>
 
       {/* Sorting Dropdown */}
