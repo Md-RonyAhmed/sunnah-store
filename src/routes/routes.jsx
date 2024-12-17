@@ -11,6 +11,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import ProductDetails from "../pages/Products/ProductDetails";
 import Cart from "../pages/Cart/Cart";
 import WishList from "../pages/WishList/WishList";
+import Reset from "../pages/Auth/SignIn/Reset";
 
 const router = createBrowserRouter([
   {
@@ -48,12 +49,12 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <Cart/>,
+        element: <Cart />,
       },
       {
         path: "wishlist",
-        element: <WishList/>,
-      }
+        element: <WishList />,
+      },
     ],
   },
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
+      },
+      {
+        path: "reset",
+        element: <Reset />,
       },
     ],
   },
