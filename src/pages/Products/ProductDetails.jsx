@@ -55,13 +55,16 @@ const ProductDetails = () => {
         <CardHeader
           shadow={false}
           floated={false}
-          className="flex-1 flex justify-center items-center shadow-sm"
+          className="flex-1 flex justify-center items-center"
         >
-          <img
-            src={image}
-            alt={name}
-            className="w-80 object-contain transition-transform duration-200 hover:scale-105"
-          />
+          <div className="group w-80 overflow-hidden cursor-zoom-in">
+            <img
+              loading="lazy"
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
         </CardHeader>
         <CardBody className="flex-1 lg:ml-8 p-0 pt-6 lg:pt-0 lg:p-6">
           <Typography
