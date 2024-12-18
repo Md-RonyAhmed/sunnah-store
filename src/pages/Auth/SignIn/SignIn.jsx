@@ -1,47 +1,62 @@
 // src/components/SignIn.jsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import {
+  LoadCanvasTemplateNoReload,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   // State for form data
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    captcha: "",
   });
 
   // State for validation errors
   const [errors, setErrors] = useState({
     email: "",
     password: "",
+    captcha: "",
   });
 
   // State to handle form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [, setIsCaptchaValid] = useState(false);
 
-  // Handler for input changes
+  useEffect(() => {
+    loadCaptchaEnginge(4, "#00BF63");
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
 
-    // Clear the error message as the user types
-    setErrors({
-      ...errors,
+    setErrors((prev) => ({
+      ...prev,
       [name]: "",
-    });
+    }));
+
+    if (name === "captcha") {
+      setIsCaptchaValid(false);
+    }
   };
 
-  // Validation function
-  const validate = () => {
+  const validateForm = () => {
     const newErrors = {};
+
     // Email Validation
     if (!formData.email) {
       newErrors.email = "Email is required.";
@@ -59,31 +74,45 @@ const SignIn = () => {
       newErrors.password = "Password must be at least 8 characters.";
     }
 
+    // Captcha Validation
+    if (!formData.captcha) {
+      newErrors.captcha = "Captcha is required.";
+    } else if (!validateCaptcha(formData.captcha)) {
+      newErrors.captcha = "Captcha does not match.";
+    } else {
+      setIsCaptchaValid(true);
+    }
+
     return newErrors;
   };
 
-  // Handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const validationErrors = validate();
+    const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
-    } else {
-      // Proceed with form submission (e.g., API call)
-      console.log("Form submitted successfully:", formData);
-
-      // TODO: Replace the console log with actual sign-in logic
-
-      // Reset form fields
-      setFormData({
-        email: "",
-        password: "",
-      });
-      setIsSubmitting(false);
+      return;
     }
+
+    // If we reach here, we have no validation errors
+    console.log("Form submitted successfully:", formData);
+
+    // TODO: Implement actual sign-in logic here
+
+    // Reset form fields
+    setFormData({
+      email: "",
+      password: "",
+      captcha: "",
+    });
+    setIsCaptchaValid(false);
+    setIsSubmitting(false);
+
+    // Reload captcha after submission
+    loadCaptchaEnginge(4, "#00BF63");
   };
 
   return (
@@ -91,7 +120,7 @@ const SignIn = () => {
       <div>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign In</div>
-          <div color="gray" className="mt-1 font-normal">
+          <div className="mt-1 font-normal text-gray-700">
             Enter your details to sign in.
           </div>
           <form
@@ -99,7 +128,7 @@ const SignIn = () => {
             onSubmit={handleSubmit}
             noValidate
           >
-            <div className="flex flex-col gap-6 mb-2">
+            <div className="flex flex-col gap-6 mb-3">
               {/* Email Field */}
               <div className="flex flex-col">
                 <label
@@ -155,22 +184,52 @@ const SignIn = () => {
                     }}
                   />
                   <div
-                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <VscEyeClosed size={24} />
-                  ) : (
-                    <VscEye size={24} />
-                  )}
-                </div>
-                  
+                    className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <VscEyeClosed size={24} />
+                    ) : (
+                      <VscEye size={24} />
+                    )}
+                  </div>
                 </div>
                 {errors.password && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.password}
-                    </p>
-                  )}
+                  <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                )}
+              </div>
+
+              {/* Captcha Field */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="captcha"
+                  className="mb-1 text-base font-bold text-blue-gray-700"
+                >
+                  Captcha
+                </label>
+                <label className="label">
+                  <LoadCanvasTemplateNoReload />
+                </label>
+                <Input
+                  id="captcha"
+                  name="captcha"
+                  type="text"
+                  placeholder="Type the captcha above"
+                  size="lg"
+                  value={formData.captcha}
+                  onChange={handleChange}
+                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 mt-2 ${
+                    errors.captcha
+                      ? "!border-red-500 focus:!border-red-500"
+                      : ""
+                  }`}
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                />
+                {errors.captcha && (
+                  <p className="mt-3 text-sm text-red-500">{errors.captcha}</p>
+                )}
               </div>
             </div>
 

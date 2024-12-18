@@ -12,6 +12,7 @@ import ProductDetails from "../pages/Products/ProductDetails";
 import Cart from "../pages/Cart/Cart";
 import WishList from "../pages/WishList/WishList";
 import Reset from "../pages/Auth/SignIn/Reset";
+import Profile from "../pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <WishList />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

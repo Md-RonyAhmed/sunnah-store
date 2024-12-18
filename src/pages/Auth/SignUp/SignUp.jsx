@@ -1,17 +1,11 @@
-/* eslint-disable no-unused-vars */
 // src/components/SignUp.jsx
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import {
-  LoadCanvasTemplateNoReload,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
@@ -19,55 +13,35 @@ import Swal from "sweetalert2";
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-  // State for form data
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    captcha: "",
   });
 
-  // State for validation errors
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    captcha: "",
   });
 
-  // State to handle form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // State to track captcha validity
-  const [, setIsCaptchaValid] = useState(false);
-
-  // State to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
-
-  // Load captcha once on mount
-  useEffect(() => {
-    loadCaptchaEnginge(6, "#00BF63");
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
 
-    // Clear the error message as the user types
-    setErrors({
-      ...errors,
+    setErrors((prev) => ({
+      ...prev,
       [name]: "",
-    });
-
-    // Reset captcha validity if captcha field is modified
-    if (name === "captcha") {
-      setIsCaptchaValid(false);
-    }
+    }));
   };
 
   const validateForm = () => {
@@ -107,70 +81,64 @@ const SignUp = () => {
       newErrors.confirmPassword = "Passwords do not match.";
     }
 
-    // Captcha Validation on Submission
-    if (!formData.captcha) {
-      newErrors.captcha = "Captcha is required.";
-    } else if (!validateCaptcha(formData.captcha)) {
-      newErrors.captcha = "Captcha does not match.";
-    } else {
-      setIsCaptchaValid(true);
-    }
-
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const validationErrors = validateForm();
 
+    const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
-    } else {
-      createUser(formData.email, formData.password)
-        .then((res) => {
-          setIsSubmitting(true);
-          const user = res.user;
-          updateUserProfile(formData.name)
-            .then(() => {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "User Signed Up successfully.",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              navigate("/");
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setIsSubmitting(false);
-        });
-
-      // Reset form fields
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        captcha: "",
-      });
-      setIsCaptchaValid(false);
-      setErrors({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        captcha: "",
-      });
-      setIsSubmitting(false);
-
-      // Reload captcha after successful submission
-      loadCaptchaEnginge(6, "#00BF63");
+      return;
     }
+
+    createUser(formData.email, formData.password)
+      .then(() => {
+        // Update user profile
+        updateUserProfile(formData.name)
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Welcome to our website, ${formData.name}`,
+              showConfirmButton: false,
+              timer: 3000,
+            });
+            // Reset the form
+            setFormData({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
+
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: err.message,
+              showConfirmButton: true,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: true,
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -181,7 +149,7 @@ const SignUp = () => {
       <div>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign Up</div>
-          <div color="gray" className="mt-1 font-normal">
+          <div className="mt-1 font-normal text-gray-700">
             Enter your details to Register or Sign Up.
           </div>
           <form
@@ -329,40 +297,6 @@ const SignUp = () => {
                   <p className="mt-1 text-sm text-red-500">
                     {errors.confirmPassword}
                   </p>
-                )}
-              </div>
-
-              {/* Captcha Field */}
-              <div className="flex flex-col">
-                <label
-                  htmlFor="captcha"
-                  className="mb-1 text-base font-bold text-blue-gray-700"
-                >
-                  Captcha
-                </label>
-                <label className="label">
-                  <LoadCanvasTemplateNoReload />
-                </label>
-                <Input
-                  id="captcha"
-                  name="captcha"
-                  type="text"
-                  placeholder="Type the captcha above"
-                  size="lg"
-                  value={formData.captcha}
-                  onChange={handleChange}
-                  // Removed onBlur event
-                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 mt-2 ${
-                    errors.captcha
-                      ? "!border-red-500  focus:!border-red-500"
-                      : ""
-                  }`}
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
-                {errors.captcha && (
-                  <p className="mt-2 text-sm text-red-500">{errors.captcha}</p>
                 )}
               </div>
             </div>
