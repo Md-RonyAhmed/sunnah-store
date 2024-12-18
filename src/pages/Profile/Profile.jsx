@@ -1,17 +1,39 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { Button, Card, Input, Tabs, TabsHeader, TabsBody, Tab, TabPanel } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  Input,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import { FaUser, FaHeart, FaShoppingBag } from "react-icons/fa";
+import { auth } from "../../firebase/firebase.config"; // Make sure this import is correct
+import { sendEmailVerification } from "firebase/auth";
 
 const Profile = () => {
   const { user, updateUserProfile } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user?.displayName || "");
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isSendingVerification, setIsSendingVerification] = useState(false);
 
-  // Mock data for orders and wishlist (replace with actual data from your backend)
+  // Reload user data when component mounts to ensure emailVerified is up-to-date
+  useEffect(() => {
+    const reloadUserData = async () => {
+      if (auth.currentUser) {
+        await auth.currentUser.reload();
+      }
+    };
+    reloadUserData();
+  }, []);
+
+  // Mock data for orders and wishlist (replace with actual data)
   const orders = [
     { id: 1, date: "2024-03-20", status: "Delivered", total: 150 },
     { id: 2, date: "2024-03-15", status: "Processing", total: 85 },
@@ -47,6 +69,33 @@ const Profile = () => {
       });
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const handleSendVerificationEmail = async () => {
+    if (!auth.currentUser) return;
+    setIsSendingVerification(true);
+
+    try {
+      await sendEmailVerification(auth.currentUser);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Verification email sent!",
+        text: "Please check your inbox (and spam folder).",
+        showConfirmButton: true,
+      });
+    } catch (error) {
+      console.error("Error sending verification email:", error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Failed to send verification email",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    } finally {
+      setIsSendingVerification(false);
     }
   };
 
@@ -97,11 +146,23 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Account Status
             </label>
-            <p className="text-lg">
+            <p className="text-lg flex items-center gap-2">
               {user?.emailVerified ? (
                 <span className="text-green-500">Verified</span>
               ) : (
-                <span className="text-red-500">Not Verified</span>
+                <>
+                  <span className="text-red-500">Not Verified</span>
+                  <Button
+                    size="sm"
+                    color="blue"
+                    onClick={handleSendVerificationEmail}
+                    disabled={isSendingVerification}
+                  >
+                    {isSendingVerification
+                      ? "Sending..."
+                      : "Send Verification Email"}
+                  </Button>
+                </>
               )}
             </p>
           </div>
@@ -177,8 +238,12 @@ const Profile = () => {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {orders.map((order) => (
                     <tr key={order.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">#{order.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">{order.date}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        #{order.id}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order.date}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
                           className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
@@ -231,7 +296,6 @@ const Profile = () => {
         </div>
       ),
     },
-   
   ];
 
   return (
