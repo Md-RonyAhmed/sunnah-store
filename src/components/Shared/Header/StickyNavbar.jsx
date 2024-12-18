@@ -17,7 +17,7 @@ import Marquee from "./Marquee";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
 
   // For avatar dropdown
   const [profileOpen, setProfileOpen] = useState(false);
@@ -142,11 +142,8 @@ export function StickyNavbar() {
       .catch((err) => console.log(err));
   };
 
-  // Determine avatar: if user.photoURL is available, use it; otherwise use placeholder
-  const avatarURL =
-    user && user.photoURL
-      ? user.photoURL
-      : "https://api.dicebear.com/5.x/bottts/svg?seed=User";
+  const userPhotoURL =
+    user?.photoURL || user?.providerData?.[0]?.photoURL || "";
 
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
@@ -204,12 +201,16 @@ export function StickyNavbar() {
               </div>
             ) : (
               <div className="relative" ref={dropdownRef}>
-                <img
-                  src={avatarURL}
-                  alt="User Avatar"
-                  className="w-10 h-10 rounded-full cursor-pointer font-bold"
-                  onClick={() => setProfileOpen((prev) => !prev)}
-                />
+                {loading ? (
+                  <div className="w-10 h-10 rounded-full bg-gray-300 animate-pulse" />
+                ) : (
+                  <img
+                    src={userPhotoURL}
+                    alt="User"
+                    className="w-10 h-10 rounded-full cursor-pointer font-bold"
+                    onClick={() => setProfileOpen((prev) => !prev)}
+                  />
+                )}
                 {profileOpen && (
                   <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
                     <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">

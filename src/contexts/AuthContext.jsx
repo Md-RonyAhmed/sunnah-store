@@ -27,7 +27,7 @@ const AuthContextProvider = ({ children }) => {
    * - If `auth.currentUser.photoURL` already exists, use that.
    * - Otherwise, generate a placeholder letter avatar from the user's first name.
    */
-  const updateUserProfile = (name) => {
+  const updateUserProfile = async (name) => {
     const firstName = name?.split(" ")[0] || "U";
     const firstChar = firstName.charAt(0).toUpperCase();
 
@@ -44,17 +44,17 @@ const AuthContextProvider = ({ children }) => {
     const base64SVG = btoa(svg);
     const placeholderPhoto = `data:image/svg+xml;base64,${base64SVG}`;
 
-    const currentPhotoURL = auth.currentUser?.photoURL;
-    const finalPhotoURL =
-      currentPhotoURL && currentPhotoURL.trim() !== ""
-        ? currentPhotoURL
-        : placeholderPhoto;
+    const finalPhotoURL = auth?.currentUser?.photoURL
+      ? auth?.currentUser?.photoURL
+      : placeholderPhoto;
 
-    return updateProfile(auth.currentUser, {
+    return await updateProfile(auth?.currentUser, {
       displayName: name,
       photoURL: finalPhotoURL,
     });
   };
+
+  // console.log(auth?.currentUser?.photoURL)
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (loggedInUser) => {
@@ -66,7 +66,7 @@ const AuthContextProvider = ({ children }) => {
 
   const signOutUser = () => {
     setLoading(true);
-    return signOut(auth).then(() => setLoading(false));
+    return signOut(auth);
   };
 
   const signInUser = (email, password) => {
@@ -74,11 +74,13 @@ const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // New: Sign In with Google
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     setLoading(true);
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    // result.user is the signed-in user with providerData that includes the Google photo URL
+    setLoading(false);
+    return result;
   };
 
   const authInfo = {
