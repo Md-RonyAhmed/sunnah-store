@@ -4,7 +4,9 @@ import Banner from "../../components/Shared/Header/Banner/Banner";
 import AdvertisementModal from "../../components/AdvertisementModal";
 import OfferTimer from "./OfferTimer/OfferTimer";
 import Categories from "./categories/Categories";
+import Pride from "../../components/pride/Pride";
 import { Helmet } from "react-helmet-async";
+
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -48,6 +50,7 @@ const Home = () => {
       <Categories />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
       <Ebook />
+      <Pride />
     </>
   );
 };
