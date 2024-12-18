@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
@@ -13,14 +15,14 @@ const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return await createUserWithEmailAndPassword(auth, email, password);
   };
 
   /**
    * Updates the user's profile with the given name. The photoURL will be determined as follows:
-   * - If `auth.currentUser.photoURL` already exists (e.g., from Google login), use that.
+   * - If `auth.currentUser.photoURL` already exists, use that.
    * - Otherwise, generate a placeholder letter avatar from the user's first name.
    */
   const updateUserProfile = (name) => {
@@ -40,7 +42,6 @@ const AuthContextProvider = ({ children }) => {
     const base64SVG = btoa(svg);
     const placeholderPhoto = `data:image/svg+xml;base64,${base64SVG}`;
 
-    // If the user logged in with Google and already has a photoURL, use that
     const currentPhotoURL = auth.currentUser?.photoURL;
     const finalPhotoURL =
       currentPhotoURL && currentPhotoURL.trim() !== ""
@@ -61,10 +62,14 @@ const AuthContextProvider = ({ children }) => {
     return () => unSubscribe();
   }, []);
 
-  // Implement signOutUser if needed for the logout logic in your navbar
   const signOutUser = () => {
     setLoading(true);
-    return auth.signOut().then(() => setLoading(false));
+    return signOut(auth).then(() => setLoading(false));
+  };
+
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const authInfo = {
@@ -73,6 +78,7 @@ const AuthContextProvider = ({ children }) => {
     createUser,
     updateUserProfile,
     signOutUser,
+    signInUser,
   };
 
   return (

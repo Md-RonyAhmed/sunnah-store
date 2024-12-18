@@ -1,14 +1,15 @@
-// src/components/SignUp.jsx
-
 import { useState, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import {} from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { auth } from "../../../firebase/firebase.config";
+import { signOut } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -92,18 +93,21 @@ const SignUp = () => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
-      return;
+      return; // Stop execution here since we have errors
     }
 
+    // If we reach here, we have no validation errors
     createUser(formData.email, formData.password)
       .then(() => {
         // Update user profile
         updateUserProfile(formData.name)
-          .then(() => {
+          .then(async () => {
+            await signOut(auth);
             Swal.fire({
               position: "center",
               icon: "success",
               title: `Welcome to our website, ${formData.name}`,
+              text: "Please login first!",
               showConfirmButton: false,
               timer: 3000,
             });
@@ -114,8 +118,14 @@ const SignUp = () => {
               password: "",
               confirmPassword: "",
             });
+            setErrors({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
 
-            navigate("/");
+            navigate("/signin");
           })
           .catch((err) => {
             console.log(err);
@@ -129,6 +139,7 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.log(err);
+        // If createUser fails, show an error message
         Swal.fire({
           position: "center",
           icon: "error",

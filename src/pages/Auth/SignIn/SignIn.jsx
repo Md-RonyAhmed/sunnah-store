@@ -1,9 +1,9 @@
 // src/components/SignIn.jsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import { FaGoogle } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import {
@@ -11,8 +11,12 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+  const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   // State for form data
@@ -97,22 +101,41 @@ const SignIn = () => {
       return;
     }
 
-    // If we reach here, we have no validation errors
-    console.log("Form submitted successfully:", formData);
+    signInUser(formData.email, formData.password)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully logged in!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
-    // TODO: Implement actual sign-in logic here
+        // Reset form
+        setFormData({
+          email: "",
+          password: "",
+          captcha: "",
+        });
 
-    // Reset form fields
-    setFormData({
-      email: "",
-      password: "",
-      captcha: "",
-    });
-    setIsCaptchaValid(false);
-    setIsSubmitting(false);
-
-    // Reload captcha after submission
-    loadCaptchaEnginge(4, "#00BF63");
+        // Navigate to home page
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Invalid credentials",
+          text: "Please check your email and password",
+          showConfirmButton: true,
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        // Reload captcha
+        loadCaptchaEnginge(4, "#00BF63");
+      });
   };
 
   return (
