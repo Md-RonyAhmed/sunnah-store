@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { NavLink, useParams, Navigate, Link } from "react-router-dom";
 import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";

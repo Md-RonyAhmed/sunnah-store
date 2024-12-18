@@ -7,12 +7,11 @@ import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../components/Shared/Loading";
-import CategoryFilter from "./Filtering/CategoryFiltering";
 
 const Products = () => {
   const { key } = useParams();
   const [sortBy, setSortBy] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
   const [sortedProducts, setSortedProducts] = useState([]);
 
@@ -37,7 +36,9 @@ const Products = () => {
 
     // Category Filtering
     if (selectedCategory) {
-      filtered = filtered.filter((product) => product.category === selectedCategory);
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory
+      );
     }
 
     // Sorting
@@ -67,9 +68,9 @@ const Products = () => {
     setSortedProducts(filtered);
   }, [products, sortBy, selectedCategory, inStock]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   // Determine title and product count
   let title = "";
@@ -99,8 +100,6 @@ const Products = () => {
               {title}
             </h1>
           </div>
-          {/* Filter by Categories Dropdown menu */}
-          <CategoryFilter onSelectedCategory={setSelectedCategory} />
         </div>
 
         <div className="flex items-center space-x-2 mt-3">
@@ -115,11 +114,15 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mb-8 mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {sortedProducts.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="mb-8 mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {sortedProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      )}
       <div className="mx-auto mb-6">
         <ProductsPagination />
       </div>
