@@ -6,14 +6,18 @@ import {
   Input,
   Collapse,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
 
   useEffect(() => {
     window.addEventListener(

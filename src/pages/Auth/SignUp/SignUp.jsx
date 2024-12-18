@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 // src/components/SignUp.jsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import {
@@ -12,8 +13,12 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   // State for form data
   const [formData, setFormData] = useState({
     name: "",
@@ -123,9 +128,27 @@ const SignUp = () => {
       setErrors(validationErrors);
       setIsSubmitting(false);
     } else {
-      console.log("Form submitted successfully:", formData);
-
-      // TODO: Replace with actual sign-up logic
+      createUser(formData.email, formData.password)
+        .then((res) => {
+          setIsSubmitting(true);
+          const user = res.user;
+          updateUserProfile(formData.name)
+            .then(() => {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User Signed Up successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setIsSubmitting(false);
+        });
 
       // Reset form fields
       setFormData({
@@ -241,7 +264,9 @@ const SignUp = () => {
                     value={formData.password}
                     onChange={handleChange}
                     className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
-                      errors.password ? "!border-red-500  focus:!border-red-500" : ""
+                      errors.password
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
                     }`}
                     labelProps={{
                       className: "before:content-none after:content-none",
@@ -281,7 +306,9 @@ const SignUp = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
-                      errors.confirmPassword ? "!border-red-500  focus:!border-red-500" : ""
+                      errors.confirmPassword
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
                     }`}
                     labelProps={{
                       className: "before:content-none after:content-none",
@@ -326,7 +353,9 @@ const SignUp = () => {
                   onChange={handleChange}
                   // Removed onBlur event
                   className={`!border-t-blue-gray-200 focus:!border-t-gray-900 mt-2 ${
-                    errors.captcha ? "!border-red-500  focus:!border-red-500" : ""
+                    errors.captcha
+                      ? "!border-red-500  focus:!border-red-500"
+                      : ""
                   }`}
                   labelProps={{
                     className: "before:content-none after:content-none",

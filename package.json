@@ -22,7 +22,8 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.0.2",
     "react-scroll-to-top": "^3.0.0",
-    "react-simple-captcha": "^9.3.1"
+    "react-simple-captcha": "^9.3.1",
+    "sweetalert2": "^11.15.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
