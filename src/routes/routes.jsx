@@ -13,6 +13,7 @@ import Cart from "../pages/Cart/Cart";
 import WishList from "../pages/WishList/WishList";
 import Reset from "../pages/Auth/SignIn/Reset";
 import Profile from "../pages/Profile/Profile";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
