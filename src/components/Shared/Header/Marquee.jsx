@@ -1,14 +1,14 @@
 import { BiSupport } from "react-icons/bi";
-import { SiShopee } from "react-icons/si";
 import { MdPhone } from "react-icons/md";
 import { MdOutlineMailOutline } from "react-icons/md";
+import logo from "../../../assets/images/logo.png"
 
 const Marquee = () => {
   const marqueeContent = (
     <>
       <div className="flex items-center text-xs gap-2">
-        <SiShopee className="text-base text-[#4caf50]" />
-        Welcome to Sunnah, a Multivendor Shop
+        <img src={logo} alt="logo" className="w-6"/>
+        Welcome to Sunnah Store, Multi-vendor Online Shop
       </div>
 
       <div className="flex items-center">
@@ -18,7 +18,6 @@ const Marquee = () => {
         </div>
 
         <div className="flex items-center space-x-2 ml-2">
-          <span className="text-xs">Contact</span>
           <a
             className="inline-flex items-center gap-2 text-xs"
             href="mailto:assunnahfoundationbd@gmail.com"
