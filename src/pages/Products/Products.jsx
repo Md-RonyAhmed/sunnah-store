@@ -90,7 +90,7 @@ const Products = () => {
 
   return (
     <div className="mt-28">
-      <FilterSection setSortBy={setSortBy} />
+      <FilterSection sortBy={sortBy} setSortBy={setSortBy} />
 
       <div className="flex items-center justify-between mt-3">
         <div className="flex w-1/2 justify-between items-center gap-5">
