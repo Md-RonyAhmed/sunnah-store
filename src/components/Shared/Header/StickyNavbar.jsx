@@ -209,7 +209,7 @@ export function StickyNavbar() {
                 />
                 {profileOpen && (
                   <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
-                    <div className="px-4 py-2">
+                    <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
                       <Link to={"/profile"} className="font-semibold">
                         {user.displayName}
                       </Link>

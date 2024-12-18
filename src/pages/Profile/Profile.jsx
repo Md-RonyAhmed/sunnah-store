@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   Button,
@@ -13,7 +13,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import { FaUser, FaHeart, FaShoppingBag } from "react-icons/fa";
-import { auth } from "../../firebase/firebase.config"; // Make sure this import is correct
+import { auth } from "../../firebase/firebase.config";
 import { sendEmailVerification } from "firebase/auth";
 
 const Profile = () => {
@@ -22,16 +22,7 @@ const Profile = () => {
   const [name, setName] = useState(user?.displayName || "");
   const [isUpdating, setIsUpdating] = useState(false);
   const [isSendingVerification, setIsSendingVerification] = useState(false);
-
-  // Reload user data when component mounts to ensure emailVerified is up-to-date
-  useEffect(() => {
-    const reloadUserData = async () => {
-      if (auth.currentUser) {
-        await auth.currentUser.reload();
-      }
-    };
-    reloadUserData();
-  }, []);
+  const [isRefreshingStatus, setIsRefreshingStatus] = useState(false);
 
   // Mock data for orders and wishlist (replace with actual data)
   const orders = [
@@ -99,6 +90,35 @@ const Profile = () => {
     }
   };
 
+  const handleRefreshStatus = async () => {
+    if (!auth.currentUser) return;
+    setIsRefreshingStatus(true);
+
+    try {
+      await auth.currentUser.reload();
+      // After reloading, user.emailVerified should be updated
+      // Trigger a UI update by using setState in AuthContext or rely on onAuthStateChanged if implemented correctly.
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Status refreshed!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Error reloading user:", error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Failed to refresh status",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    } finally {
+      setIsRefreshingStatus(false);
+    }
+  };
+
   const data = [
     {
       label: "Profile",
@@ -146,7 +166,7 @@ const Profile = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Account Status
             </label>
-            <p className="text-lg flex items-center gap-2">
+            <div className="flex items-center gap-2">
               {user?.emailVerified ? (
                 <span className="text-green-500">Verified</span>
               ) : (
@@ -164,7 +184,18 @@ const Profile = () => {
                   </Button>
                 </>
               )}
-            </p>
+              {/* Refresh status button */}
+              {!user?.emailVerified && (
+                <Button
+                  size="sm"
+                  variant="outlined"
+                  onClick={handleRefreshStatus}
+                  disabled={isRefreshingStatus}
+                >
+                  {isRefreshingStatus ? "Refreshing..." : "Refresh Status"}
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Account Created */}
