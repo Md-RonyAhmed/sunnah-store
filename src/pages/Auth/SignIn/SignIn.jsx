@@ -15,7 +15,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -136,6 +136,28 @@ const SignIn = () => {
         // Reload captcha
         loadCaptchaEnginge(4, "#00BF63");
       });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    }
   };
 
   return (
@@ -283,7 +305,10 @@ const SignIn = () => {
 
             {/* Google Sign-In */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>

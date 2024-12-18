@@ -12,7 +12,8 @@ import { auth } from "../../../firebase/firebase.config";
 import { signOut } from "firebase/auth";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -150,6 +151,28 @@ const SignUp = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    }
   };
 
   return (
@@ -331,7 +354,10 @@ const SignUp = () => {
 
             {/* Google Sign-Up */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>
