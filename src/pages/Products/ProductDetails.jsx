@@ -43,6 +43,7 @@ const ProductDetails = () => {
     description,
     category,
     price,
+    status,
     individualRating,
     averageRating,
     keyFeatures = {},
@@ -54,13 +55,16 @@ const ProductDetails = () => {
         <CardHeader
           shadow={false}
           floated={false}
-          className="flex-1 flex justify-center items-center shadow-sm"
+          className="flex-1 flex justify-center items-center"
         >
-          <img
-            src={image}
-            alt={name}
-            className="w-80 object-contain transition-transform duration-200 hover:scale-105"
-          />
+          <div className="group w-80 overflow-hidden cursor-zoom-in">
+            <img
+              loading="lazy"
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
         </CardHeader>
         <CardBody className="flex-1 lg:ml-8 p-0 pt-6 lg:pt-0 lg:p-6">
           <Typography
@@ -91,19 +95,23 @@ const ProductDetails = () => {
               Key Features:
             </Typography>
             {Object.entries(keyFeatures).length > 0 ? (
-              Object.entries(keyFeatures).map(([featureKey, featureValue]) => (
-                <Typography
-                  key={featureKey}
-                  variant="h6"
-                  color="gray"
-                  className="flex items-center text-sm sm:text-base"
-                >
-                  <span className="capitalize mr-2">{featureKey}:</span>{" "}
-                  <span className="text-green-500 font-medium">
-                    {featureValue}
-                  </span>
-                </Typography>
-              ))
+              Object.entries(keyFeatures).map(
+                (
+                  [featureKey, featureValue] //keyFeatures=[[key,value]]
+                ) => (
+                  <Typography
+                    key={featureKey}
+                    variant="h6"
+                    color="gray"
+                    className="flex items-center text-sm sm:text-base"
+                  >
+                    <span className="capitalize mr-2">{featureKey}:</span>{" "}
+                    <span className="text-green-500 font-medium">
+                      {featureValue}
+                    </span>
+                  </Typography>
+                )
+              )
             ) : (
               <Typography color="gray" className="text-sm">
                 No specific key features available.
@@ -158,11 +166,11 @@ const ProductDetails = () => {
             <Link to={"/cart"}>
               <button
                 className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
-                  product?.status
+                  status
                     ? "bg-green-600 hover:bg-green-400 cursor-pointer"
                     : "cursor-not-allowed bg-gray-400"
                 }`}
-                disabled={!product?.status}
+                disabled={!status}
               >
                 Add to Cart
               </button>

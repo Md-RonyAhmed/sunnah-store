@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
 import { NavLink, useParams, Navigate, Link } from "react-router-dom";
 import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
 import ProductCard from "../../Products/ProductCard";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
-const categoryData = [
+export const categoryData = [
   { catName: "Books", path: "/books" },
   { catName: "Electronics", path: "/electronics" },
   { catName: "Groceries & Foods", path: "/groceries" },
@@ -15,25 +17,20 @@ const categoryData = [
 ];
 
 function Categories() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://sunnah-store-server-azure.vercel.app/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
   const { key } = useParams(); // Get the dynamic key from the URL
-  const category = categoryData.find((cat) => cat.path === `/${key}`); // Match the key with a category
 
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://sunnah-store-server-azure.vercel.app/products"
+      );
+      return res.data.data;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const category = categoryData.find((cat) => cat.path === `/${key}`); // Match the key with a category
   // Redirect to /books if no key is provided
   if (!key) {
     return <Navigate to="/books" replace />;
@@ -45,12 +42,12 @@ function Categories() {
   }
 
   // Filter products based on the selected category
-  const filteredProducts = products.filter(
+  const filteredProducts = products?.filter(
     (product) =>
       product.category.toLowerCase() === category?.catName.toLowerCase()
   );
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
