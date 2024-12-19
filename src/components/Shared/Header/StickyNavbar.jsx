@@ -13,6 +13,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Marquee from "./Marquee";
+import { CartContext } from "../../../contexts/CartContext";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -22,6 +23,10 @@ export function StickyNavbar() {
 
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const { cartItems } = useContext(CartContext);
+
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -85,8 +90,13 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/sunnah-store/cart"}>
-          <FiShoppingCart className="mr-2 size-5" />
+        <NavLink to={"/sunnah-store/cart"} className="relative">
+          <FiShoppingCart className="mr-2 size-6" />
+          {totalQuantity > 0 && (
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+              {totalQuantity}
+            </span>
+          )}
         </NavLink>
       </Typography>
       <Typography

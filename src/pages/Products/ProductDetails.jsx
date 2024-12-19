@@ -172,7 +172,7 @@ const ProductDetails = () => {
             >
               Add to Wishlist
             </Button>
-            <Link to={"/cart"}>
+            <Link to={"/sunnah-store/cart"}>
               <button
                 className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
                   status
