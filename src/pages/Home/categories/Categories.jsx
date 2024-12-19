@@ -4,7 +4,7 @@ import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
 import ProductCard from "../../Products/ProductCard";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { axiosInstance } from "../../../api/axios_instance";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
 export const categoryData = [
@@ -22,8 +22,8 @@ function Categories() {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://sunnah-store-server-azure.vercel.app/products"
+      const res = await axiosInstance.get(
+        "products"
       );
       return res.data.data;
     },

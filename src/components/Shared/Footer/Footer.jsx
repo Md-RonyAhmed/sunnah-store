@@ -1,8 +1,10 @@
 import { Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
 import NewsLetter from "./Newsletter";
+import { Link } from "react-router-dom";
+
 
 const SITEMAP = [
+  
   {
     title: "Company",
     links: [
@@ -79,7 +81,7 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        {/* ================================ */}
+        
         <div className="flex flex-col md:flex-row items-center gap-3">
           <div>
             <img
@@ -91,7 +93,6 @@ export default function Footer() {
             <NewsLetter />
           </div>
         </div>
-        {/* ================================ */}
 
         <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
           <Typography

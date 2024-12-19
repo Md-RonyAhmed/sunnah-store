@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { categoryData } from "../../Home/categories/Categories";
 
-const FilterSection = ({ sortBy, setSortBy }) => {
+const FilterSection = ({ sortBy, setSortBy, search }) => {
   const navigate = useNavigate();
   const { key } = useParams();
   // Options for sorting
@@ -31,21 +31,25 @@ const FilterSection = ({ sortBy, setSortBy }) => {
       <h3 className="text-xl">Filter Items</h3>
 
       {/* Category Dropdown */}
-      <div className="relative">
-        <select
-          id="categories"
-          className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-          onChange={handleCategoryChange}
-          value={`/${key}`}
-        >
-          <option value="">Select Category</option>
-          {categoryData.map((category) => (
-            <option key={category.path} value={category.path}>
-              {category.catName}
-            </option>
-          ))}
-        </select>
-      </div>
+      {search ? (
+        ""
+      ) : (
+        <div className="relative">
+          <select
+            id="categories"
+            className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+            onChange={handleCategoryChange}
+            value={`/${key}`}
+          >
+            <option value="">Select Category</option>
+            {categoryData.map((category) => (
+              <option key={category.path} value={category.path}>
+                {category.catName}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {/* Sorting Dropdown */}
       <div className="relative">

@@ -9,10 +9,11 @@ export function NewsLetter() {
           Stay in the Know: Subscribe for Exclusive Updates
         </Typography> */}
         <div className="flex items-start flex-col gap-4 md:flex-row">
-          <Input className="text-gray-900" label="Enter your email" />
-          <Button className="flex-shrink-0 md:w-fit w-full ">subscribe</Button>
+          <Input className="text-white" label="Enter your email" />
+          <Button className="flex-shrink-0 md:w-fit w-full bg-white text-primary ">subscribe</Button>
         </div>
       </div>
+      
     </section>
   );
 }

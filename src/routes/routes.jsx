@@ -14,6 +14,7 @@ import WishList from "../pages/WishList/WishList";
 import Reset from "../pages/Auth/SignIn/Reset";
 import Profile from "../pages/Profile/Profile";
 import PrivateRoutes from "./PrivateRoutes";
+import ErrorPage from "../pages/Error/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -24,10 +25,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Navigate to="/books" replace />,
+        errorElement: <ErrorPage />,
       },
       {
         path: ":key",
         element: <Home />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "products",
@@ -42,23 +45,23 @@ const router = createBrowserRouter([
         element: <ProductDetails />,
       },
       {
-        path: "about",
+        path: "sunnah-store/about",
         element: <About />,
       },
       {
-        path: "contact",
+        path: "sunnah-store/contact",
         element: <Contact />,
       },
       {
-        path: "cart",
+        path: "sunnah-store/cart",
         element: <Cart />,
       },
       {
-        path: "wishlist",
+        path: "sunnah-store/wishlist",
         element: <WishList />,
       },
       {
-        path: "profile",
+        path: "sunnah-store/profile",
         element: (
           <PrivateRoutes>
             <Profile />
@@ -72,15 +75,15 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "signin",
+        path: "sunnah-store/signin",
         element: <SignIn />,
       },
       {
-        path: "signup",
+        path: "sunnah-store/signup",
         element: <SignUp />,
       },
       {
-        path: "reset",
+        path: "sunnah-store/reset",
         element: <Reset />,
       },
     ],

@@ -1,43 +1,45 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import ProductsPagination from "./ProductsPagination";
 import { useState, useEffect } from "react";
 import FilterSection from "./Filtering/FilterSection";
 import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
+import { axiosInstance } from "../../api/axios_instance";
 
 const Products = () => {
   const { key } = useParams();
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search")?.toLowerCase() || "";
+
   const [sortBy, setSortBy] = useState(0);
-  const [selectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
   const [sortedProducts, setSortedProducts] = useState([]);
 
   const { data: products, isLoading } = useQuery({
     queryKey: key ? ["products", key] : ["products"],
     queryFn: async () => {
-      let url = "https://sunnah-store-server-azure.vercel.app/products";
+      let url = "products";
       if (key) {
-        url = `https://sunnah-store-server-azure.vercel.app/products/${key}`;
+        url = `products/${key}`;
       }
-      const res = await axios.get(url);
+      const res = await axiosInstance.get(url);
       return res.data.data;
     },
     staleTime: 5 * 60 * 1000,
   });
 
-  // Single effect to handle filtering and sorting
   useEffect(() => {
     if (!products) return;
 
     let filtered = [...products];
 
-    // Category Filtering
-    if (selectedCategory) {
-      filtered = filtered.filter(
-        (product) => product.category === selectedCategory
+    // Title Search Filtering
+    if (search) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(search)
       );
     }
 
@@ -66,32 +68,30 @@ const Products = () => {
     }
 
     setSortedProducts(filtered);
-  }, [products, sortBy, selectedCategory, inStock]);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  }, [products, sortBy, inStock, search]);
 
   // Determine title and product count
   let title = "";
-  if (selectedCategory) {
-    // If a category is selected, show it
-    title = `${selectedCategory} (${sortedProducts.length})`;
+
+  if (search) {
+    // If searching by title
+    title = `Search results for "${search}" (${sortedProducts.length})`;
   } else {
     // No selectedCategory, check key
     if (key) {
-      // Special case for "groceries"
       const displayKey = key === "groceries" ? "groceries & foods" : key;
       title = `${displayKey} (${sortedProducts.length})`;
     } else {
-      // No key, show all products
       title = `all products (${sortedProducts.length})`;
     }
   }
 
   return (
-    <div className="mt-28">
-      <FilterSection sortBy={sortBy} setSortBy={setSortBy} />
+    <div className="mt-44">
+      <Helmet>
+        <title>Sunnah Store | Products</title>
+      </Helmet>
+      <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} />
 
       <div className="flex items-center justify-between mt-3">
         <div className="flex w-1/2 justify-between items-center gap-5">

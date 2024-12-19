@@ -7,12 +7,16 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Rating } from "@smastrom/react-rating";
+import { useContext } from "react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
 
 const ProductCard = ({ product }) => {
   const { _id, image, name, price, individualRating, status } = product || {};
+
+  const { addToCart } = useContext(CartContext);
 
   return (
     <Card className="relative border hover:shadow-lg transition-shadow duration-300">
@@ -82,19 +86,18 @@ const ProductCard = ({ product }) => {
         </Link>
 
         <div className="relative group inline-block">
-          <Link to="/cart">
-            <button
-              className={`p-2 text-white rounded shadow-md flex items-center justify-center ${
-                status
-                  ? "bg-green-500 hover:bg-green-600"
-                  : "bg-gray-500 cursor-not-allowed"
-              }`}
-              aria-label="Add to Cart"
-              disabled={!status}
-            >
-              <FaShoppingCart />
-            </button>
-          </Link>
+          <button
+            className={`p-2 text-white rounded shadow-md flex items-center justify-center ${
+              status
+                ? "bg-green-500 hover:bg-green-600"
+                : "bg-gray-500 cursor-not-allowed"
+            }`}
+            aria-label="Add to Cart"
+            disabled={!status}
+            onClick={() => addToCart(product)}
+          >
+            <FaShoppingCart />
+          </button>
 
           {/* Custom Tooltip */}
           <span
