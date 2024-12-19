@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import ProductsPagination from "./ProductsPagination";
 import { useState, useEffect } from "react";
@@ -11,6 +11,9 @@ import { Helmet } from "react-helmet-async";
 
 const Products = () => {
   const { key } = useParams();
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search")?.toLowerCase() || "";
+
   const [sortBy, setSortBy] = useState(0);
   const [selectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
@@ -29,7 +32,6 @@ const Products = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  // Single effect to handle filtering and sorting
   useEffect(() => {
     if (!products) return;
 
@@ -38,7 +40,15 @@ const Products = () => {
     // Category Filtering
     if (selectedCategory) {
       filtered = filtered.filter(
-        (product) => product.category === selectedCategory
+        (product) =>
+          product.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Title Search Filtering
+    if (search) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(search)
       );
     }
 
@@ -67,21 +77,22 @@ const Products = () => {
     }
 
     setSortedProducts(filtered);
-  }, [products, sortBy, selectedCategory, inStock]);
+  }, [products, sortBy, selectedCategory, inStock, search]);
 
   // Determine title and product count
   let title = "";
   if (selectedCategory) {
     // If a category is selected, show it
     title = `${selectedCategory} (${sortedProducts.length})`;
+  } else if (search) {
+    // If searching by title
+    title = `Search results for "${search}" (${sortedProducts.length})`;
   } else {
     // No selectedCategory, check key
     if (key) {
-      // Special case for "groceries"
       const displayKey = key === "groceries" ? "groceries & foods" : key;
       title = `${displayKey} (${sortedProducts.length})`;
     } else {
-      // No key, show all products
       title = `all products (${sortedProducts.length})`;
     }
   }
