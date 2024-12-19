@@ -26,7 +26,10 @@ export function StickyNavbar() {
 
   const { cartItems } = useContext(CartContext);
 
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -66,7 +69,16 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/products"}>Products</NavLink>
+        <NavLink
+          to={"/products"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          Products
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -74,7 +86,16 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/sunnah-store/about"}>About</NavLink>
+        <NavLink
+          to={"/sunnah-store/about"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          About
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -82,7 +103,16 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/sunnah-store/contact"}>Contact</NavLink>
+        <NavLink
+          to={"/sunnah-store/contact"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
+          Contact
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -90,7 +120,14 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/sunnah-store/cart"} className="relative">
+        <NavLink
+          to={"/sunnah-store/cart"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center relative"
+              : "text-black flex items-center relative"
+          }
+        >
           <FiShoppingCart className="mr-2 size-6" />
           {totalQuantity > 0 && (
             <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
@@ -105,7 +142,14 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <NavLink to={"/sunnah-store/wishlist"}>
+        <NavLink
+          to={"/sunnah-store/wishlist"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-black flex items-center"
+          }
+        >
           <FaHeart className=" text-red-500 size-5" />
         </NavLink>
       </Typography>
