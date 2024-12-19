@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -56,6 +57,9 @@ const ProductDetails = () => {
 
   return (
     <div className="flex relative justify-center items-center mt-44 py-10 px-4">
+      <Helmet>
+        <title>{`Sunnah Store | ${name}`}</title>
+      </Helmet>
       <Card className="relative border p-6 shadow-lg w-full max-w-6xl lg:flex-row bg-white">
         <CardHeader
           shadow={false}

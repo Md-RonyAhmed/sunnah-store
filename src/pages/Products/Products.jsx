@@ -68,10 +68,6 @@ const Products = () => {
     setSortedProducts(filtered);
   }, [products, sortBy, selectedCategory, inStock]);
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-
   // Determine title and product count
   let title = "";
   if (selectedCategory) {

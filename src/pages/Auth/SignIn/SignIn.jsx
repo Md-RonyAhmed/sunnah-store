@@ -13,6 +13,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -163,6 +164,9 @@ const SignIn = () => {
   return (
     <div className="flex justify-center mt-40">
       <div>
+        <Helmet>
+          <title>Sunnah Store | Sign In</title>
+        </Helmet>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign In</div>
           <div className="mt-1 font-normal text-gray-700">

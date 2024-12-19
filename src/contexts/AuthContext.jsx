@@ -7,6 +7,7 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
@@ -83,6 +84,11 @@ const AuthContextProvider = ({ children }) => {
     return result;
   };
 
+  const sendResetPassword = async (email) => {
+    setLoading(true);
+    return await sendPasswordResetEmail(auth, email);
+  };
+
   const authInfo = {
     user,
     loading,
@@ -91,6 +97,7 @@ const AuthContextProvider = ({ children }) => {
     signOutUser,
     signInUser,
     signInWithGoogle,
+    sendResetPassword,
   };
 
   return (

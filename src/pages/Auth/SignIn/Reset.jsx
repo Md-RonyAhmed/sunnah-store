@@ -1,6 +1,26 @@
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const Reset = () => {
+  const [email, setEmail] = useState("");
+  const { sendResetPassword } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handlePasswordReset = () => {
+    sendResetPassword(email).then(() => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Password reset email sent successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/signin");
+    });
+  };
+
   return (
     <div className="flex flex-col p-8 justify-center items-center min-h-screen">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-2xl">
@@ -14,10 +34,15 @@ const Reset = () => {
         <div className="flex flex-col gap-4">
           <input
             type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter your email address"
           />
-          <button className="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition duration-300 ease-in-out">
+          <button
+            className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-green-400 transition duration-300 ease-in-out"
+            onClick={handlePasswordReset}
+          >
             Send Password Reset Email
           </button>
         </div>
@@ -25,13 +50,13 @@ const Reset = () => {
           Didn&apos;t signin yet?{" "}
           <Link
             to="/signin"
-            className="text-green-600 font-medium hover:underline"
+            className="text-primary font-medium hover:underline"
           >
             Sign In
           </Link>
         </p>
         <p className="text-center text-gray-600 mt-2">
-          <Link to="/" className="text-green-600 font-medium hover:underline">
+          <Link to="/" className="text-primary font-medium hover:underline">
             Back to Home
           </Link>
         </p>
