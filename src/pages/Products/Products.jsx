@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import FilterSection from "./Filtering/FilterSection";
 import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
+import { axiosInstance } from "../../api/axios_instance";
 
 const Products = () => {
   const { key } = useParams();
@@ -21,11 +21,11 @@ const Products = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: key ? ["products", key] : ["products"],
     queryFn: async () => {
-      let url = "https://sunnah-store-server-azure.vercel.app/products";
+      let url = "products";
       if (key) {
-        url = `https://sunnah-store-server-azure.vercel.app/products/${key}`;
+        url = `products/${key}`;
       }
-      const res = await axios.get(url);
+      const res = await axiosInstance.get(url);
       return res.data.data;
     },
     staleTime: 5 * 60 * 1000,
