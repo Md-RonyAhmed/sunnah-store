@@ -50,7 +50,7 @@ export function StickyNavbar() {
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
+      navigate(`/products?search=${searchTerm.trim()}`);
     }
     setSearchTerm("");
   };

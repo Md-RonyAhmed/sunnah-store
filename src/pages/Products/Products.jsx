@@ -15,7 +15,6 @@ const Products = () => {
   const search = searchParams.get("search")?.toLowerCase() || "";
 
   const [sortBy, setSortBy] = useState(0);
-  const [selectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
   const [sortedProducts, setSortedProducts] = useState([]);
 
@@ -36,14 +35,6 @@ const Products = () => {
     if (!products) return;
 
     let filtered = [...products];
-
-    // Category Filtering
-    if (selectedCategory) {
-      filtered = filtered.filter(
-        (product) =>
-          product.category.toLowerCase() === selectedCategory.toLowerCase()
-      );
-    }
 
     // Title Search Filtering
     if (search) {
@@ -77,14 +68,12 @@ const Products = () => {
     }
 
     setSortedProducts(filtered);
-  }, [products, sortBy, selectedCategory, inStock, search]);
+  }, [products, sortBy, inStock, search]);
 
   // Determine title and product count
   let title = "";
-  if (selectedCategory) {
-    // If a category is selected, show it
-    title = `${selectedCategory} (${sortedProducts.length})`;
-  } else if (search) {
+
+  if (search) {
     // If searching by title
     title = `Search results for "${search}" (${sortedProducts.length})`;
   } else {
@@ -102,7 +91,7 @@ const Products = () => {
       <Helmet>
         <title>Sunnah Store | Products</title>
       </Helmet>
-      <FilterSection sortBy={sortBy} setSortBy={setSortBy} />
+      <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} />
 
       <div className="flex items-center justify-between mt-3">
         <div className="flex w-1/2 justify-between items-center gap-5">
