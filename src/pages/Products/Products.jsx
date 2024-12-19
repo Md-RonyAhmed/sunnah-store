@@ -7,13 +7,13 @@ import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../components/Shared/Loading";
-import CategoryFilter from "./Filtering/CategoryFiltering";
 
 const Products = () => {
   const { key } = useParams();
   const [sortBy, setSortBy] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory] = useState("");
   const [inStock, setInStock] = useState(false);
+  const [sortedProducts, setSortedProducts] = useState([]);
 
   const { data: products, isLoading } = useQuery({
     queryKey: key ? ["products", key] : ["products"],
@@ -28,81 +28,78 @@ const Products = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  const [sortedProducts, setSortedProducts] = useState([]);
-
-  // Sorting
-  useEffect(() => {
-    if (!products) return;
-    let sorted = [...products];
-    switch (sortBy) {
-      case 1: // Price: Low to High
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case 2: // Price: High to Low
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case 3: // Rating
-        sorted.sort((a, b) => b.averageRating - a.averageRating);
-        break;
-      case 4: // Top Sales
-        sorted.sort((a, b) => b.individualRating - a.individualRating);
-        break;
-      default:
-        // 0 : restore raw array (products)
-        break;
-    }
-    // Filter by stock if inStock is true
-    if (inStock) {
-      sorted = sorted.filter((product) => product.status === true);
-    }
-    setSortedProducts(sorted);
-  }, [sortBy, products, inStock]);
-
-  // filtering products by category
-
+  // Single effect to handle filtering and sorting
   useEffect(() => {
     if (!products) return;
 
-    let filteredProducts = [...products];
+    let filtered = [...products];
+
+    // Category Filtering
     if (selectedCategory) {
-      filteredProducts = filteredProducts.filter(
+      filtered = filtered.filter(
         (product) => product.category === selectedCategory
       );
     }
 
-    setSortedProducts(filteredProducts);
-  }, [selectedCategory, products]);
+    // Sorting
+    switch (sortBy) {
+      case 1: // Price: Low to High
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 2: // Price: High to Low
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 3: // Rating
+        filtered.sort((a, b) => b.averageRating - a.averageRating);
+        break;
+      case 4: // Top Sales
+        filtered.sort((a, b) => b.individualRating - a.individualRating);
+        break;
+      default:
+        // 0 : no additional sorting
+        break;
+    }
 
-  if (isLoading) {
-    return <Loading />;
+    // In Stock Filter
+    if (inStock) {
+      filtered = filtered.filter((product) => product.status === true);
+    }
+
+    setSortedProducts(filtered);
+  }, [products, sortBy, selectedCategory, inStock]);
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+
+  // Determine title and product count
+  let title = "";
+  if (selectedCategory) {
+    // If a category is selected, show it
+    title = `${selectedCategory} (${sortedProducts.length})`;
+  } else {
+    // No selectedCategory, check key
+    if (key) {
+      // Special case for "groceries"
+      const displayKey = key === "groceries" ? "groceries & foods" : key;
+      title = `${displayKey} (${sortedProducts.length})`;
+    } else {
+      // No key, show all products
+      title = `all products (${sortedProducts.length})`;
+    }
   }
+
   return (
     <div className="mt-28">
-      <FilterSection setSortBy={setSortBy} />
+      <FilterSection sortBy={sortBy} setSortBy={setSortBy} />
 
       <div className="flex items-center justify-between mt-3">
-        <div className="flex gap-5">
-          {/* Title and Number of Products */}
-          {selectedCategory && (
+        <div className="flex w-1/2 justify-between items-center gap-5">
+          <div>
             <h1 className="text-2xl border-b-4 border-primary w-fit capitalize">
-              {selectedCategory ? selectedCategory : ""} (
-              {sortedProducts.length})
+              {title}
             </h1>
-          )}
-          <h1
-            className={`text-2xl border-b-4 border-primary w-fit capitalize ${
-              selectedCategory ? "hidden" : "block"
-            }`}
-          >
-            {key
-              ? key === "groceries"
-                ? "groceries & foods"
-                : key
-              : "all products"}{" "}
-            ({sortedProducts.length})
-          </h1>
-          {/* Filter by Categories Dropdown menu */}
-          <CategoryFilter onSelectedCategory={setSelectedCategory} />
+          </div>
         </div>
 
         <div className="flex items-center space-x-2 mt-3">
@@ -117,11 +114,15 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="mb-8 mt-6 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {sortedProducts?.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="mb-8 mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {sortedProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      )}
       <div className="mx-auto mb-6">
         <ProductsPagination />
       </div>

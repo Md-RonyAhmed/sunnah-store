@@ -1,68 +1,49 @@
-// src/components/SignUp.jsx
-
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import {
-  LoadCanvasTemplateNoReload,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import {} from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
+import { auth } from "../../../firebase/firebase.config";
+import { signOut } from "firebase/auth";
 
 const SignUp = () => {
-  // State for form data
+  const { createUser, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    captcha: "",
   });
 
-  // State for validation errors
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    captcha: "",
   });
 
-  // State to handle form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // State to track captcha validity
-  const [, setIsCaptchaValid] = useState(false);
-
-  // State to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
-
-  // Load captcha once on mount
-  useEffect(() => {
-    loadCaptchaEnginge(6, "#00BF63");
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
 
-    // Clear the error message as the user types
-    setErrors({
-      ...errors,
+    setErrors((prev) => ({
+      ...prev,
       [name]: "",
-    });
-
-    // Reset captcha validity if captcha field is modified
-    if (name === "captcha") {
-      setIsCaptchaValid(false);
-    }
+    }));
   };
 
   const validateForm = () => {
@@ -102,51 +83,95 @@ const SignUp = () => {
       newErrors.confirmPassword = "Passwords do not match.";
     }
 
-    // Captcha Validation on Submission
-    if (!formData.captcha) {
-      newErrors.captcha = "Captcha is required.";
-    } else if (!validateCaptcha(formData.captcha)) {
-      newErrors.captcha = "Captcha does not match.";
-    } else {
-      setIsCaptchaValid(true);
-    }
-
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const validationErrors = validateForm();
 
+    const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
-    } else {
-      console.log("Form submitted successfully:", formData);
+      return; // Stop execution here since we have errors
+    }
 
-      // TODO: Replace with actual sign-up logic
+    // If we reach here, we have no validation errors
+    createUser(formData.email, formData.password)
+      .then(() => {
+        // Update user profile
+        updateUserProfile(formData.name)
+          .then(async () => {
+            await signOut(auth);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Welcome to our website, ${formData.name}`,
+              text: "Please login first!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+            // Reset the form
+            setFormData({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
+            setErrors({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
 
-      // Reset form fields
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        captcha: "",
+            navigate("/signin");
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: err.message,
+              showConfirmButton: true,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        // If createUser fails, show an error message
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: true,
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
-      setIsCaptchaValid(false);
-      setErrors({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        captcha: "",
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
       });
-      setIsSubmitting(false);
-
-      // Reload captcha after successful submission
-      loadCaptchaEnginge(6, "#00BF63");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
     }
   };
 
@@ -158,7 +183,7 @@ const SignUp = () => {
       <div>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign Up</div>
-          <div color="gray" className="mt-1 font-normal">
+          <div className="mt-1 font-normal text-gray-700">
             Enter your details to Register or Sign Up.
           </div>
           <form
@@ -241,7 +266,9 @@ const SignUp = () => {
                     value={formData.password}
                     onChange={handleChange}
                     className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
-                      errors.password ? "!border-red-500  focus:!border-red-500" : ""
+                      errors.password
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
                     }`}
                     labelProps={{
                       className: "before:content-none after:content-none",
@@ -281,7 +308,9 @@ const SignUp = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
-                      errors.confirmPassword ? "!border-red-500  focus:!border-red-500" : ""
+                      errors.confirmPassword
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
                     }`}
                     labelProps={{
                       className: "before:content-none after:content-none",
@@ -302,38 +331,6 @@ const SignUp = () => {
                   <p className="mt-1 text-sm text-red-500">
                     {errors.confirmPassword}
                   </p>
-                )}
-              </div>
-
-              {/* Captcha Field */}
-              <div className="flex flex-col">
-                <label
-                  htmlFor="captcha"
-                  className="mb-1 text-base font-bold text-blue-gray-700"
-                >
-                  Captcha
-                </label>
-                <label className="label">
-                  <LoadCanvasTemplateNoReload />
-                </label>
-                <Input
-                  id="captcha"
-                  name="captcha"
-                  type="text"
-                  placeholder="Type the captcha above"
-                  size="lg"
-                  value={formData.captcha}
-                  onChange={handleChange}
-                  // Removed onBlur event
-                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 mt-2 ${
-                    errors.captcha ? "!border-red-500  focus:!border-red-500" : ""
-                  }`}
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
-                {errors.captcha && (
-                  <p className="mt-2 text-sm text-red-500">{errors.captcha}</p>
                 )}
               </div>
             </div>
@@ -357,7 +354,10 @@ const SignUp = () => {
 
             {/* Google Sign-Up */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>

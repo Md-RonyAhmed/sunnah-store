@@ -6,14 +6,35 @@ import {
   Input,
   Collapse,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 
+import { AuthContext } from "../../../contexts/AuthContext";
+import Marquee from "./Marquee";
+
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  // For avatar dropdown
+  const [profileOpen, setProfileOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close the dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     window.addEventListener(
@@ -23,7 +44,7 @@ export function StickyNavbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
       <Typography
         as="li"
         variant="small"
@@ -106,20 +127,36 @@ export function StickyNavbar() {
               : "text-black flex items-center"
           }
         >
-          <FaHeart className="mr-2 text-red-500 size-5" />
+          <FaHeart className=" text-red-500 size-5" />
         </NavLink>
       </Typography>
     </ul>
   );
 
+  const handleLogout = () => {
+    signOutUser()
+      .then(() => {
+        // Successfully logged out
+        setProfileOpen(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // Determine avatar: if user.photoURL is available, use it; otherwise use placeholder
+  const avatarURL =
+    user && user.photoURL
+      ? user.photoURL
+      : "https://api.dicebear.com/5.x/bottts/svg?seed=User";
+
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
+      <Marquee />
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
           <div className="order-1 font-medium cursor-pointer">
             <div className="flex flex-col items-start justify-start gap-6 md:flex-row md:items-center md:justify-center">
-              <Link>
+              <Link to="/">
                 {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
@@ -152,13 +189,46 @@ export function StickyNavbar() {
           {/* Nav Links */}
           <div className="flex items-center order-2 gap-4 pr-4 md:order-3">
             <div className="hidden mr-4 lg:block">{navList}</div>
-            <div className="flex items-center gap-x-1">
-              <NavLink to={"/signin"}>
-                <Button size="sm" className="hidden lg:inline-block bg-primary">
-                  <span>Sign in</span>
-                </Button>
-              </NavLink>
-            </div>
+
+            {/* If user is logged in, show avatar dropdown; else show Sign In button */}
+            {!user ? (
+              <div className="flex items-center gap-x-1">
+                <NavLink to={"/signin"}>
+                  <Button
+                    size="sm"
+                    className="hidden lg:inline-block bg-primary"
+                  >
+                    <span>Sign in</span>
+                  </Button>
+                </NavLink>
+              </div>
+            ) : (
+              <div className="relative" ref={dropdownRef}>
+                <img
+                  src={avatarURL}
+                  alt="User Avatar"
+                  className="w-10 h-10 rounded-full cursor-pointer font-bold"
+                  onClick={() => setProfileOpen((prev) => !prev)}
+                />
+                {profileOpen && (
+                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
+                    <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
+                      <Link to={"/profile"} className="font-semibold">
+                        {user.displayName}
+                      </Link>
+                    </div>
+                    <hr />
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-[#00BF63] hover:text-white"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
             <IconButton
               variant="text"
               className="w-6 h-6 ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -201,13 +271,17 @@ export function StickyNavbar() {
         <Collapse open={openNav}>
           <Collapse open={openNav}>
             {navList}
-            <div className="flex items-center gap-x-1">
-              <Button fullWidth variant="text" size="sm" className="">
-                <span>Log In</span>
-              </Button>
-              <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Sign in</span>
-              </Button>
+            <div className="flex items-center gap-x-1 mt-4">
+              <NavLink to={"/signin"} className="w-full">
+                <Button fullWidth variant="text" size="sm" className="">
+                  <span>Sign In</span>
+                </Button>
+              </NavLink>
+              <NavLink to={"/signup"} className="w-full">
+                <Button fullWidth variant="gradient" size="sm" className="">
+                  <span>Sign Up</span>
+                </Button>
+              </NavLink>
             </div>
           </Collapse>
         </Collapse>

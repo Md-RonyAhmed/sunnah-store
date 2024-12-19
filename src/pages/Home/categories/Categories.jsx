@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { NavLink, useParams, Navigate, Link } from "react-router-dom";
 import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
@@ -6,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
-const categoryData = [
+export const categoryData = [
   { catName: "Books", path: "/books" },
   { catName: "Electronics", path: "/electronics" },
   { catName: "Groceries & Foods", path: "/groceries" },
