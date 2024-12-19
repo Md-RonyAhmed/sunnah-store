@@ -69,7 +69,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/about"}
+          to={"/sunnah-store/about"}
           className={({ isActive }) =>
             isActive
               ? "text-primary underline underline-offset-4 flex items-center"
@@ -86,7 +86,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/contact"}
+          to={"/sunnah-store/contact"}
           className={({ isActive }) =>
             isActive
               ? "text-primary underline underline-offset-4 flex items-center"
@@ -103,7 +103,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/cart"}
+          to={"/sunnah-store/cart"}
           className={({ isActive }) =>
             isActive
               ? "text-primary underline underline-offset-4 flex items-center"
@@ -120,7 +120,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/wishlist"}
+          to={"/sunnah-store/wishlist"}
           className={({ isActive }) =>
             isActive
               ? "text-primary underline underline-offset-4 flex items-center"
@@ -190,7 +190,7 @@ export function StickyNavbar() {
             {/* If user is logged in, show avatar dropdown; else show Sign In button */}
             {!user ? (
               <div className="flex items-center gap-x-1">
-                <NavLink to={"/signin"}>
+                <NavLink to={"/sunnah-store/signin"}>
                   <Button
                     size="sm"
                     className="hidden lg:inline-block bg-primary"
@@ -214,7 +214,7 @@ export function StickyNavbar() {
                 {profileOpen && (
                   <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
                     <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                      <Link to={"/profile"} className="font-semibold">
+                      <Link to={"/sunnah-store/profile"} className="font-semibold">
                         {user.displayName}
                       </Link>
                     </div>
@@ -273,12 +273,12 @@ export function StickyNavbar() {
           <Collapse open={openNav}>
             {navList}
             <div className="flex items-center gap-x-1 mt-4">
-              <NavLink to={"/signin"} className="w-full">
+              <NavLink to={"/sunnah-store/signin"} className="w-full">
                 <Button fullWidth variant="text" size="sm" className="">
                   <span>Sign In</span>
                 </Button>
               </NavLink>
-              <NavLink to={"/signup"} className="w-full">
+              <NavLink to={"/sunnah-store/signup"} className="w-full">
                 <Button fullWidth variant="gradient" size="sm" className="">
                   <span>Sign Up</span>
                 </Button>

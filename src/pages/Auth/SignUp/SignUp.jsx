@@ -126,7 +126,7 @@ const SignUp = () => {
               confirmPassword: "",
             });
 
-            navigate("/signin");
+            navigate("/sunnah-store/signin");
           })
           .catch((err) => {
             console.log(err);
@@ -176,7 +176,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center mt-32">
+    <div className="flex justify-center mt-44">
       <Helmet>
         <title>Sunnah Store | Sign Up</title>
       </Helmet>
@@ -368,7 +368,7 @@ const SignUp = () => {
             {/* Sign In Link */}
             <div className="mt-4 font-normal text-center">
               Already have an account?
-              <Link to={"/signin"} className="ml-2 font-medium text-primary">
+              <Link to={"/sunnah-store/signin"} className="ml-2 font-medium text-primary">
                 Sign In
               </Link>
             </div>

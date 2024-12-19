@@ -330,7 +330,7 @@ const Profile = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 mt-32 mb-8">
+    <div className="container mx-auto px-4 mt-40 mb-8">
       <Helmet>
         <title>Sunnah Store | Profile</title>
       </Helmet>

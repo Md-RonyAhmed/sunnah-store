@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
+import { Helmet } from "react-helmet-async";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,10 @@ export function Contact() {
   };
 
   return (
-    <section className="px-8 py-8 lg:py-16">
+    <section className="px-8 py-8 lg:py-20">
+       <Helmet>
+        <title>Sunnah Store | Contact</title>
+      </Helmet>
       <div className="container mx-auto text-center">
         <h5
           color="blue-gray"
@@ -48,7 +52,7 @@ export function Contact() {
         <Typography
           variant="h1"
           color="blue-gray"
-          className="mb-4 !text-3xl lg:!text-5xl"
+          className="mb-4 !text-3xl lg:!text-4xl"
         >
           Contact Us
         </Typography>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
@@ -17,12 +18,15 @@ const Reset = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate("/signin");
+      navigate("/sunnah-store/signin");
     });
   };
 
   return (
     <div className="flex flex-col p-8 justify-center items-center min-h-screen">
+       <Helmet>
+        <title>Sunnah Store | Reset</title>
+      </Helmet>
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-2xl">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
           Reset Your Password
@@ -49,7 +53,7 @@ const Reset = () => {
         <p className="text-center text-gray-600 mt-6">
           Didn&apos;t signin yet?{" "}
           <Link
-            to="/signin"
+            to="/sunnah-store/signin"
             className="text-primary font-medium hover:underline"
           >
             Sign In

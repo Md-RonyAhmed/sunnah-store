@@ -7,6 +7,7 @@ import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
 
 const Products = () => {
   const { key } = useParams();
@@ -86,7 +87,10 @@ const Products = () => {
   }
 
   return (
-    <div className="mt-28">
+    <div className="mt-44">
+      <Helmet>
+        <title>Sunnah Store | Products</title>
+      </Helmet>
       <FilterSection sortBy={sortBy} setSortBy={setSortBy} />
 
       <div className="flex items-center justify-between mt-3">
