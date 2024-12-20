@@ -1,9 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { categoryData } from "../../Home/categories/Categories";
+import { Box, Slider } from "@mui/material";
+import { useState } from "react";
 
 const FilterSection = ({ sortBy, setSortBy, search }) => {
   const navigate = useNavigate();
   const { key } = useParams();
+
   // Options for sorting
   const sortOptions = [
     { id: 0, label: "Select Sorting Option" },
@@ -26,14 +29,25 @@ const FilterSection = ({ sortBy, setSortBy, search }) => {
     navigate(`/products${selectedPath}`);
   };
 
+  // State for slider values
+  const [price, setprice] = useState([0, 1000000]);
+
+  // Handle slider price change
+  const handleChange = (event, newprice) => {
+    setprice(newprice);
+  };
+
+  // Function to display the price text
+  const pricetext = (price) => {
+    return `${price}`;
+  };
+
   return (
     <div className="flex flex-col lg:flex-row justify-start gap-2 items-center pb-4 mb-4 bg-white rounded-lg space-y-3 lg:space-y-0">
       <h3 className="text-xl">Filter Items</h3>
 
       {/* Category Dropdown */}
-      {search ? (
-        ""
-      ) : (
+      {!search && (
         <div className="relative">
           <select
             id="categories"
@@ -65,6 +79,39 @@ const FilterSection = ({ sortBy, setSortBy, search }) => {
             </option>
           ))}
         </select>
+      </div>
+
+      {/* Slider */}
+      <div className="mx-5">
+        <Box sx={{ width: 200 }}>
+          <div className="flex justify-center text-sm text-gray-700 ">
+            {/* <span>Min: {price[0]}</span>
+          <span>Max: {price[1]}</span> */}
+            <span>Select Price Range</span>
+          </div>
+          <Slider
+            getAriaLabel={() => "Price range"}
+            value={price}
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={pricetext}
+            min={0} // Set minimum price
+            max={1000000} // Set maximum price
+            sx={{
+              color: "#00bf63", // Equivalent to bg-green-700
+              '& .MuiSlider-thumb': {
+                backgroundColor: "#00bf63", // Thumb color
+              },
+              '& .MuiSlider-track': {
+                backgroundColor: "#00bf63", // Track color
+              },
+              '& .MuiSlider-rail': {
+                backgroundColor: "#a7f3d0", // Rail color (lighter green for contrast)
+              },
+            }}
+            
+          />
+        </Box>
       </div>
     </div>
   );
