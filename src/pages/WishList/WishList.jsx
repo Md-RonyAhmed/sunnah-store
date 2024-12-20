@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const WishList = () => {
   return (
-    <div className="mt-32 mb-6 text-2xl">
+    <div className="mt-40 mb-6 text-2xl">
       <Helmet>
         <title>Sunnah Store | Wish List</title>
       </Helmet>
