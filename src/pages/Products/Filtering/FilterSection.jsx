@@ -2,8 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { categoryData } from "../../Home/categories/Categories";
 import { Box, Slider } from "@mui/material";
 import { useState } from "react";
+import { maxPrice } from "../Products";
 
-const FilterSection = ({ sortBy, setSortBy, search }) => {
+const FilterSection = ({
+  filterProps: { sortBy, setSortBy, search, price, setprice },
+}) => {
   const navigate = useNavigate();
   const { key } = useParams();
 
@@ -29,12 +32,29 @@ const FilterSection = ({ sortBy, setSortBy, search }) => {
     navigate(`/products${selectedPath}`);
   };
 
-  // State for slider values
-  const [price, setprice] = useState([0, 1000000]);
+  // Handle slider price change (temporary state for smooth interaction)
+  const [tempPrice, setTempPrice] = useState(price);
 
-  // Handle slider price change
-  const handleChange = (event, newprice) => {
-    setprice(newprice);
+  // Update temp price while scrolling
+  const handleTempChange = (event, newPrice) => {
+    setTempPrice(newPrice);
+  };
+
+  // debounce timer state
+  const [debounceTimer, setDebounceTimer] = useState(null);
+  // Update actual price after user finishes scrolling + debounce timer
+  const handlePriceChangeCommitted = (event, newPrice) => {
+    // Clear previous debounce timer if exists
+    if (debounceTimer) clearTimeout(debounceTimer);
+  
+    // Set a new debounce timer to update the price after a delay
+    const newTimer = setTimeout(() => {
+      setprice(newPrice);
+      //console.log("New - Min", newPrice[0],"max", newPrice[1]);
+    }, 1000); // 1-second debounce delay
+  
+    // Store the new timer ID in state to manage future timeouts
+    setDebounceTimer(newTimer);
   };
 
   // Function to display the price text
@@ -83,34 +103,36 @@ const FilterSection = ({ sortBy, setSortBy, search }) => {
 
       {/* Slider */}
       <div className="mx-5">
-        <Box sx={{ width: 200 }}>
+        <Box sx={{ width: 250 }}>
           <div className="flex justify-center text-sm text-gray-700 ">
-            {/* <span>Min: {price[0]}</span>
-          <span>Max: {price[1]}</span> */}
             <span>Select Price Range</span>
           </div>
           <Slider
             getAriaLabel={() => "Price range"}
-            value={price}
-            onChange={handleChange}
+            value={tempPrice} // Temporary value for smooth interaction
+            onChange={handleTempChange} // Update temporary value on scroll
+            onChangeCommitted={handlePriceChangeCommitted} // Update actual price when done
             valueLabelDisplay="auto"
             getAriaValueText={pricetext}
             min={0} // Set minimum price
-            max={1000000} // Set maximum price
+            max={maxPrice} // Set maximum price
             sx={{
               color: "#00bf63", // Equivalent to bg-green-700
-              '& .MuiSlider-thumb': {
+              "& .MuiSlider-thumb": {
                 backgroundColor: "#00bf63", // Thumb color
               },
-              '& .MuiSlider-track': {
+              "& .MuiSlider-track": {
                 backgroundColor: "#00bf63", // Track color
               },
-              '& .MuiSlider-rail': {
+              "& .MuiSlider-rail": {
                 backgroundColor: "#a7f3d0", // Rail color (lighter green for contrast)
               },
             }}
-            
           />
+          <div className="flex justify-between text-sm text-gray-700 ">
+            <span>Min: {tempPrice[0]}</span>
+            <span>Max: {tempPrice[1]}</span>
+          </div>
         </Box>
       </div>
     </div>

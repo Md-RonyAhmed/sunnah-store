@@ -9,6 +9,8 @@ import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
 import { axiosInstance } from "../../api/axios_instance";
 
+export const maxPrice = 100000;
+
 const Products = () => {
   const { key } = useParams();
   const [searchParams] = useSearchParams();
@@ -16,6 +18,7 @@ const Products = () => {
 
   const [sortBy, setSortBy] = useState(0);
   const [inStock, setInStock] = useState(false);
+  const [price, setprice] = useState([0, maxPrice]); // Price Range Filter Array
   const [sortedProducts, setSortedProducts] = useState([]);
 
   const { data: products, isLoading } = useQuery({
@@ -40,6 +43,13 @@ const Products = () => {
     if (search) {
       filtered = filtered.filter((product) =>
         product.name.toLowerCase().includes(search)
+      );
+    }
+    // Price Range Filtering
+    if (price && price.length === 2) {
+      const [minPrice, maxPrice] = price;
+      filtered = filtered.filter(
+        (product) => product.price >= minPrice && product.price <= maxPrice
       );
     }
 
@@ -68,7 +78,7 @@ const Products = () => {
     }
 
     setSortedProducts(filtered);
-  }, [products, sortBy, inStock, search]);
+  }, [products, sortBy, inStock, search, price]);
 
   // Determine title and product count
   let title = "";
@@ -91,7 +101,10 @@ const Products = () => {
       <Helmet>
         <title>Sunnah Store | Products</title>
       </Helmet>
-      <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} />
+      {/* <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} /> */}
+      <FilterSection
+        filterProps={{ sortBy, setSortBy, search, price, setprice }}
+      />
 
       <div className="flex items-center justify-between mt-3">
         <div className="flex w-1/2 justify-between items-center gap-5">
