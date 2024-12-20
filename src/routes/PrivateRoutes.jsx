@@ -7,7 +7,7 @@ const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   if (loading) return <Loading />;
   if (!user) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/sunnah-store/signin" />;
   }
   return children;
 };

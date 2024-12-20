@@ -5,34 +5,25 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
+import { axiosInstance } from "../../api/axios_instance";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(
-          `https://sunnah-store-server-azure.vercel.app/product/${id}`
-        );
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [id]);
+  const { data: product, isLoading } = useQuery({
+    queryKey: [id],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`product/${id}`);
+      return res.data;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -56,6 +47,9 @@ const ProductDetails = () => {
 
   return (
     <div className="flex relative justify-center items-center mt-44 py-10 px-4">
+      <Helmet>
+        <title>{`Sunnah Store | ${name}`}</title>
+      </Helmet>
       <Card className="relative border p-6 shadow-lg w-full max-w-6xl lg:flex-row bg-white">
         <CardHeader
           shadow={false}
@@ -168,7 +162,7 @@ const ProductDetails = () => {
             >
               Add to Wishlist
             </Button>
-            <Link to={"/cart"}>
+            <Link to={"/sunnah-store/cart"}>
               <button
                 className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
                   status

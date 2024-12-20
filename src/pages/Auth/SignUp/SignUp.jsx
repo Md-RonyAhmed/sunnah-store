@@ -12,7 +12,8 @@ import { auth } from "../../../firebase/firebase.config";
 import { signOut } from "firebase/auth";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -125,7 +126,7 @@ const SignUp = () => {
               confirmPassword: "",
             });
 
-            navigate("/signin");
+            navigate("/sunnah-store/signin");
           })
           .catch((err) => {
             console.log(err);
@@ -151,9 +152,31 @@ const SignUp = () => {
         setIsSubmitting(false);
       });
   };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    }
+  };
 
   return (
-    <div className="flex justify-center mt-32">
+    <div className="flex justify-center mt-44">
       <Helmet>
         <title>Sunnah Store | Sign Up</title>
       </Helmet>
@@ -331,7 +354,10 @@ const SignUp = () => {
 
             {/* Google Sign-Up */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>
@@ -342,7 +368,7 @@ const SignUp = () => {
             {/* Sign In Link */}
             <div className="mt-4 font-normal text-center">
               Already have an account?
-              <Link to={"/signin"} className="ml-2 font-medium text-primary">
+              <Link to={"/sunnah-store/signin"} className="ml-2 font-medium text-primary">
                 Sign In
               </Link>
             </div>

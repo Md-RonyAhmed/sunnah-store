@@ -13,9 +13,10 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -137,10 +138,35 @@ const SignIn = () => {
         loadCaptchaEnginge(4, "#00BF63");
       });
   };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    }
+  };
 
   return (
-    <div className="flex justify-center mt-40">
+    <div className="flex justify-center mt-44">
       <div>
+        <Helmet>
+          <title>Sunnah Store | Sign In</title>
+        </Helmet>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign In</div>
           <div className="mt-1 font-normal text-gray-700">
@@ -220,6 +246,13 @@ const SignIn = () => {
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-500">{errors.password}</p>
                 )}
+                {/* Forgot password link */}
+                <NavLink
+                  to="/sunnah-store/reset"
+                  className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                >
+                  Forgot password?
+                </NavLink>
               </div>
 
               {/* Captcha Field */}
@@ -256,14 +289,6 @@ const SignIn = () => {
               </div>
             </div>
 
-            {/* Forgot password link */}
-            <NavLink
-              to="/reset"
-              className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-            >
-              Forgot password?
-            </NavLink>
-
             {/* Submit Button */}
             <Button
               type="submit"
@@ -283,7 +308,10 @@ const SignIn = () => {
 
             {/* Google Sign-In */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>
@@ -294,7 +322,10 @@ const SignIn = () => {
             {/* Sign Up Link */}
             <div className="mt-4 font-normal text-center">
               Don&apos;t have an account?
-              <Link to={"/signup"} className="ml-2 font-medium text-primary">
+              <Link
+                to={"/sunnah-store/signup"}
+                className="ml-2 font-medium text-primary"
+              >
                 Sign Up
               </Link>
             </div>

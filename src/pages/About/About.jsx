@@ -1,11 +1,15 @@
+import { Helmet } from "react-helmet-async";
 import { FaBook, FaGlobe, FaUtensils } from "react-icons/fa";
 import { GrDeliver } from "react-icons/gr";
 import { Link } from "react-router-dom";
 const About = () => {
   return (
-    <div className="flex flex-col items-center mt-10 justify-center py-20 ">
+    <div className="flex flex-col items-center py-20 justify-center mt-20 ">
+       <Helmet>
+        <title>Sunnah Store | About</title>
+      </Helmet>
       <div className="">
-        <h2 className="text-center text-3xl mb-4 font-bold">About Us</h2>
+        <h2 className="text-center text-4xl mb-4 font-bold">About Us</h2>
         <p className=" text-justify mb-6">
           Sunnah Store is your trusted online destination for Premium
           Electronics, Authentic Halal Food, and an Extensive collection of

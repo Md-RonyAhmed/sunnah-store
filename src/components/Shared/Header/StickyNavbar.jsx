@@ -7,23 +7,30 @@ import {
   Collapse,
 } from "@material-tailwind/react";
 import { useContext, useEffect, useState, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-
 import { AuthContext } from "../../../contexts/AuthContext";
 import Marquee from "./Marquee";
+import { CartContext } from "../../../contexts/CartContext";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  // For avatar dropdown
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Close the dropdown if clicked outside
+  const { cartItems } = useContext(CartContext);
+
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,9 +38,7 @@ export function StickyNavbar() {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -42,6 +47,31 @@ export function StickyNavbar() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${searchTerm.trim()}`);
+    }
+    setSearchTerm("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const firstName = user?.displayName?.split(" ")[0] || "U";
+  const firstChar = firstName.charAt(0).toUpperCase();
+
+  // Create a simple SVG with the first letter
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" style="background: #00BF63; border-radius: 50%;">
+      <text x="50%" y="50%" alignment-baseline="middle" text-anchor="middle" font-size="120" fill="#fff" font-family="Arial">
+        ${firstChar}
+      </text>
+    </svg>
+  `;
 
   const navList = (
     <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
@@ -55,7 +85,7 @@ export function StickyNavbar() {
           to={"/products"}
           className={({ isActive }) =>
             isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -69,10 +99,10 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/about"}
+          to={"/sunnah-store/about"}
           className={({ isActive }) =>
             isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -86,10 +116,10 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/contact"}
+          to={"/sunnah-store/contact"}
           className={({ isActive }) =>
             isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -103,14 +133,19 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/cart"}
+          to={"/sunnah-store/cart"}
           className={({ isActive }) =>
             isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
-              : "text-black flex items-center"
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center relative"
+              : "text-black flex items-center relative"
           }
         >
-          <FiShoppingCart className="mr-2 size-5" />
+          <FiShoppingCart className="mr-2 size-6" />
+          {totalQuantity > 0 && (
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+              {totalQuantity}
+            </span>
+          )}
         </NavLink>
       </Typography>
       <Typography
@@ -120,10 +155,10 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/wishlist"}
+          to={"/sunnah-store/wishlist"}
           className={({ isActive }) =>
             isActive
-              ? "text-primary underline underline-offset-4 flex items-center"
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
               : "text-black flex items-center"
           }
         >
@@ -135,30 +170,22 @@ export function StickyNavbar() {
 
   const handleLogout = () => {
     signOutUser()
-      .then(() => {
-        // Successfully logged out
-        setProfileOpen(false);
-      })
+      .then(() => setProfileOpen(false))
       .catch((err) => console.log(err));
   };
 
-  // Determine avatar: if user.photoURL is available, use it; otherwise use placeholder
-  const avatarURL =
-    user && user.photoURL
-      ? user.photoURL
-      : "https://api.dicebear.com/5.x/bottts/svg?seed=User";
+  // const userPhotoURL =
+  //   user?.photoURL || user?.providerData?.[0]?.photoURL || "";
 
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
       <Marquee />
-
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
           <div className="order-1 font-medium cursor-pointer">
             <div className="flex flex-col items-start justify-start gap-6 md:flex-row md:items-center md:justify-center">
               <Link to="/">
-                {/* Logo file */}
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
                   <span className="text-2xl font-semibold text-primary">
@@ -175,6 +202,9 @@ export function StickyNavbar() {
               color="gray"
               label="Search Products"
               className="pr-[5.5rem]"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
               containerProps={{
                 className: "md:min-w-[360px]",
               }}
@@ -183,6 +213,8 @@ export function StickyNavbar() {
             <Button
               size="sm"
               className="!absolute right-1 top-1 rounded bg-primary"
+              onClick={handleSearch}
+              disabled={!searchTerm.trim()}
             >
               Search
             </Button>
@@ -191,10 +223,9 @@ export function StickyNavbar() {
           <div className="flex items-center order-2 gap-4 pr-4 md:order-3">
             <div className="hidden mr-4 lg:block">{navList}</div>
 
-            {/* If user is logged in, show avatar dropdown; else show Sign In button */}
             {!user ? (
               <div className="flex items-center gap-x-1">
-                <NavLink to={"/signin"}>
+                <NavLink to={"/sunnah-store/signin"}>
                   <Button
                     size="sm"
                     className="hidden lg:inline-block bg-primary"
@@ -205,17 +236,26 @@ export function StickyNavbar() {
               </div>
             ) : (
               <div className="relative" ref={dropdownRef}>
-                <img
-                  src={avatarURL}
-                  alt="User Avatar"
-                  className="w-10 h-10 rounded-full cursor-pointer font-bold"
-                  onClick={() => setProfileOpen((prev) => !prev)}
-                />
+                {loading ? (
+                  <div className="w-10 h-10 rounded-full bg-gray-300 animate-pulse" />
+                ) : user?.photoURL ? (
+                  <img
+                    src={user?.photoURL}
+                    alt="User"
+                    className="w-10 h-10 rounded-full cursor-pointer font-bold"
+                    onClick={() => setProfileOpen((prev) => !prev)}
+                  />
+                ) : (
+                  svg
+                )}
                 {profileOpen && (
                   <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
                     <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                      <Link to={"/profile"} className="font-semibold">
-                        {user.displayName}
+                      <Link
+                        to={"/sunnah-store/profile"}
+                        className="font-semibold"
+                      >
+                        {user.displayName || "User"}
                       </Link>
                     </div>
                     <hr />
@@ -270,21 +310,19 @@ export function StickyNavbar() {
           </div>
         </div>
         <Collapse open={openNav}>
-          <Collapse open={openNav}>
-            {navList}
-            <div className="flex items-center gap-x-1 mt-4">
-              <NavLink to={"/signin"} className="w-full">
-                <Button fullWidth variant="text" size="sm" className="">
-                  <span>Sign In</span>
-                </Button>
-              </NavLink>
-              <NavLink to={"/signup"} className="w-full">
-                <Button fullWidth variant="gradient" size="sm" className="">
-                  <span>Sign Up</span>
-                </Button>
-              </NavLink>
-            </div>
-          </Collapse>
+          {navList}
+          <div className="flex items-center gap-x-1 mt-4">
+            <NavLink to={"/sunnah-store/signin"} className="w-full">
+              <Button fullWidth variant="text" size="sm" className="">
+                <span>Sign In</span>
+              </Button>
+            </NavLink>
+            <NavLink to={"/sunnah-store/signup"} className="w-full">
+              <Button fullWidth variant="gradient" size="sm" className="">
+                <span>Sign Up</span>
+              </Button>
+            </NavLink>
+          </div>
         </Collapse>
       </Navbar>
     </div>
