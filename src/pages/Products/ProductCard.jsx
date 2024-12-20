@@ -12,11 +12,13 @@ import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
+import { WishlistContext } from "../../contexts/WishlistContext";
 
 const ProductCard = ({ product }) => {
   const { _id, image, name, price, individualRating, status } = product || {};
 
-  const { addToCart, addToWishlist , wishlistItems} = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
+  const { wishlistItems, addToWishlist } = useContext(WishlistContext);
 
   const isWishlisted = wishlistItems.find((item) => item._id === _id);
 
@@ -29,6 +31,9 @@ const ProductCard = ({ product }) => {
         onClick={() => addToWishlist(product)}
       >
         <FaHeart className={isWishlisted ? "text-red-500" : "text-gray-700"} />
+        {/* একবার বাটন ক্লিক করলে wishlist এ প্রোডাক্টটা অ্যাড হয়ে যাবে, পুনরায় এই বাটন ক্লিক করলে wishlist থেকে রিমোভ হয়ে যাবে, অনেকটা toggle এর মতো */}
+
+        {/* যেকল কার্ডের প্রোডাক্ট wishlist এ অ্যাড হয়েছে সেকল কার্ডের <FaHeart/> আইকনের কালার রেড হবে, সেকল কার্ডের প্রোডাক্ট wishlist এ এড করা হয়নাই তাদের আইকন grey কালার হবে */}
       </button>
 
       <Link to={`/product/${_id}`}>

@@ -3,16 +3,13 @@ import { Helmet } from "react-helmet-async";
 import { CartContext } from "../../contexts/CartContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { Typography } from "@material-tailwind/react";
+import { WishlistContext } from "../../contexts/WishlistContext";
 
 function Wishlist() {
-  const { wishlistItems, setwishlistItems, addToCart } =
-    useContext(CartContext);
+  const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
+  const { addToCart } = useContext(CartContext);
 
-  const removeFromWishlist = (id) => {
-    setwishlistItems((prevItems) =>
-      prevItems.filter((item) => item._id !== id)
-    );
-  };
+
 
   return (
     <>
