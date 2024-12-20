@@ -16,7 +16,9 @@ import { CartContext } from "../../contexts/CartContext";
 const ProductCard = ({ product }) => {
   const { _id, image, name, price, individualRating, status } = product || {};
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, addToWishlist , wishlistItems} = useContext(CartContext);
+
+  const isWishlisted = wishlistItems.find((item) => item._id === _id);
 
   return (
     <Card className="relative border hover:shadow-lg transition-shadow duration-300">
@@ -24,8 +26,9 @@ const ProductCard = ({ product }) => {
       <button
         className="absolute top-3 right-3 p-2 z-30 bg-white/80 rounded-full shadow hover:bg-white transition"
         aria-label="Add to Wishlist"
+        onClick={() => addToWishlist(product)}
       >
-        <FaHeart className="text-red-500" />
+        <FaHeart className={isWishlisted ? "text-red-500" : "text-gray-700"} />
       </button>
 
       <Link to={`/product/${_id}`}>

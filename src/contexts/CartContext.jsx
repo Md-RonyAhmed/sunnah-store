@@ -3,6 +3,19 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [wishlistItems, setwishlistItems] = useState([]);
+
+  const addToWishlist = (product) => {
+    setwishlistItems((prevItems) => {
+      const existingItems = prevItems.find(item => item._id === product._id);
+      if (!existingItems) {
+        return [...prevItems, product];
+      } else {
+        return prevItems.filter(item => item._id !== product._id)
+      }
+    });
+  };
+
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item._id === product._id);
@@ -49,6 +62,9 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        wishlistItems,
+        addToWishlist,
+        setwishlistItems,
         cartItems,
         addToCart,
         removeFromCart,
