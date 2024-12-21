@@ -159,10 +159,10 @@ export function StickyNavbar() {
           className={({ isActive }) =>
             isActive
               ? "text-[#00BF63] underline underline-offset-4 flex items-center"
-              : "text-black flex items-center"
+              : "text-red-500 flex items-center"
           }
         >
-          <FaHeart className=" text-red-500 size-5" />
+          <FaHeart className="size-5" />
         </NavLink>
       </Typography>
     </ul>
