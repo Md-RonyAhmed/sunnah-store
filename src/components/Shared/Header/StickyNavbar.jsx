@@ -192,7 +192,7 @@ export function StickyNavbar() {
       }
     });
   };
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
       <Marquee />

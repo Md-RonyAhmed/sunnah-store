@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { categoryData } from "../../Home/categories/Categories";
 import { Box, Slider } from "@mui/material";
-import { useState } from "react";
+// import { useState } from "react";
 import { maxPrice } from "../Products";
 
 const FilterSection = ({
@@ -33,28 +33,28 @@ const FilterSection = ({
   };
 
   // Handle slider price change (temporary state for smooth interaction)
-  const [tempPrice, setTempPrice] = useState(price);
+  // const [price, setPrice] = useState(price);
 
   // Update temp price while scrolling
   const handleTempChange = (event, newPrice) => {
-    setTempPrice(newPrice);
+    setPrice(newPrice);
   };
 
   // debounce timer state
-  const [debounceTimer, setDebounceTimer] = useState(null);
+  // const [debounceTimer, setDebounceTimer] = useState(null);
   // Update actual price after user finishes scrolling + debounce timer
   const handlePriceChangeCommitted = (event, newPrice) => {
-    // Clear previous debounce timer if exists
-    if (debounceTimer) clearTimeout(debounceTimer);
+    // // Clear previous debounce timer if exists
+    // if (debounceTimer) clearTimeout(debounceTimer);
 
-    // Set a new debounce timer to update the price after a delay
-    const newTimer = setTimeout(() => {
+    // // Set a new debounce timer to update the price after a delay
+    // const newTimer = setTimeout(() => {
       setPrice(newPrice);
-      //console.log("New - Min", newPrice[0],"max", newPrice[1]);
-    }, 1000); // 1-second debounce delay
+    //   //console.log("New - Min", newPrice[0],"max", newPrice[1]);
+    // }, 1000); // 1-second debounce delay
 
     // Store the new timer ID in state to manage future timeouts
-    setDebounceTimer(newTimer);
+    // setDebounceTimer(newTimer);
   };
 
   // Function to display the price text
@@ -109,7 +109,7 @@ const FilterSection = ({
           </div>
           <Slider
             getAriaLabel={() => "Price range"}
-            value={tempPrice} // Temporary value for smooth interaction
+            value={price} // Temporary value for smooth interaction
             onChange={handleTempChange} // Update temporary value on scroll
             onChangeCommitted={handlePriceChangeCommitted} // Update actual price when done
             valueLabelDisplay="auto"
@@ -130,8 +130,8 @@ const FilterSection = ({
             }}
           />
           <div className="flex justify-between text-sm text-gray-700 ">
-            <span>Min: {tempPrice[0]}</span>
-            <span>Max: {tempPrice[1]}</span>
+            <span>Min: {price[0]}</span>
+            <span>Max: {price[1]}</span>
           </div>
         </Box>
       </div>

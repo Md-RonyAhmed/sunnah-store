@@ -77,7 +77,6 @@ const Profile = () => {
         showConfirmButton: true,
       });
     } catch (error) {
-      console.error("Error sending verification email:", error);
       Swal.fire({
         position: "center",
         icon: "error",
