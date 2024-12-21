@@ -50,10 +50,7 @@ const AuthContextProvider = ({ children }) => {
   const signInWithGoogle = async () => {
     setLoading(true);
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    // result.user is the signed-in user with providerData that includes the Google photo URL
-    setLoading(false);
-    return result;
+    return await signInWithPopup(auth, provider);
   };
 
   const sendResetPassword = async (email) => {

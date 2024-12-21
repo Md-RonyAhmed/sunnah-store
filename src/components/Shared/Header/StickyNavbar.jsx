@@ -192,7 +192,7 @@ export function StickyNavbar() {
       }
     });
   };
-
+  console.log(user?.photoURL);
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
       <Marquee />
@@ -253,7 +253,7 @@ export function StickyNavbar() {
             ) : (
               <div className="relative" ref={dropdownRef}>
                 <div className="w-10 h-10 rounded-full bg-gray-300">
-                  {user?.photoURL ? (
+                  {user && user?.photoURL ? (
                     <img
                       src={user?.photoURL}
                       alt="User"
