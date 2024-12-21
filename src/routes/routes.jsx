@@ -16,6 +16,7 @@ import Profile from "../pages/Profile/Profile";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../pages/Error/ErrorPage";
 import Checkout from "../pages/Checkout/Checkout";
+import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <Checkout />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "sunnah-store/order-success",
+        element: (
+          <PrivateRoutes>
+            <OrderSuccess/>
           </PrivateRoutes>
         ),
       },

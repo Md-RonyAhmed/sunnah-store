@@ -27,9 +27,18 @@ const Checkout = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Order submitted:", formData);
+  const handlePlaceOrder = () => {
+    const orderData = {
+      orderId: `ORD${Date.now()}`,
+      name: formData.name,
+      address: formData.address,
+      phone: formData.phone,
+      totalAmount: getTotalPrice(),
+      items: cartItems,
+      orderDate: new Date().toISOString(),
+    };
+
+    navigate("/sunnah-store/order-success", { state: { orderData } });
   };
 
   return (
@@ -71,7 +80,7 @@ const Checkout = () => {
             <h2 className="text-2xl font-bold mb-6 text-gray-800">
               Shipping Information
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handlePlaceOrder} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -213,8 +222,8 @@ const Checkout = () => {
                 </div>
 
                 <button
-                  type="submit"
-                  className="w-full mt-6 bg-primary text-white py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center space-x-2"
+                  onClick={handlePlaceOrder}
+                  className="w-full bg-primary text-white py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center space-x-2"
                 >
                   <FaMoneyCheckAlt size={20} />
                   <span>Place Order</span>
