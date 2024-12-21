@@ -36,12 +36,17 @@ export const CartProvider = ({ children }) => {
   };
   const decreaseQuantity = (id) => {
     setCartItems((prevItems) => {
-      const item = prevItems.find((item) => item._id === id);
-      if (item.quantity === 1) {
-        return prevItems.filter((item) => item._id !== id);
-      }
+      // const item = prevItems.find((item) => item._id === id);
+      // if (item.quantity === 1) {
+      //   return prevItems.filter((item) => item._id !== id);
+      // }
       return prevItems.map((item) =>
-        item._id === id ? { ...item, quantity: item.quantity - 1 } : item
+        item._id === id
+          ? {
+              ...item,
+              quantity: item?.quantity > 1 ? item.quantity - 1 : 1,
+            }
+          : item
       );
     });
   };
@@ -62,7 +67,7 @@ export const CartProvider = ({ children }) => {
         getTotalPrice,
         increaseQuantity,
         decreaseQuantity,
-        removeAllFromCart
+        removeAllFromCart,
       }}
     >
       {children}
