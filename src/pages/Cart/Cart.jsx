@@ -74,7 +74,7 @@ const Cart = () => {
                         </div>
                       </Link>
                       <div className="text-lg font-semibold text-primary">
-                        ৳ {item.price * item.quantity}
+                        ৳ {item.price}
                       </div>
                       <div className="flex items-center mt-2 gap-3">
                         <button
