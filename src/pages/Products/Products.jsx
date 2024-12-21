@@ -18,7 +18,7 @@ const Products = () => {
 
   const [sortBy, setSortBy] = useState(0);
   const [inStock, setInStock] = useState(false);
-  const [price, setprice] = useState([0, maxPrice]); // Price Range Filter Array
+  const [price, setPrice] = useState([0, maxPrice]); // Price Range Filter Array
   const [sortedProducts, setSortedProducts] = useState([]);
 
   const { data: products, isLoading } = useQuery({
@@ -103,7 +103,7 @@ const Products = () => {
       </Helmet>
       {/* <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} /> */}
       <FilterSection
-        filterProps={{ sortBy, setSortBy, search, price, setprice }}
+        filterProps={{ sortBy, setSortBy, search, price, setPrice }}
       />
 
       <div className="flex items-center justify-between mt-3">

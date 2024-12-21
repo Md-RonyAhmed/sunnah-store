@@ -10,6 +10,9 @@ import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
 import { axiosInstance } from "../../api/axios_instance";
 import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { WishlistContext } from "../../contexts/WishlistContext";
+import { CartContext } from "../../contexts/CartContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -22,6 +25,9 @@ const ProductDetails = () => {
     },
     staleTime: 5 * 60 * 1000,
   });
+
+  const { addToCart } = useContext(CartContext);
+  const { removeFromWishlist, addToWishlist } = useContext(WishlistContext);
 
   if (isLoading) {
     return <Loading />;
@@ -159,6 +165,9 @@ const ProductDetails = () => {
               size="md"
               variant="outlined"
               className="border-green-500 text-green-500 hover:bg-green-50 transition duration-500"
+              onClick={() => {
+                addToWishlist(product);
+              }}
             >
               Add to Wishlist
             </Button>
@@ -170,6 +179,10 @@ const ProductDetails = () => {
                     : "cursor-not-allowed bg-gray-400"
                 }`}
                 disabled={!status}
+                onClick={() => {
+                  addToCart(product);
+                  removeFromWishlist(product._id);
+                }}
               >
                 Add to Cart
               </button>

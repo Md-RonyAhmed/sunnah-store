@@ -4,10 +4,10 @@ import { createContext, useState } from "react";
 export const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
-    const [wishlistItems, setwishlistItems] = useState([]);
+    const [wishlistItems, setWishlistItems] = useState([]);
 
     const addToWishlist = (product) => {
-        setwishlistItems((prevItems) => {
+        setWishlistItems((prevItems) => {
           const existingItems = prevItems.find(item => item._id === product._id);
           if (!existingItems) {
             return [...prevItems, product];
@@ -18,7 +18,7 @@ export const WishlistProvider = ({ children }) => {
       };
 
       const removeFromWishlist = (id) => {
-        setwishlistItems((prevItems) =>
+        setWishlistItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
         );
       };

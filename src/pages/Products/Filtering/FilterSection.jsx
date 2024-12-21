@@ -5,7 +5,7 @@ import { useState } from "react";
 import { maxPrice } from "../Products";
 
 const FilterSection = ({
-  filterProps: { sortBy, setSortBy, search, price, setprice },
+  filterProps: { sortBy, setSortBy, search, price, setPrice },
 }) => {
   const navigate = useNavigate();
   const { key } = useParams();
@@ -46,19 +46,19 @@ const FilterSection = ({
   const handlePriceChangeCommitted = (event, newPrice) => {
     // Clear previous debounce timer if exists
     if (debounceTimer) clearTimeout(debounceTimer);
-  
+
     // Set a new debounce timer to update the price after a delay
     const newTimer = setTimeout(() => {
-      setprice(newPrice);
+      setPrice(newPrice);
       //console.log("New - Min", newPrice[0],"max", newPrice[1]);
     }, 1000); // 1-second debounce delay
-  
+
     // Store the new timer ID in state to manage future timeouts
     setDebounceTimer(newTimer);
   };
 
   // Function to display the price text
-  const pricetext = (price) => {
+  const priceText = (price) => {
     return `${price}`;
   };
 
@@ -113,7 +113,7 @@ const FilterSection = ({
             onChange={handleTempChange} // Update temporary value on scroll
             onChangeCommitted={handlePriceChangeCommitted} // Update actual price when done
             valueLabelDisplay="auto"
-            getAriaValueText={pricetext}
+            getAriaValueText={priceText}
             min={0} // Set minimum price
             max={maxPrice} // Set maximum price
             sx={{

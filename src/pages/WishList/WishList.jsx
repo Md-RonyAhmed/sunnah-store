@@ -68,7 +68,10 @@ function Wishlist() {
                       }`}
                       aria-label="Add to Cart"
                       disabled={!item.status}
-                      onClick={() => addToCart(item)}
+                      onClick={() => {
+                        addToCart(item);
+                        removeFromWishlist(item._id);
+                      }}
                     >
                       <FaShoppingCart />
                     </button>
