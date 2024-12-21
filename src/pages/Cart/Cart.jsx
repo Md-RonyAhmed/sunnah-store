@@ -31,15 +31,16 @@ const Cart = () => {
           <img
             src="https://www.rokomari.com/static/200/images/icon_empty_cart.png"
             alt="empty-cart"
+            className="w-32 h-32"
           />
           <p className="text-3xl text-red-900 font-bold ">
             Your cart is empty!
           </p>
           <p className="text-lg text-gray-600 ">
-            Looks like you haven&apos;t add any products in cart.
+            Looks like you haven&apos;t added any products to the cart.
           </p>
-          <button className=" bg-primary text-white py-2 px-4 mt-2 rounded-lg hover:bg-green-600 transition duration-300">
-            <Link to={"/products"}>Continue to Shopping</Link>{" "}
+          <button className="bg-primary text-white py-2 px-4 mt-2 rounded-lg hover:bg-green-600 transition duration-300">
+            <Link to={"/products"}>Continue Shopping</Link>
           </button>
         </div>
       ) : (
@@ -53,12 +54,12 @@ const Cart = () => {
               <MdRemoveShoppingCart color="red" className="size-5" />
             </span>
           </button>
-          <div className="flex flex-col md:flex-row gap-4  justify-between">
+          <div className="flex flex-col md:flex-row gap-4 justify-between">
             <section className="w-full md:w-2/3">
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 relative"
+                  className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 relative transition-transform duration-300 hover:shadow-lg"
                 >
                   <div className="flex items-center gap-3">
                     <img
@@ -68,7 +69,7 @@ const Cart = () => {
                     />
                     <div>
                       <Link to={`/product/${item._id}`}>
-                        <div className="text-lg font-semibold text-gray-800">
+                        <div className="text-lg font-semibold text-gray-800 hover:text-primary transition duration-200">
                           {item.name}
                         </div>
                       </Link>
@@ -78,7 +79,7 @@ const Cart = () => {
                       <div className="flex items-center mt-2 gap-3">
                         <button
                           onClick={() => decreaseQuantity(item._id)}
-                          className="px-3 py-1 bg-gray-300 hover:bg-gray-400 transition duration-300"
+                          className="px-3 py-1 bg-gray-300 hover:bg-gray-400 transition duration-300 rounded"
                         >
                           <MdRemove />
                         </button>
@@ -87,7 +88,7 @@ const Cart = () => {
                         </span>
                         <button
                           onClick={() => increaseQuantity(item._id)}
-                          className="px-3 py-1 bg-gray-300 hover:bg-gray-400 transition duration-300"
+                          className="px-3 py-1 bg-gray-300 hover:bg-gray-400 transition duration-300 rounded"
                         >
                           <MdAdd />
                         </button>
@@ -103,31 +104,31 @@ const Cart = () => {
                 </div>
               ))}
             </section>
-            <section className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 w-full md:w-1/3 h-fit ">
+            <section className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 w-full md:w-1/3 h-fit">
               <h2 className="text-2xl border-gray-400 border-b pb-2">
                 Checkout Summary
               </h2>
 
               <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-sm text-gray-800 border-gray-400 border-b border-dashed">
-                <p> Subtotal ({totalQuantity} items): </p>
-
+                <p>Subtotal ({totalQuantity} items):</p>
                 <p className="text-primary">৳ {getTotalPrice() - shipping}</p>
               </div>
               <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-sm text-gray-800 border-gray-400 border-b border-dashed">
-                <p> Shipping Charge: </p>
-
+                <p>Shipping Charge:</p>
                 <p className="text-primary">৳ {shipping}</p>
               </div>
               <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-lg text-gray-800 border-gray-400 border-b border-dashed">
-                <p> Total Price: </p>
-
+                <p>Total Price:</p>
                 <p className="text-primary">৳ {getTotalPrice()}</p>
               </div>
 
               <div className="mt-6">
-                <button className=" bg-primary text-white py-2 px-4 rounded-lg w-full hover:bg-green-600 transition duration-300">
+                <Link
+                  to={"/sunnah-store/checkout"}
+                  className="bg-primary text-white py-3 px-4 rounded-lg w-full hover:bg-green-600 transition duration-300"
+                >
                   Proceed to Checkout ({totalQuantity})
-                </button>
+                </Link>
               </div>
             </section>
           </div>

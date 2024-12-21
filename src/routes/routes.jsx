@@ -15,6 +15,7 @@ import Reset from "../pages/Auth/SignIn/Reset";
 import Profile from "../pages/Profile/Profile";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../pages/Error/ErrorPage";
+import Checkout from "../pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <Cart />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "sunnah-store/checkout",
+        element: (
+          <PrivateRoutes>
+            <Checkout />
           </PrivateRoutes>
         ),
       },
