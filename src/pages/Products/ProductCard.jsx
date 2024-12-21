@@ -18,7 +18,8 @@ const ProductCard = ({ product }) => {
   const { _id, image, name, price, individualRating, status } = product || {};
 
   const { addToCart } = useContext(CartContext);
-  const { wishlistItems, addToWishlist } = useContext(WishlistContext);
+  const { wishlistItems, addToWishlist, removeFromWishlist } =
+    useContext(WishlistContext);
 
   const isWishlisted = wishlistItems.find((item) => item._id === _id);
 
@@ -102,7 +103,10 @@ const ProductCard = ({ product }) => {
             }`}
             aria-label="Add to Cart"
             disabled={!status}
-            onClick={() => addToCart(product)}
+            onClick={() => {
+              addToCart(product);
+              removeFromWishlist(product._id);
+            }}
           >
             <FaShoppingCart />
           </button>

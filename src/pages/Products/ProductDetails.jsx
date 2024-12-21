@@ -5,7 +5,7 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
 import { axiosInstance } from "../../api/axios_instance";
@@ -171,22 +171,21 @@ const ProductDetails = () => {
             >
               Add to Wishlist
             </Button>
-            <Link to={"/sunnah-store/cart"}>
-              <button
-                className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
-                  status
-                    ? "bg-green-600 hover:bg-green-400 cursor-pointer"
-                    : "cursor-not-allowed bg-gray-400"
-                }`}
-                disabled={!status}
-                onClick={() => {
-                  addToCart(product);
-                  removeFromWishlist(product._id);
-                }}
-              >
-                Add to Cart
-              </button>
-            </Link>
+
+            <button
+              className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
+                status
+                  ? "bg-green-600 hover:bg-green-400 cursor-pointer"
+                  : "cursor-not-allowed bg-gray-400"
+              }`}
+              disabled={!status}
+              onClick={() => {
+                addToCart(product);
+                removeFromWishlist(product._id);
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </CardBody>
       </Card>
