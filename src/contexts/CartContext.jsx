@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState } from "react";
 export const CartContext = createContext();
+export const shipping = 55;
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
@@ -42,10 +43,12 @@ export const CartProvider = ({ children }) => {
     });
   };
   const getTotalPrice = () => {
-    return cartItems.reduce(
+    const subtotal = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
+    const total = subtotal + shipping;
+    return total;
   };
   return (
     <CartContext.Provider

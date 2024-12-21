@@ -14,10 +14,11 @@ import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Marquee from "./Marquee";
 import { CartContext } from "../../../contexts/CartContext";
+import Swal from "sweetalert2";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
-  const { user, signOutUser, loading } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -169,13 +170,28 @@ export function StickyNavbar() {
   );
 
   const handleLogout = () => {
-    signOutUser()
-      .then(() => setProfileOpen(false))
-      .catch((err) => console.log(err));
+    Swal.fire({
+      title: "Are you sure to Logout?",
+      text: "You can stay our site!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00BF63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOutUser()
+          .then(() => {
+            setProfileOpen(false);
+          })
+          .catch((err) => console.log(err));
+        Swal.fire({
+          title: "Logout Successfully!",
+          icon: "success",
+        });
+      }
+    });
   };
-
-  // const userPhotoURL =
-  //   user?.photoURL || user?.providerData?.[0]?.photoURL || "";
 
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
@@ -236,37 +252,37 @@ export function StickyNavbar() {
               </div>
             ) : (
               <div className="relative" ref={dropdownRef}>
-                {loading ? (
-                  <div className="w-10 h-10 rounded-full bg-gray-300 animate-pulse" />
-                ) : user?.photoURL ? (
-                  <img
-                    src={user?.photoURL}
-                    alt="User"
-                    className="w-10 h-10 rounded-full cursor-pointer font-bold"
-                    onClick={() => setProfileOpen((prev) => !prev)}
-                  />
-                ) : (
-                  svg
-                )}
-                {profileOpen && (
-                  <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
-                    <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                      <Link
-                        to={"/sunnah-store/profile"}
-                        className="font-semibold"
+                <div className="w-10 h-10 rounded-full bg-gray-300">
+                  {user?.photoURL ? (
+                    <img
+                      src={user?.photoURL}
+                      alt="User"
+                      className="w-10 h-10 rounded-full cursor-pointer font-bold"
+                      onClick={() => setProfileOpen((prev) => !prev)}
+                    />
+                  ) : (
+                    svg
+                  )}
+                  {profileOpen && (
+                    <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
+                      <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
+                        <Link
+                          to={"/sunnah-store/profile"}
+                          className="font-semibold"
+                        >
+                          {user.displayName || "User"}
+                        </Link>
+                      </div>
+                      <hr />
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 hover:bg-[#00BF63] hover:text-white"
                       >
-                        {user.displayName || "User"}
-                      </Link>
+                        Logout
+                      </button>
                     </div>
-                    <hr />
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-[#00BF63] hover:text-white"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             )}
 

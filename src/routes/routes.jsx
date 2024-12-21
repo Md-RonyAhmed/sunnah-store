@@ -54,11 +54,19 @@ const router = createBrowserRouter([
       },
       {
         path: "sunnah-store/cart",
-        element: <Cart />,
+        element: (
+          <PrivateRoutes>
+            <Cart />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "sunnah-store/wishlist",
-        element: <WishList />,
+        element: (
+          <PrivateRoutes>
+            <WishList />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "sunnah-store/profile",

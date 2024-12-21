@@ -4,16 +4,15 @@ import { CartContext } from "../../contexts/CartContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { Typography } from "@material-tailwind/react";
 import { WishlistContext } from "../../contexts/WishlistContext";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Wishlist() {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
 
-
-
   return (
     <>
-      <div className="max-w-full mt-40 mx-auto p-4 bg-gray-100 rounded-lg shadow">
+      <div className="max-w-full mt-40 mx-auto p-4 bg-gray-50 rounded-lg shadow">
         <Helmet>
           <title>Sunnah Store | Wish List</title>
         </Helmet>
@@ -37,8 +36,8 @@ function Wishlist() {
 
                 {/* Product Details */}
                 <div className="flex-1 px-4">
-                  <h2 className="text-lg font-medium text-gray-800 truncate flex-col flex md:flex-row items-center gap-4">
-                    {item.name}
+                  <div className="text-lg font-medium text-gray-800 truncate flex-col flex md:flex-row items-center gap-4">
+                    <h1 className="text-lg font-semibold">{item.name}</h1>
                     <Typography className="text-sm">
                       {item.status ? (
                         <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">
@@ -50,14 +49,14 @@ function Wishlist() {
                         </span>
                       )}
                     </Typography>
-                  </h2>
-                  <p className="text-lg font-bold text-red-600 mt-2">
+                  </div>
+                  <p className="text-lg font-bold text-primary mt-2">
                     ৳ {item.price}
                   </p>
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col items-end space-y-3 mr-2">
+                <div className="flex flex-col items-end justify-center space-y-3 mr-2">
                   {/* Add to Cart */}
                   <div className="relative group inline-block">
                     <button
@@ -87,12 +86,12 @@ function Wishlist() {
                     </span>
                   </div>
 
-                  {/* Remove from Cart */}
+                  {/* Remove from Wishlist*/}
                   <button
                     onClick={() => removeFromWishlist(item._id)}
-                    className="text-red-500 text-md hover:underline"
+                    className="text-red-500 hover:text-red-700 transition duration-300 bg-red-100 rounded-full px-1 py-1"
                   >
-                    Remove from Wishlist
+                    <RiDeleteBin6Line size={24} />
                   </button>
                 </div>
               </div>

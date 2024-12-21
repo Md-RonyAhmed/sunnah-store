@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
-import { RiDeleteBin2Fill } from "react-icons/ri";
+import { CartContext, shipping } from "../../contexts/CartContext";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -13,10 +13,10 @@ const Cart = () => {
     getTotalPrice,
   } = useContext(CartContext);
 
-   const totalQuantity = cartItems.reduce(
-     (total, item) => total + item.quantity,
-     0
-   );
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <div className="mt-48 mb-6 p-6 bg-white shadow-lg rounded-lg">
@@ -34,9 +34,9 @@ const Cart = () => {
             Your cart is empty!
           </p>
           <p className="text-lg text-gray-600 ">
-            Looks like you haven&apos;t made order yet.
+            Looks like you haven&apos;t add any products in cart.
           </p>
-          <button className=" bg-primary text-white py-1 px-4 mt-2 rounded-lg hover:bg-green-600 transition duration-300">
+          <button className=" bg-primary text-white py-2 px-4 mt-2 rounded-lg hover:bg-green-600 transition duration-300">
             <Link to={"/products"}>Continue to Shopping</Link>{" "}
           </button>
         </div>
@@ -46,7 +46,7 @@ const Cart = () => {
             {cartItems.map((item) => (
               <div
                 key={item._id}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow-md mb-4"
+                className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md mb-4"
               >
                 <div className="flex items-center">
                   <img
@@ -78,20 +78,20 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-lg font-semibold text-gray-800 ml-4">
+                  <span className="text-lg font-semibold text-primary">
                     ৳ {item.price * item.quantity}
                   </span>
                   <button
                     onClick={() => removeFromCart(item._id)}
-                    className="ml-4 text-red-500 hover:text-red-700 transition duration-300"
+                    className="text-red-500 hover:text-red-700 transition duration-300 bg-red-100 rounded-full px-1 py-1 ml-4"
                   >
-                    <RiDeleteBin2Fill size={24} />
+                    <RiDeleteBin6Line size={24} />
                   </button>
                 </div>
               </div>
             ))}
           </section>
-          <section className=" bg-gray-100 p-4 rounded-lg shadow-md mb-4 w-full md:w-1/3 h-fit ">
+          <section className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 w-full md:w-1/3 h-fit ">
             <h2 className="text-2xl border-gray-400 border-b pb-2">
               Checkout Summary
             </h2>
@@ -99,17 +99,17 @@ const Cart = () => {
             <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-sm text-gray-800 border-gray-400 border-b border-dashed">
               <p> Subtotal ({totalQuantity} items): </p>
 
-              <p className="text-green-600">৳ {getTotalPrice()}</p>
+              <p className="text-primary">৳ {getTotalPrice() - shipping}</p>
             </div>
             <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-sm text-gray-800 border-gray-400 border-b border-dashed">
-              <p> Shipping Charges: </p>
+              <p> Shipping Charge: </p>
 
-              <p className="text-green-600">৳ {getTotalPrice()}</p>
+              <p className="text-primary">৳ {shipping}</p>
             </div>
-            <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-sm text-gray-800 border-gray-400 border-b border-dashed">
+            <div className="flex justify-between items-center gap-4 mt-4 pb-2 font-bold text-lg text-gray-800 border-gray-400 border-b border-dashed">
               <p> Total Price: </p>
 
-              <p className="text-green-600">৳ {getTotalPrice()}</p>
+              <p className="text-primary">৳ {getTotalPrice()}</p>
             </div>
 
             <div className="mt-6">
