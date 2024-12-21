@@ -60,16 +60,18 @@ const Cart = () => {
                   key={item._id}
                   className="bg-gray-50 p-4 rounded-lg shadow-md mb-4 relative"
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-3">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-24 h-24 object-cover rounded mr-4"
+                      className="w-24 h-24 object-contain rounded-md"
                     />
                     <div>
-                      <div className="text-lg font-semibold text-gray-800">
-                        {item.name}
-                      </div>
+                      <Link to={`/product/${item._id}`}>
+                        <div className="text-lg font-semibold text-gray-800">
+                          {item.name}
+                        </div>
+                      </Link>
                       <div className="text-lg font-semibold text-primary">
                         ৳ {item.price * item.quantity}
                       </div>
