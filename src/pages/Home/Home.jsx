@@ -6,7 +6,7 @@ import OfferTimer from "./OfferTimer/OfferTimer";
 import Categories from "./categories/Categories";
 import Pride from "../../components/pride/Pride";
 import { Helmet } from "react-helmet-async";
-
+import PopularAuthors from "./PopularAuthors";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,6 +51,7 @@ const Home = () => {
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
       <Ebook />
       <Pride />
+      <PopularAuthors />
     </>
   );
 };
