@@ -24,6 +24,9 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
   };
+  const removeAllFromCart = () => {
+    setCartItems([]);
+  };
   const increaseQuantity = (id) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -59,6 +62,7 @@ export const CartProvider = ({ children }) => {
         getTotalPrice,
         increaseQuantity,
         decreaseQuantity,
+        removeAllFromCart
       }}
     >
       {children}
