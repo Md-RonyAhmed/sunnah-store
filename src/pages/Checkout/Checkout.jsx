@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useContext, useState, useEffect } from "react";
 import { CartContext, shipping } from "../../contexts/CartContext";
 import { Link, useNavigate } from "react-router-dom";
-import { FaShoppingBag, FaTruck, FaMoneyCheckAlt } from "react-icons/fa";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 const Checkout = () => {
   const { cartItems, getTotalPrice } = useContext(CartContext);
@@ -39,7 +39,7 @@ const Checkout = () => {
       </Helmet>
 
       {/* Checkout Steps */}
-      <div className="flex justify-center items-center mb-8">
+      {/* <div className="flex justify-center items-center mb-8">
         <div className="flex items-center space-x-8">
           <div className="flex flex-col items-center">
             <div className="bg-primary text-white p-3 rounded-full">
@@ -62,7 +62,7 @@ const Checkout = () => {
             <p className="mt-2 text-sm font-medium">Payment</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Checkout Form */}
