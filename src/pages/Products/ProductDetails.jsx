@@ -27,7 +27,9 @@ const ProductDetails = () => {
   });
 
   const { addToCart } = useContext(CartContext);
-  const { removeFromWishlist, addToWishlist } = useContext(WishlistContext);
+  const { removeFromWishlist, addToWishlist, wishlistItems } = useContext(WishlistContext);
+
+  const isWishlisted = wishlistItems.find((item) => item._id === id);
 
   if (isLoading) {
     return <Loading />;
@@ -169,7 +171,7 @@ const ProductDetails = () => {
                 addToWishlist(product);
               }}
             >
-              Add to Wishlist
+              {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
             </Button>
 
             <button
