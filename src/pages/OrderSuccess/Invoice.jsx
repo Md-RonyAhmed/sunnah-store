@@ -2,12 +2,40 @@ import { useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { FaFileDownload, FaMoneyBillWave } from "react-icons/fa";
+import {
+  FaFileDownload,
+  FaMoneyBillWave,
+  FaMoneyCheckAlt,
+} from "react-icons/fa";
+import { shipping } from "../../contexts/CartContext";
 
 const Invoice = () => {
   const location = useLocation();
   const orderData = location?.state?.orderData;
   const invoiceRef = useRef(null);
+
+  // Payment method display helper
+  const getPaymentMethodDisplay = (method) => {
+    switch (method) {
+      case "cod":
+        return {
+          text: "Cash on Delivery",
+          icon: <FaMoneyBillWave className="text-yellow-600 mr-2" />,
+        };
+      case "online":
+        return {
+          text: "Online Payment",
+          icon: <FaMoneyCheckAlt className="text-green-600 mr-2" />,
+        };
+      default:
+        return {
+          text: "Cash on Delivery",
+          icon: <FaMoneyBillWave className="text-yellow-600 mr-2" />,
+        };
+    }
+  };
+  // ... generateInvoice function ...
+  const paymentMethod = getPaymentMethodDisplay(orderData?.paymentMethod);
 
   const generateInvoice = async () => {
     const invoice = invoiceRef.current;
@@ -50,7 +78,7 @@ const Invoice = () => {
 
     pdf.save(`invoice-${orderData.orderId}.pdf`);
   };
-  
+
   if (!orderData) {
     return (
       <div className="mt-44 mb-6 text-center">
@@ -116,11 +144,11 @@ const Invoice = () => {
         <div className="border-t border-gray-200 pt-4">
           <div className="flex justify-between mb-2">
             <span className="font-medium">Subtotal:</span>
-            <span>৳ {orderData.totalAmount - 60}</span>
+            <span>৳ {orderData.totalAmount - shipping}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span className="font-medium">Shipping:</span>
-            <span>৳ 60</span>
+            <span>৳ {shipping}</span>
           </div>
           <div className="flex justify-between text-lg font-bold">
             <span>Total:</span>
@@ -129,13 +157,25 @@ const Invoice = () => {
         </div>
 
         {/* Payment Method */}
-        <div className="mt-6 bg-yellow-50 p-4 rounded">
+        <div
+          className={`mt-6 p-4 rounded ${
+            orderData.paymentMethod === "online"
+              ? "bg-green-50"
+              : "bg-yellow-50"
+          }`}
+        >
           <div className="flex items-center">
-            <FaMoneyBillWave className="text-yellow-600 mr-2" />
+            {paymentMethod.icon}
             <span className="font-medium">
-              Payment Method: Cash on Delivery
+              Payment Method: {paymentMethod.text}
             </span>
           </div>
+          {orderData.paymentMethod === "cod" && (
+            <p className="text-sm text-gray-600 mt-2">
+              Please keep the exact amount of ৳{orderData.totalAmount} ready for
+              delivery.
+            </p>
+          )}
         </div>
       </div>
 
