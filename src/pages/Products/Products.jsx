@@ -81,7 +81,6 @@ const Products = () => {
     // Extracting sub-categories
     if (key) {
       const newSubCategories = [];
-
       // getting unique sub-categories
       filtered.forEach((product) => {
         if (
@@ -95,11 +94,9 @@ const Products = () => {
     }else{
       setSubCtegories([]); // Clear sub-categories if no category is selected
     }
-
     setSortedProducts(filtered);
   }, [products, sortBy, inStock, search, price]);
-
-  console.log(subCategories);
+  //console.log(subCategories);
 
   // Determine title and product count
   let title = "";
@@ -124,7 +121,7 @@ const Products = () => {
       </Helmet>
       {/* <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} /> */}
       <FilterSection
-        filterProps={{ sortBy, setSortBy, search, price, setPrice }}
+        filterProps={{ sortBy, setSortBy, search, price, setPrice, subCategories }}
       />
 
       <div className="flex items-center justify-between mt-3">

@@ -4,7 +4,9 @@ import { Box, Slider } from "@mui/material";
 import { useState } from "react";
 import { maxPrice } from "../Products";
 
-const FilterSection = ({filterProps:{sortBy, setSortBy, search, price, setPrice}}) => {
+const FilterSection = ({
+  filterProps: { sortBy, setSortBy, search, price, setPrice, subCategories },
+}) => {
   const navigate = useNavigate();
   const { key } = useParams();
 
@@ -83,6 +85,35 @@ const FilterSection = ({filterProps:{sortBy, setSortBy, search, price, setPrice}
         </div>
       )}
 
+      {/* 
+      > Subcategories are added dynamically, but filtering isn’t working yet 
+      due to incorrect API results with subcategory filtering.
+      > If we filter products in a second step in Product.jsx,
+      we could create a new array for secondary filtering.
+      > I left the draft open for discussion in live class, 
+      as adding another filter step might complicate understanding. 
+      */}
+      {/* Sub-Category Dropdown */}
+      {subCategories.length > 0 ? (
+        <div className="relative">
+          <select
+            id="categories"
+            className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+            onChange={handleCategoryChange}
+            value={`/${key}`}
+          >
+            <option value="">Select Sub-Category</option>
+            {subCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* Sorting Dropdown */}
       <div className="relative">
         <select
@@ -101,7 +132,7 @@ const FilterSection = ({filterProps:{sortBy, setSortBy, search, price, setPrice}
 
       {/* Slider */}
       <div className="mx-5">
-        <Box sx={{ width: 250 }}>
+        <Box sx={{ width: 200 }}>
           <div className="flex justify-center text-sm text-gray-700 ">
             <span>Select Price Range</span>
           </div>
