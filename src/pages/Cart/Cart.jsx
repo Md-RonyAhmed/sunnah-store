@@ -13,12 +13,10 @@ const Cart = () => {
     decreaseQuantity,
     getTotalPrice,
     removeAllFromCart,
+    totalQuantity
   } = useContext(CartContext);
 
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+ 
 
   return (
     <div className="mt-48 mb-6 p-6 bg-white shadow-lg rounded-lg">

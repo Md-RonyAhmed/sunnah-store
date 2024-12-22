@@ -5,6 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Typography } from "@material-tailwind/react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function Wishlist() {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
@@ -37,7 +38,11 @@ function Wishlist() {
                 {/* Product Details */}
                 <div className="flex-1 px-4">
                   <div className="text-lg font-medium text-gray-800 truncate flex-col flex md:flex-row items-center gap-4">
-                    <h1 className="text-lg font-semibold">{item.name}</h1>
+                    <Link to={`/product/${item._id}`}>
+                      <div className="text-lg font-semibold text-gray-800 hover:text-primary transition duration-200">
+                        {item.name}
+                      </div>
+                    </Link>
                     <Typography className="text-sm">
                       {item.status ? (
                         <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">

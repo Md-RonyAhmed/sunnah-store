@@ -58,19 +58,23 @@ export const CartProvider = ({ children }) => {
     const total = subtotal + shipping;
     return total;
   };
+
+  const totalQuantity = cartItems.reduce(
+    (totalQuan, item) => totalQuan + item.quantity,
+    0
+  );
+
+  const cartInfo = {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    getTotalPrice,
+    increaseQuantity,
+    decreaseQuantity,
+    removeAllFromCart,
+    totalQuantity
+  };
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        getTotalPrice,
-        increaseQuantity,
-        decreaseQuantity,
-        removeAllFromCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={cartInfo}>{children}</CartContext.Provider>
   );
 };
