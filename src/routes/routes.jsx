@@ -17,6 +17,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../pages/Error/ErrorPage";
 import Checkout from "../pages/Checkout/Checkout";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
+import Invoice from "../pages/OrderSuccess/Invoice";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <OrderSuccess/>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "sunnah-store/invoice",
+        element: (
+          <PrivateRoutes>
+            <Invoice/>
           </PrivateRoutes>
         ),
       },
