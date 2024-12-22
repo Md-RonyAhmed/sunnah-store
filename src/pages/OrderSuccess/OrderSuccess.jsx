@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
@@ -16,7 +17,7 @@ const OrderSuccess = () => {
   useEffect(() => {
     // কার্ট খালি করুন কারণ অর্ডার সফল হয়েছে
     removeAllFromCart();
-  }, [removeAllFromCart]);
+  }, []);
 
   const generateInvoice = async () => {
     const invoice = invoiceRef.current;

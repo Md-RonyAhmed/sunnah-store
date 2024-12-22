@@ -7,7 +7,7 @@ import {
 export const CartContext = createContext();
 export const shipping = 55;
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(getDataFromLocalStorage("cart"));
+  const [cartItems, setCartItems] = useState(() => getDataFromLocalStorage("cart"));
 
   // Sync cartItems to localStorage whenever it changes
   useEffect(() => {

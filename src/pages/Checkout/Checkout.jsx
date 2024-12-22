@@ -3,42 +3,120 @@ import { useContext, useState, useEffect } from "react";
 import { CartContext, shipping } from "../../contexts/CartContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FaMoneyCheckAlt } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Checkout = () => {
   const { cartItems, getTotalPrice } = useContext(CartContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // If no items in cart, redirect to Cart page
   useEffect(() => {
     if (cartItems.length === 0) {
       navigate("/sunnah-store/cart");
     }
   }, [cartItems, navigate]);
 
+  // Basic shipping form data
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    address: "",
+    name: user?.displayName || "",
+    email: user?.email || "",
     phone: "",
+    address: "",
     note: "",
   });
 
+  // Payment method state
+  // "cod" for Cash on Delivery, or "online" for Online Payment
+  const [paymentMethod, setPaymentMethod] = useState("cod");
+
+  // Track validation errors
+  const [errors, setErrors] = useState({});
+
+  // Update form data on input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    // Reset error message as user types
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  /**
+   * Validate form fields; return an object of errors.
+   * If the object is empty, no errors found.
+   */
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required.";
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address.";
+      }
+    }
+
+    // Phone validation (simple example)
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required.";
+    } else {
+      // example: must be at least 10 digits
+      if (formData.phone.trim().length < 11) {
+        newErrors.phone = "Phone number must be at least 11 digits.";
+      }
+    }
+
+    // Address validation
+    if (!formData.address.trim()) {
+      newErrors.address = "Shipping address is required.";
+    }
+
+    // Payment Method validation
+    if (!paymentMethod) {
+      newErrors.paymentMethod = "Payment method is required.";
+    }
+
+    return newErrors;
+  };
+
+  // Called when clicking "Place Order"
   const handlePlaceOrder = () => {
+    // Validate the form
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return; // Stop submission, show errors
+    }
+
+    // Build order data
     const orderData = {
       orderId: `ORD${Date.now()}`,
       name: formData.name,
+      email: formData.email,
       address: formData.address,
       phone: formData.phone,
+      note: formData.note,
+      paymentMethod,
       totalAmount: getTotalPrice(),
       items: cartItems,
       orderDate: new Date().toISOString(),
     };
 
-    navigate("/sunnah-store/order-success", { state: { orderData } });
+    // If Cash on Delivery, finalize directly
+    if (paymentMethod === "cod") {
+      navigate("/sunnah-store/order-success", { state: { orderData } });
+    } else {
+      // If Online Payment, you'd call or redirect to a payment gateway
+      console.log("Initiate Online Payment flow for order:", orderData);
+      navigate("/sunnah-store/order-success", { state: { orderData } });
+    }
   };
 
   return (
@@ -47,32 +125,6 @@ const Checkout = () => {
         <title>Sunnah Store | Checkout</title>
       </Helmet>
 
-      {/* Checkout Steps */}
-      {/* <div className="flex justify-center items-center mb-8">
-        <div className="flex items-center space-x-8">
-          <div className="flex flex-col items-center">
-            <div className="bg-primary text-white p-3 rounded-full">
-              <FaShoppingBag size={20} />
-            </div>
-            <p className="mt-2 text-sm font-medium">Cart</p>
-          </div>
-          <div className="h-1 w-16 bg-primary"></div>
-          <div className="flex flex-col items-center">
-            <div className="bg-primary text-white p-3 rounded-full">
-              <FaTruck size={20} />
-            </div>
-            <p className="mt-2 text-sm font-medium">Shipping</p>
-          </div>
-          <div className="h-1 w-16 bg-primary"></div>
-          <div className="flex flex-col items-center">
-            <div className="bg-primary text-white p-3 rounded-full">
-              <FaMoneyCheckAlt size={20} />
-            </div>
-            <p className="mt-2 text-sm font-medium">Payment</p>
-          </div>
-        </div>
-      </div> */}
-
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Checkout Form */}
         <div className="lg:w-1/2">
@@ -80,65 +132,89 @@ const Checkout = () => {
             <h2 className="text-2xl font-bold mb-6 text-gray-800">
               Shipping Information
             </h2>
-            <form onSubmit={handlePlaceOrder} className="space-y-6">
+            <form className="space-y-6">
+              {/* Name & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Full Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg
+                      focus:ring-2 focus:ring-primary focus:border-transparent
+                      transition-all duration-300"
                     placeholder="Enter your full name"
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg
+                      focus:ring-2 focus:ring-primary focus:border-transparent
+                      transition-all duration-300"
                     placeholder="Enter your email"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
+
+              {/* Phone */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
+                  Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-primary focus:border-transparent
+                    transition-all duration-300"
                   placeholder="Enter your phone number"
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                )}
               </div>
+
+              {/* Address */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Shipping Address
+                  Shipping Address <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  required
                   rows="3"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-primary focus:border-transparent
+                    transition-all duration-300"
                   placeholder="Enter your full address"
                 />
+                {errors.address && (
+                  <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                )}
               </div>
+
+              {/* Note (optional) */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Order Notes (Optional)
@@ -148,9 +224,43 @@ const Checkout = () => {
                   value={formData.note}
                   onChange={handleChange}
                   rows="2"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-primary focus:border-transparent
+                    transition-all duration-300"
                   placeholder="Notes about your order, e.g. special notes for delivery"
                 />
+              </div>
+
+              {/* Payment Options */}
+              <div className="mt-6">
+                <h2 className="text-xl font-semibold mb-2">Payment Method</h2>
+                <div className="flex items-center space-x-4">
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="cod"
+                      checked={paymentMethod === "cod"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    <span>Cash on Delivery</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="online"
+                      checked={paymentMethod === "online"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    <span>Online Payment</span>
+                  </label>
+                </div>
+                {errors.paymentMethod && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.paymentMethod}
+                  </p>
+                )}
               </div>
             </form>
           </div>
@@ -223,7 +333,7 @@ const Checkout = () => {
 
                 <button
                   onClick={handlePlaceOrder}
-                  className="w-full bg-primary text-white py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center space-x-2"
+                  className="w-full bg-primary text-white py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center space-x-2 mt-4"
                 >
                   <FaMoneyCheckAlt size={20} />
                   <span>Place Order</span>
