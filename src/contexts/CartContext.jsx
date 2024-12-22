@@ -1,9 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import {
+  getDataFromLocalStorage,
+  setDataToLocalStorage,
+} from "../utils/localStorage";
 export const CartContext = createContext();
 export const shipping = 55;
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(getDataFromLocalStorage("cart"));
+
+  // Sync cartItems to localStorage whenever it changes
+  useEffect(() => {
+    setDataToLocalStorage("cart", cartItems);
+  }, [cartItems]);
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -72,7 +81,7 @@ export const CartProvider = ({ children }) => {
     increaseQuantity,
     decreaseQuantity,
     removeAllFromCart,
-    totalQuantity
+    totalQuantity,
   };
   return (
     <CartContext.Provider value={cartInfo}>{children}</CartContext.Provider>
