@@ -4,6 +4,7 @@ import { CartContext, shipping } from "../../contexts/CartContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
+import GoBack from "../../components/Shared/GoBack";
 
 const Checkout = () => {
   const { cartItems, getTotalPrice } = useContext(CartContext);
@@ -124,6 +125,10 @@ const Checkout = () => {
       <Helmet>
         <title>Sunnah Store | Checkout</title>
       </Helmet>
+
+      <div className="mt-40 mb-6 w-fit">
+        <GoBack />
+      </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Checkout Form */}

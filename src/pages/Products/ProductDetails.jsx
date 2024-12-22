@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import { CartContext } from "../../contexts/CartContext";
+import GoBack from "../../components/Shared/GoBack";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -54,10 +55,15 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="flex relative justify-center items-center mt-44 py-10 px-4">
+    <div className="flex flex-col items-center relative mt-40 py-10 px-4">
       <Helmet>
         <title>{`Sunnah Store | ${name}`}</title>
       </Helmet>
+
+      <div className="mb-6 relative w-full max-w-6xl lg:flex-row bg-white">
+        <GoBack />
+      </div>
+
       <Card className="relative border p-6 shadow-lg w-full max-w-6xl lg:flex-row bg-white">
         <CardHeader
           shadow={false}
