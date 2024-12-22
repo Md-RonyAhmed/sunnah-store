@@ -6,6 +6,7 @@ import { Typography } from "@material-tailwind/react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import GoBack from "../../components/Shared/GoBack";
 
 function Wishlist() {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
@@ -13,7 +14,10 @@ function Wishlist() {
 
   return (
     <>
-      <div className="max-w-full mt-40 mx-auto p-4 bg-gray-50 rounded-lg shadow">
+      <div className="mt-40 mb-6 w-fit">
+        <GoBack />
+      </div>
+      <div className="max-w-full mx-auto p-4 bg-gray-50 rounded-lg shadow">
         <Helmet>
           <title>Sunnah Store | Wish List</title>
         </Helmet>
