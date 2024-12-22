@@ -13,6 +13,7 @@ export const categoryData = [
   { catName: "Groceries & Foods", path: "/groceries" },
   { catName: "Clothing", path: "/clothing" },
   // { catName: "Offers", path: "/offers" },
+  { catName: "Sunnah", path: "/sunnah" },
   { catName: "Others", path: "/others" },
 ];
 
