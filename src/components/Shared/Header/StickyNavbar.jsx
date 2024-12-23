@@ -65,15 +65,6 @@ export function StickyNavbar() {
   const firstName = user?.displayName?.split(" ")[0] || "U";
   const firstChar = firstName.charAt(0).toUpperCase();
 
-  // Create a simple SVG with the first letter
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" style="background: #00BF63; border-radius: 50%;">
-      <text x="50%" y="50%" alignment-baseline="middle" text-anchor="middle" font-size="120" fill="#fff" font-family="Arial">
-        ${firstChar}
-      </text>
-    </svg>
-  `;
-
   const navList = (
     <ul className="flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
       <Typography
@@ -261,7 +252,14 @@ export function StickyNavbar() {
                       onClick={() => setProfileOpen((prev) => !prev)}
                     />
                   ) : (
-                    svg
+                    <div 
+                      className="w-10 h-10 rounded-full bg-primary flex items-center justify-center cursor-pointer"
+                      onClick={() => setProfileOpen((prev) => !prev)}
+                    >
+                      <span className="text-white text-2xl font-semibold">
+                        {firstChar}
+                      </span>
+                    </div>
                   )}
                   {profileOpen && (
                     <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">

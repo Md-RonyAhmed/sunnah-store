@@ -35,6 +35,9 @@ const Profile = () => {
     { id: 2, name: "Product 2", price: 29.99 },
   ];
 
+  const firstName = user?.displayName?.split(" ")[0] || "U";
+  const firstChar = firstName.charAt(0).toUpperCase();
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setIsUpdating(true);
@@ -127,11 +130,23 @@ const Profile = () => {
         <div className="space-y-6">
           <div className="text-center mb-8">
             <div className="relative inline-block">
-              <img
-                src={user?.photoURL}
-                alt={user?.displayName}
-                className="w-32 h-32 rounded-full mx-auto border-4 border-primary"
-              />
+            {user && user?.photoURL ? (
+                    <img
+                      src={user?.photoURL}
+                      alt={user?.displayName}
+                      className="w-32 h-32 rounded-full cursor-pointer font-bold"
+                      
+                    />
+                  ) : (
+                    <div 
+                      className="w-32 h-32 rounded-full bg-primary flex items-center justify-center"
+                     
+                    >
+                      <span className="text-white text-7xl font-semibold">
+                        {firstChar}
+                      </span>
+                    </div>
+                  )}
             </div>
           </div>
 
