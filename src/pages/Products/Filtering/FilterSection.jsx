@@ -87,7 +87,9 @@ const FilterSection = ({
             <option value="">Select Category</option>
             {categoryData.map((category) => (
               <option key={category.path} value={category.path}>
-                {category.catName}
+                {category?.catName && category?.catName === "Sunnah"
+                  ? "Sunnah Products"
+                  : category?.catName}
               </option>
             ))}
           </select>
@@ -102,7 +104,7 @@ const FilterSection = ({
             onChange={(e) => setSelectedSubCategory(e.target.value)}
             value={selectedSubCategory}
           >
-            <option value="">All Sub-Categories</option>
+            <option value="">Select Sub-Categories</option>
             {subCategories.map((scat) => (
               <option key={scat} value={scat}>
                 {scat}

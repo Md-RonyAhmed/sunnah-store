@@ -10,7 +10,7 @@ import { axiosInstance } from "../../../api/axios_instance";
 export const categoryData = [
   { catName: "Books", path: "/books" },
   { catName: "Electronics", path: "/electronics" },
-  { catName: "Sunnah Products", path: "/sunnah" },
+  { catName: "Sunnah", path: "/sunnah" },
   { catName: "Groceries & Foods", path: "/groceries" },
   { catName: "Clothing", path: "/clothing" },
   { catName: "Offers", path: "/offers" },
@@ -30,6 +30,7 @@ function Categories() {
   });
 
   const category = categoryData.find((cat) => cat.path === `/${key}`); // Match the key with a category
+
   // Redirect to /books if no key is provided
   if (!key) {
     return <Navigate to="/books" replace />;
@@ -43,7 +44,7 @@ function Categories() {
   // Filter products based on the selected category
   const filteredProducts = products?.filter(
     (product) =>
-      product.category.toLowerCase() === category?.catName.toLowerCase()
+      product?.category?.toLowerCase() === category?.catName?.toLowerCase()
   );
 
   if (isLoading) {
@@ -67,7 +68,9 @@ function Categories() {
                 }`
               }
             >
-              {category.catName}
+              {category?.catName && category?.catName === "Sunnah"
+                ? "Sunnah Products"
+                : category?.catName}
             </NavLink>
           ))}
         </div>
@@ -76,7 +79,9 @@ function Categories() {
       {/* Categories content */}
       <div className="p-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
-          {category?.catName}
+          {category?.catName && category?.catName === "Sunnah"
+            ? "Sunnah Products"
+            : category?.catName}
         </h2>
         {/* Products list */}
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -87,7 +92,14 @@ function Categories() {
                 <ProductCard key={product?._id} product={product} />
               ))
           ) : (
-            <p>No products available in this category.</p>
+            <div className="col-span-full flex flex-col items-center justify-center py-20 px-4">
+              <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                No Products Available
+              </h3>
+              <p className="text-gray-500 text-center">
+                We couldn&apos;t find any products matching this category.
+              </p>
+            </div>
           )}
         </div>
         {filteredProducts && (

@@ -115,7 +115,13 @@ const Products = () => {
   } else {
     // No selectedCategory, check key
     if (key) {
-      const displayKey = key === "groceries" ? "groceries & foods" : key;
+      // Map your special cases:
+      const displayMap = {
+        groceries: "groceries & foods",
+        sunnah: "sunnah products",
+      };
+
+      const displayKey = displayMap[key] || key;
       title = `${displayKey} (${sortedProducts.length})`;
     } else {
       title = `all products (${sortedProducts.length})`;
