@@ -20,7 +20,8 @@ const Products = () => {
   const [inStock, setInStock] = useState(false);
   const [price, setPrice] = useState([0, maxPrice]); // Price Range Filter Array
   const [sortedProducts, setSortedProducts] = useState([]);
-  const [subCategories, setSubCtegories] = useState([]); // Initialize empty sub category array
+  const [subCategories, setSubCategories] = useState([]); // Initialize empty sub category array
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
 
   const { data: products, isLoading } = useQuery({
     queryKey: key ? ["products", key] : ["products"],
@@ -78,25 +79,31 @@ const Products = () => {
       filtered = filtered.filter((product) => product.status === true);
     }
 
-    // Extracting sub-categories
+    // Build subCategories for the UI
     if (key) {
-      const newSubCategories = [];
-      // getting unique sub-categories
+      const newSubs = [];
       filtered.forEach((product) => {
-        if (
-          product["sub-category"] &&
-          !newSubCategories.includes(product["sub-category"])
-        ) {
-          newSubCategories.push(product["sub-category"]);
+        const sc = product["sub-category"];
+        if (sc && !newSubs.includes(sc)) {
+          newSubs.push(sc);
         }
       });
-      setSubCtegories(newSubCategories); // Update state with unique sub-categories
-    }else{
-      setSubCtegories([]); // Clear sub-categories if no category is selected
+      setSubCategories(newSubs);
+    } else {
+      setSubCategories([]);
     }
+
+    // Now filter by selectedSubCategory
+    if (selectedSubCategory) {
+      filtered = filtered.filter(
+        (p) =>
+          p["sub-category"] &&
+          p["sub-category"].toLowerCase() === selectedSubCategory.toLowerCase()
+      );
+    }
+    // final sortedProducts
     setSortedProducts(filtered);
-  }, [products, sortBy, inStock, search, price]);
-  //console.log(subCategories);
+  }, [products, sortBy, inStock, price, key, selectedSubCategory, search]);
 
   // Determine title and product count
   let title = "";
@@ -119,9 +126,18 @@ const Products = () => {
       <Helmet>
         <title>Sunnah Store | Products</title>
       </Helmet>
-      {/* <FilterSection sortBy={sortBy} setSortBy={setSortBy} search={search} /> */}
+
       <FilterSection
-        filterProps={{ sortBy, setSortBy, search, price, setPrice, subCategories }}
+        filterProps={{
+          sortBy,
+          setSortBy,
+          search,
+          price,
+          setPrice,
+          subCategories,
+          selectedSubCategory,
+          setSelectedSubCategory,
+        }}
       />
 
       <div className="flex items-center justify-between mt-3">

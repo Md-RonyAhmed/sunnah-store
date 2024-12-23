@@ -12,8 +12,8 @@ export const categoryData = [
   { catName: "Electronics", path: "/electronics" },
   { catName: "Groceries & Foods", path: "/groceries" },
   { catName: "Clothing", path: "/clothing" },
-  // { catName: "Offers", path: "/offers" },
-  { catName: "Sunnah", path: "/sunnah" },
+  { catName: "Sunnah Products", path: "/sunnah" },
+  { catName: "Offers", path: "/offers" },
   { catName: "Others", path: "/others" },
 ];
 
@@ -23,9 +23,7 @@ function Categories() {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axiosInstance.get(
-        "products"
-      );
+      const res = await axiosInstance.get("products");
       return res.data.data;
     },
     staleTime: 5 * 60 * 1000,
