@@ -130,23 +130,19 @@ const Profile = () => {
         <div className="space-y-6">
           <div className="text-center mb-8">
             <div className="relative inline-block">
-            {user && user?.photoURL ? (
-                    <img
-                      src={user?.photoURL}
-                      alt={user?.displayName}
-                      className="w-32 h-32 rounded-full cursor-pointer font-bold"
-                      
-                    />
-                  ) : (
-                    <div 
-                      className="w-32 h-32 rounded-full bg-primary flex items-center justify-center"
-                     
-                    >
-                      <span className="text-white text-7xl font-semibold">
-                        {firstChar}
-                      </span>
-                    </div>
-                  )}
+              {user && user?.photoURL ? (
+                <img
+                  src={user?.photoURL}
+                  alt={user?.displayName}
+                  className="w-32 h-32 rounded-full cursor-pointer font-bold"
+                />
+              ) : (
+                <div className="w-32 h-32 rounded-full bg-primary flex items-center justify-center">
+                  <span className="text-white text-7xl font-semibold">
+                    {firstChar}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
