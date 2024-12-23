@@ -10,9 +10,9 @@ import { axiosInstance } from "../../../api/axios_instance";
 export const categoryData = [
   { catName: "Books", path: "/books" },
   { catName: "Electronics", path: "/electronics" },
+  { catName: "Sunnah Products", path: "/sunnah" },
   { catName: "Groceries & Foods", path: "/groceries" },
   { catName: "Clothing", path: "/clothing" },
-  { catName: "Sunnah Products", path: "/sunnah" },
   { catName: "Offers", path: "/offers" },
   { catName: "Others", path: "/others" },
 ];

@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
 import { axiosInstance } from "../../api/axios_instance";
+import noProducts from "../../../src/assets/images/no.png";
 
 export const maxPrice = 100000;
 
@@ -165,9 +166,25 @@ const Products = () => {
         <Loading />
       ) : (
         <div className="mb-8 mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {sortedProducts.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+          {sortedProducts.length > 0 ? (
+            sortedProducts.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center pb-20 px-4">
+              <img
+                src={noProducts}
+                alt="No products found"
+                className="mb-6 opacity-60"
+              />
+              <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                No Products Available
+              </h3>
+              <p className="text-gray-500 text-center">
+                We couldn&apos;t find any products matching your criteria.
+              </p>
+            </div>
+          )}
         </div>
       )}
       <div className="mx-auto mb-6">
