@@ -7,7 +7,7 @@ import {
   Collapse,
 } from "@material-tailwind/react";
 import { useContext, useEffect, useState, useRef } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
@@ -21,16 +21,12 @@ export function StickyNavbar() {
   const { user, signOutUser } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const { cartItems } = useContext(CartContext);
-
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const { totalQuantity } = useContext(CartContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,9 +47,20 @@ export function StickyNavbar() {
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      navigate(`/products?search=${searchTerm.trim()}`);
+      const params = new URLSearchParams(location.search);
+
+      params.set("search", searchTerm.trim());
+
+      if (!location.pathname.includes("/products")) {
+        navigate(`/products?${params.toString()}`);
+      } else {
+        navigate({
+          pathname: location.pathname,
+          search: params.toString(),
+        });
+      }
+      setSearchTerm("");
     }
-    setSearchTerm("");
   };
 
   const handleKeyDown = (e) => {
@@ -61,6 +68,12 @@ export function StickyNavbar() {
       handleSearch();
     }
   };
+
+  useEffect(() => {
+    if (!location.pathname.includes("/products")) {
+      setSearchTerm("");
+    }
+  }, [location]);
 
   const firstName = user?.displayName?.split(" ")[0] || "U";
   const firstChar = firstName.charAt(0).toUpperCase();
@@ -252,7 +265,7 @@ export function StickyNavbar() {
                       onClick={() => setProfileOpen((prev) => !prev)}
                     />
                   ) : (
-                    <div 
+                    <div
                       className="w-10 h-10 rounded-full bg-primary flex items-center justify-center cursor-pointer"
                       onClick={() => setProfileOpen((prev) => !prev)}
                     >
@@ -263,14 +276,14 @@ export function StickyNavbar() {
                   )}
                   {profileOpen && (
                     <div className="absolute right-0 w-48 mt-2 bg-white border rounded shadow-lg">
-                      <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                        <Link
-                          to={"/sunnah-store/profile"}
-                          className="font-semibold"
-                        >
+                      <Link
+                        to={"/sunnah-store/profile"}
+                        className="font-semibold"
+                      >
+                        <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
                           {user.displayName || "User"}
-                        </Link>
-                      </div>
+                        </div>
+                      </Link>
                       <hr />
                       <button
                         onClick={handleLogout}

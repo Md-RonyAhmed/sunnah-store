@@ -5,6 +5,7 @@ import { Button } from "@material-tailwind/react";
 import ProductCard from "../../Products/ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../api/axios_instance";
+import { useState } from "react";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
 export const categoryData = [
@@ -19,11 +20,12 @@ export const categoryData = [
 
 function Categories() {
   const { key } = useParams(); // Get the dynamic key from the URL
+  const [limit] = useState(5);
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", key],
     queryFn: async () => {
-      const res = await axiosInstance.get("products");
+      const res = await axiosInstance.get(`products/${key}?limit=${limit}`);
       return res.data.data;
     },
     staleTime: 5 * 60 * 1000,
@@ -42,10 +44,7 @@ function Categories() {
   }
 
   // Filter products based on the selected category
-  const filteredProducts = products?.filter(
-    (product) =>
-      product?.category?.toLowerCase() === category?.catName?.toLowerCase()
-  );
+  const filteredProducts = products || [];
 
   if (isLoading) {
     return <Loading />;
@@ -86,11 +85,9 @@ function Categories() {
         {/* Products list */}
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
-            filteredProducts
-              .slice(0, 5)
-              .map((product) => (
-                <ProductCard key={product?._id} product={product} />
-              ))
+            filteredProducts.map((product) => (
+              <ProductCard key={product?._id} product={product} />
+            ))
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-20 px-4">
               <h3 className="text-2xl font-semibold text-gray-700 mb-2">

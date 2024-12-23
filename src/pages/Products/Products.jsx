@@ -15,7 +15,7 @@ export const maxPrice = 100000;
 const Products = () => {
   const { key } = useParams();
   const [searchParams] = useSearchParams();
-  const search = searchParams.get("search")?.toLowerCase() || "";
+  const search = searchParams.get("search") || "";
 
   const [sortBy, setSortBy] = useState(0);
   const [inStock, setInStock] = useState(false);
@@ -23,31 +23,39 @@ const Products = () => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const [subCategories, setSubCategories] = useState([]); // Initialize empty sub category array
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit] = useState(10);
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: key ? ["products", key] : ["products"],
+  const { data: productsData, isLoading } = useQuery({
+    queryKey: ["products", key, search, currentPage],
     queryFn: async () => {
-      let url = "products";
-      if (key) {
-        url = `products/${key}`;
+      let url = `products?page=${currentPage}&limit=${limit}`;
+
+      if (search) {
+        url += `&search=${search}`;
       }
+
+      if (key) {
+        url = `products/${key}?page=${currentPage}&limit=${limit}`;
+        if (search) {
+          url += `&search=${search}`;
+        }
+      }
+
       const res = await axiosInstance.get(url);
+
+      setTotalPages(res.data.pagination.totalPages);
+
       return res.data.data;
     },
-    staleTime: 5 * 60 * 1000,
   });
 
   useEffect(() => {
-    if (!products) return;
+    if (!productsData) return;
 
-    let filtered = [...products];
+    let filtered = [...productsData];
 
-    // Title Search Filtering
-    if (search) {
-      filtered = filtered.filter((product) =>
-        product.name.toLowerCase().includes(search)
-      );
-    }
     // Price Range Filtering
     if (price && price.length === 2) {
       const [minPrice, maxPrice] = price;
@@ -71,7 +79,6 @@ const Products = () => {
         filtered.sort((a, b) => b.individualRating - a.individualRating);
         break;
       default:
-        // 0 : no additional sorting
         break;
     }
 
@@ -102,30 +109,24 @@ const Products = () => {
           p["sub-category"].toLowerCase() === selectedSubCategory.toLowerCase()
       );
     }
-    // final sortedProducts
+
     setSortedProducts(filtered);
-  }, [products, sortBy, inStock, price, key, selectedSubCategory, search]);
+  }, [productsData, sortBy, inStock, price, key, selectedSubCategory]);
 
-  // Determine title and product count
+ 
+  // Update title with total count
   let title = "";
-
   if (search) {
-    // If searching by title
-    title = `Search results for "${search}" (${sortedProducts.length})`;
+    title = `Search results for "${search}" (${sortedProducts?.length || 0})`;
+  } else if (key) {
+    const displayMap = {
+      groceries: "Groceries & Foods",
+      sunnah: "Sunnah Products",
+    };
+    const displayKey = displayMap[key.toLowerCase()] || key;
+    title = `${displayKey}`;
   } else {
-    // No selectedCategory, check key
-    if (key) {
-      // Map your special cases:
-      const displayMap = {
-        groceries: "groceries & foods",
-        sunnah: "sunnah products",
-      };
-
-      const displayKey = displayMap[key] || key;
-      title = `${displayKey} (${sortedProducts.length})`;
-    } else {
-      title = `all products (${sortedProducts.length})`;
-    }
+    title = `All Products`;
   }
 
   return (
@@ -193,9 +194,18 @@ const Products = () => {
           )}
         </div>
       )}
-      <div className="mx-auto mb-6">
-        <ProductsPagination />
-      </div>
+
+      {/* Only show pagination if there are products */}
+
+      {!search && (
+        <div className="mx-auto mb-6">
+          <ProductsPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
+      )}
     </div>
   );
 };
