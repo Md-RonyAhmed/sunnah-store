@@ -48,7 +48,7 @@ const TopBar = () => {
   return (
     <div className="bg-gray-100 p-4 flex items-center justify-between border-b border-gray-300">
       <h1 className="text-xl font-bold">Dashboard</h1>
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <input
           type="text"
           placeholder="Search..."
@@ -57,7 +57,7 @@ const TopBar = () => {
         <button className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
           Search
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
