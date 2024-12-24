@@ -18,12 +18,17 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import Checkout from "../pages/Checkout/Checkout";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 import Invoice from "../pages/OrderSuccess/Invoice";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Orders from "../pages/Dashboard/Orders/Orders";
+import Users from "../pages/Dashboard/Users/Users";
+import ManageProducts from "../pages/Dashboard/Products/Products";
+import DashboardHome from "../pages/Dashboard/Home/DashboardHome";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -75,7 +80,7 @@ const router = createBrowserRouter([
         path: "sunnah-store/order-success",
         element: (
           <PrivateRoutes>
-            <OrderSuccess/>
+            <OrderSuccess />
           </PrivateRoutes>
         ),
       },
@@ -83,7 +88,7 @@ const router = createBrowserRouter([
         path: "sunnah-store/invoice",
         element: (
           <PrivateRoutes>
-            <Invoice/>
+            <Invoice />
           </PrivateRoutes>
         ),
       },
@@ -120,6 +125,40 @@ const router = createBrowserRouter([
       {
         path: "sunnah-store/reset",
         element: <Reset />,
+      },
+    ],
+  },
+  {
+    path: "sunnah-store/dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout />
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "",
+        element: <DashboardHome />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+      {
+        path: "products",
+        element: <ManageProducts />,
+      },
+      {
+        path: "users",
+        element: <Users />,
       },
     ],
   },

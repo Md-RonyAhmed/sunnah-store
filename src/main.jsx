@@ -18,13 +18,13 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <CartProvider>
-          <WishlistProvider>
-            <AuthContextProvider>
+        <AuthContextProvider>
+          <CartProvider>
+            <WishlistProvider>
               <RouterProvider router={router} />
-            </AuthContextProvider>
-          </WishlistProvider>
-        </CartProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </AuthContextProvider>
       </HelmetProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

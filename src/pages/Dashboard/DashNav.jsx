@@ -3,30 +3,21 @@ import {
   Typography,
   Button,
   IconButton,
-  Input,
   Collapse,
 } from "@material-tailwind/react";
 import { useContext, useEffect, useState, useRef } from "react";
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import logo from "../../../assets/images/logo.png";
-import { FiShoppingCart } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
-import { AuthContext } from "../../../contexts/AuthContext";
-import Marquee from "./Marquee";
-import { CartContext } from "../../../contexts/CartContext";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../contexts/AuthContext";
 
-export function StickyNavbar() {
-  const [openNav, setOpenNav] = useState(false);
+export function DashNav() {
   const { user, signOutUser } = useContext(AuthContext);
-  const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
-  const location = useLocation();
+
+  const [openNav, setOpenNav] = useState(false);
 
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-  const { totalQuantity } = useContext(CartContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,36 +36,6 @@ export function StickyNavbar() {
     );
   }, []);
 
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      const params = new URLSearchParams(location.search);
-
-      params.set("search", searchTerm.trim());
-
-      if (!location.pathname.includes("/products")) {
-        navigate(`/products?${params.toString()}`);
-      } else {
-        navigate({
-          pathname: location.pathname,
-          search: params.toString(),
-        });
-      }
-      setSearchTerm("");
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  useEffect(() => {
-    if (!location.pathname.includes("/products")) {
-      setSearchTerm("");
-    }
-  }, [location]);
-
   const firstName = user?.displayName?.split(" ")[0] || "U";
   const firstChar = firstName.charAt(0).toUpperCase();
 
@@ -87,24 +48,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/products"}
-          className={({ isActive }) =>
-            isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
-              : "text-black flex items-center"
-          }
-        >
-          Products
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to={"/sunnah-store/about"}
+          to={"/sunnah-store/dashboard/about"}
           className={({ isActive }) =>
             isActive
               ? "text-[#00BF63] underline underline-offset-4 flex items-center"
@@ -121,7 +65,7 @@ export function StickyNavbar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to={"/sunnah-store/contact"}
+          to={"/sunnah-store/dashboard/contact"}
           className={({ isActive }) =>
             isActive
               ? "text-[#00BF63] underline underline-offset-4 flex items-center"
@@ -129,45 +73,6 @@ export function StickyNavbar() {
           }
         >
           Contact
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to={"/sunnah-store/cart"}
-          className={({ isActive }) =>
-            isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center relative"
-              : "text-black flex items-center relative"
-          }
-        >
-          <FiShoppingCart className="mr-2 size-6" />
-          {totalQuantity > 0 && (
-            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
-              {totalQuantity}
-            </span>
-          )}
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to={"/sunnah-store/wishlist"}
-          className={({ isActive }) =>
-            isActive
-              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
-              : "text-red-500 flex items-center"
-          }
-        >
-          <FaHeart className="size-5" />
         </NavLink>
       </Typography>
     </ul>
@@ -199,13 +104,12 @@ export function StickyNavbar() {
   // console.log(user?.photoURL);
   return (
     <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
-      <Marquee />
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
-          <div className="order-1 font-medium cursor-pointer">
-            <div className="flex flex-col items-start justify-start gap-6 md:flex-row md:items-center md:justify-center">
-              <Link to="/">
+          <div className="order-1 font-medium cursor-pointer invisible lg:visible">
+            <div className="">
+              <Link to="/sunnah-store/dashboard">
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
                   <span className="text-2xl font-semibold text-primary">
@@ -215,30 +119,7 @@ export function StickyNavbar() {
               </Link>
             </div>
           </div>
-          {/* Product Search Box */}
-          <div className="relative order-3 w-full gap-2 m-4 md:flex md:w-max md:order-2 md:m-0">
-            <Input
-              type="search"
-              color="gray"
-              label="Search Products"
-              className="pr-[5.5rem]"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              containerProps={{
-                className: "md:min-w-[360px]",
-              }}
-              placeholder="search by products name"
-            />
-            <Button
-              size="sm"
-              className="!absolute right-1 top-1 rounded bg-primary"
-              onClick={handleSearch}
-              disabled={!searchTerm.trim()}
-            >
-              Search
-            </Button>
-          </div>
+
           {/* Nav Links */}
           <div className="flex items-center order-2 gap-4 pr-4 md:order-3">
             <div className="hidden mr-4 lg:block">{navList}</div>
@@ -282,14 +163,6 @@ export function StickyNavbar() {
                       >
                         <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
                           {user.displayName || "User"}
-                        </div>
-                      </Link>
-                      <Link
-                        to={"/sunnah-store/dashboard"}
-                        className="font-semibold"
-                      >
-                        <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                          Dashboard
                         </div>
                       </Link>
                       <hr />
