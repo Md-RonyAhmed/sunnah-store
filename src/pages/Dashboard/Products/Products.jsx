@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { subCats } from "../../../utils/staticSubCats";
 import { categoryData } from "../../Home/categories/Categories";
+import { SubCategories } from "./SubCategories";
+import { TabPanel, Tabs, TabsBody } from "@material-tailwind/react";
 
 const ManageProducts = () => {
   const [selectedCat, setSelectedCat] = useState("");
@@ -41,11 +43,10 @@ const ManageProducts = () => {
 
       {/* Sub-Category Dropdown */}
       {/* Static category from  "../../../utils/staticSubCats";*/}
-      {subCategories.length > 0 && (
+      {/* {subCategories.length > 0 && (
         <div className="relative mt-4">
-          <select
-            className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-          >
+          {/* <SubCategories subCategories={subCategories} /> /}
+          <select className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none">
             <option value="">Select Sub-Category</option>
             {subCategories.map((scat) => (
               <option key={scat} value={scat}>
@@ -54,7 +55,22 @@ const ManageProducts = () => {
             ))}
           </select>
         </div>
-      )}
+      )} */}
+      <div className="mt-5">
+        <Tabs value="html">
+          {subCategories.length > 0 && (
+            <SubCategories subCategories={subCategories} />
+          )}
+          <TabsBody>
+            {subCategories.map((sc) => (
+              <TabPanel key={sc} value={sc}>
+                {sc}
+                <h1>Hello</h1>
+              </TabPanel>
+            ))}
+          </TabsBody>
+        </Tabs>
+      </div>
     </>
   );
 };

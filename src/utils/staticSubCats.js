@@ -6,5 +6,6 @@ export const subCats = {
     "Others",
     "Storage Device",
   ],
-  ["Sunnah Products"]: ["Food", "Health Care", "Personal Care", "Oral Care"],
+  ["Sunnah Products"]: 
+  ["Food", "Health Care", "Personal Care", "Oral Care"],
 };
