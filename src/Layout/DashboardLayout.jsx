@@ -42,7 +42,7 @@ const DashboardLayout = () => {
         </button>
 
         {/* Content */}
-        <main className="container">
+        <main className="container mt-28">
           {<Outlet />}
         </main>
       </div>
