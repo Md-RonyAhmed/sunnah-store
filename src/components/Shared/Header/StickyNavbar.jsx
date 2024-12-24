@@ -170,6 +170,25 @@ export function StickyNavbar() {
           <FaHeart className="size-5" />
         </NavLink>
       </Typography>
+
+      {/* Dashboard */}
+      {/* <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
+          to={"dashboardlayout"}
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#00BF63] underline underline-offset-4 flex items-center"
+              : "text-red-500 flex items-center"
+          }
+        >
+          Dashboard
+        </NavLink>
+      </Typography> */}
     </ul>
   );
 
@@ -284,6 +303,11 @@ export function StickyNavbar() {
                           {user.displayName || "User"}
                         </div>
                       </Link>
+                      <hr />
+                      {/* Dashboard Link */}
+                      <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
+                        <Link to={"dashboardlayout"}>Dashboard</Link>
+                      </div>
                       <hr />
                       <button
                         onClick={handleLogout}

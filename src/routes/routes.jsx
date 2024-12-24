@@ -18,6 +18,7 @@ import ErrorPage from "../pages/Error/ErrorPage";
 import Checkout from "../pages/Checkout/Checkout";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 import Invoice from "../pages/OrderSuccess/Invoice";
+import AdminDashboard from "../dashboard/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -126,6 +127,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "dashboardlayout",
+    element: <AdminDashboard/>
   },
 ]);
 

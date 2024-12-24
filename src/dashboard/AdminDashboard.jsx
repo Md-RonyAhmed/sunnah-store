@@ -1,10 +1,11 @@
-import React from 'react';
 import { FaHome, FaBox, FaUsers, FaChartBar, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
     <div className="w-64 bg-gray-800 text-gray-100 h-screen flex flex-col">
-      <h2 className="text-2xl font-bold p-4 border-b border-gray-700">Admin Panel</h2>
+      <h2 className="text-2xl font-bold p-4 border-b border-gray-700">Sunnah Store</h2>
       <nav className="flex-1">
         <ul className="space-y-2 p-4">
           <li className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded">
@@ -30,6 +31,10 @@ const Sidebar = () => {
         </ul>
       </nav>
       <div className="p-4 border-t border-gray-700">
+        <Link to={'/sunnah-store/profile'} className="flex items-center gap-3 p-2 w-full hover:bg-gray-700 rounded">
+          <IoMdArrowRoundBack />
+          <span>Back to Profile</span>
+        </Link>
         <button className="flex items-center gap-3 p-2 w-full hover:bg-gray-700 rounded">
           <FaSignOutAlt />
           <span>Logout</span>
