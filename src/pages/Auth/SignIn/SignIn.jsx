@@ -22,7 +22,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log("state in the location login page", location.state);
+  // console.log("state in the location login page", location.state);
 
   const axiosPublicInstance = usePublicAxios();
 
@@ -145,7 +145,7 @@ const SignIn = () => {
   };
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle().then(async (res)=>{
+      await signInWithGoogle().then(async (res) => {
         // create user entry in the database
         const userInfo = {
           name: res?.user?.displayName,

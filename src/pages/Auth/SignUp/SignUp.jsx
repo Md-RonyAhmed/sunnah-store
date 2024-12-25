@@ -112,8 +112,7 @@ const SignUp = () => {
               name: formData.name,
               email: formData.email,
             };
-            axiosPublicInstance.post("users", userInfo)
-            .then((res) => {
+            axiosPublicInstance.post("users", userInfo).then((res) => {
               if (res.data.insertedId) {
                 console.log("user added to the database");
               }
@@ -170,7 +169,6 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle().then(async (res) => {
-        console.log(res)
         // create user entry in the database
         const userInfo = {
           name: res?.user?.displayName,
