@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const axiosPrivateInstance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://sunnah-store-server-azure.vercel.app/",
 });
 const usePrivateAxios = () => {
   const navigate = useNavigate();
