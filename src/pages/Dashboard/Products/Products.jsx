@@ -5,6 +5,7 @@ import AddProductForm from "./Forms/AddProductForm";
 
 const ManageProducts = () => {
   const [selectedCat, setSelectedCat] = useState("");
+  const [selectedSubCat, setSelectedSubCat] = useState("");
   const [formData, setFormData] = useState({
     productName: "",
     productImage: null,
@@ -23,17 +24,22 @@ const ManageProducts = () => {
     setSelectedCat(selectedPath);
   };
 
+  // Handle sub-category selection change
+  const handleSubCategoryChange = (e) => {
+    let sc = e.target.value;
+    setSelectedSubCat(sc);
+    console.log(sc);
+  };
+
   const subCategories = subCats[selectedCat] || []; // Get the subcategories for the selected category
 
   return (
     <div className="max-w-5xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8 mt-10">
       {/* Category Dropdown */}
-      <h2
-        className={`text-2xl font-semibold text-primary text-center mb-6`}
-      >
+      <h2 className={`text-2xl font-semibold text-primary text-center mb-6`}>
         Add New Product
       </h2>
-      
+
       <div className="relative">
         <select
           id="categories"
@@ -44,7 +50,9 @@ const ManageProducts = () => {
           <option value="">Select Category</option>
           {categoryData.map((category) => (
             <option key={category.catName} value={category.catName}>
-              {category?.catName === "Sunnah" ? "Sunnah Products" : category?.catName}
+              {category?.catName === "Sunnah"
+                ? "Sunnah Products"
+                : category?.catName}
             </option>
           ))}
         </select>
@@ -53,7 +61,11 @@ const ManageProducts = () => {
       {/* Sub-Category Dropdown */}
       {subCategories.length > 0 && (
         <div className="relative mt-4">
-          <select className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none">
+          <select
+            className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+            onChange={handleSubCategoryChange}
+            value={selectedSubCat}
+          >
             <option value="">Select Sub-Category</option>
             {subCategories.map((scat) => (
               <option key={scat} value={scat}>
@@ -67,7 +79,7 @@ const ManageProducts = () => {
       {/* Add Product Form or Placeholder */}
       <div className="mt-8">
         {selectedCat ? (
-          <AddProductForm formData={formData} setFormData={setFormData}/>
+          <AddProductForm formData={formData} setFormData={setFormData} />
         ) : (
           <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
             <p className="text-gray-600 text-lg">
