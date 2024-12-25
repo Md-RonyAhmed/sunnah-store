@@ -3,6 +3,7 @@ import { subCats } from "../../../utils/staticSubCats";
 import { categoryData } from "../../Home/categories/Categories";
 import { SubCategories } from "./SubCategories";
 import { TabPanel, Tabs, TabsBody } from "@material-tailwind/react";
+import AddProductForm from "./Forms/AddProductForm";
 
 const ManageProducts = () => {
   const [selectedCat, setSelectedCat] = useState("");
@@ -70,6 +71,10 @@ const ManageProducts = () => {
             ))}
           </TabsBody>
         </Tabs>
+      </div>
+
+      <div className="container">
+        <AddProductForm/>
       </div>
     </>
   );
