@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import {} from "react-simple-captcha";
@@ -10,11 +10,16 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import { auth } from "../../../firebase/firebase.config";
 import { signOut } from "firebase/auth";
+import usePublicAxios from "../../../hooks/usePublicAxios";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublicInstance = usePublicAxios();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -103,11 +108,21 @@ const SignUp = () => {
         // Update user profile
         updateUserProfile(formData.name)
           .then(async () => {
+            // create user entry in the database
+            const userInfo = {
+              name: formData.name,
+              email: formData.email,
+            };
+            axiosPublicInstance.post("users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the database");
+              }
+            });
             await signOut(auth);
             Swal.fire({
               position: "center",
               icon: "success",
-              title: `Welcome to our website, ${formData.name}`,
+              title: `Registration successful, ${formData.name}`,
               text: "Please login first!",
               showConfirmButton: false,
               timer: 3000,
@@ -162,7 +177,7 @@ const SignUp = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -368,7 +383,10 @@ const SignUp = () => {
             {/* Sign In Link */}
             <div className="mt-4 font-normal text-center">
               Already have an account?
-              <Link to={"/sunnah-store/signin"} className="ml-2 font-medium text-primary">
+              <Link
+                to={"/sunnah-store/signin"}
+                className="ml-2 font-medium text-primary"
+              >
                 Sign In
               </Link>
             </div>
