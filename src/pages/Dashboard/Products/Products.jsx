@@ -22,6 +22,7 @@ const ManageProducts = () => {
       selectedPath = "Sunnah Products";
     }
     setSelectedCat(selectedPath);
+    setSelectedSubCat(""); // prevented showing form while another cat's sub-cat is selected
     console.log(selectedPath);
   };
 
@@ -36,12 +37,18 @@ const ManageProducts = () => {
 
   return (
     <div className="max-w-5xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8 mt-10">
-      {/* Category Dropdown */}
       <h2 className={`text-2xl font-semibold text-primary text-center mb-6`}>
         Add New Product
       </h2>
+      {/* Category Dropdown */}
 
       <div className="relative">
+        <label
+          htmlFor="price"
+          className="block text-sm font-medium text-gray-700 mb-2"
+        >
+          Category
+        </label>
         <select
           id="categories"
           className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
@@ -60,8 +67,15 @@ const ManageProducts = () => {
       </div>
 
       {/* Sub-Category Dropdown */}
+
       {subCategories.length > 0 && (
         <div className="relative mt-4">
+          <label
+            htmlFor="price"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Sub-Category
+          </label>
           <select
             className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
             onChange={handleSubCategoryChange}
@@ -84,7 +98,9 @@ const ManageProducts = () => {
             // Sub-category required but not selected
             <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
               <p className="text-gray-600 text-lg">
-                Please select a <span className="text-orange-400">sub-category</span> to continue adding a product.
+                Please select a{" "}
+                <span className="text-orange-400">sub-category</span> to
+                continue adding a product.
               </p>
             </div>
           ) : (
@@ -95,7 +111,8 @@ const ManageProducts = () => {
           // Category not selected
           <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
             <p className="text-gray-600 text-lg">
-              Please select a <span className="text-red-400">category</span> to continue adding a product.
+              Please select a <span className="text-red-400">category</span> to
+              continue adding a product.
             </p>
           </div>
         )}
