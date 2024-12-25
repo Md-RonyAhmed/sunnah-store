@@ -23,6 +23,7 @@ import Orders from "../pages/Dashboard/Orders/Orders";
 import Users from "../pages/Dashboard/Users/Users";
 import ManageProducts from "../pages/Dashboard/Products/Products";
 import DashboardHome from "../pages/Dashboard/Home/DashboardHome";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,11 @@ const router = createBrowserRouter([
       },
       {
         path: "product/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoutes>
+            <ProductDetails />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "sunnah-store/about",
@@ -131,9 +136,9 @@ const router = createBrowserRouter([
   {
     path: "sunnah-store/dashboard",
     element: (
-      <PrivateRoutes>
+      <AdminRoute>
         <DashboardLayout />
-      </PrivateRoutes>
+      </AdminRoute>
     ),
     children: [
       {

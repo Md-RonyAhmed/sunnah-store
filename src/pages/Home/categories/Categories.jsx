@@ -4,8 +4,8 @@ import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
 import ProductCard from "../../Products/ProductCard";
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "../../../api/axios_instance";
 import { useState } from "react";
+import usePublicAxios from "../../../hooks/usePublicAxios";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
 export const categoryData = [
@@ -22,10 +22,14 @@ function Categories() {
   const { key } = useParams(); // Get the dynamic key from the URL
   const [limit] = useState(5);
 
+  const axiosPublicInstance = usePublicAxios();
+
   const { data: products, isLoading } = useQuery({
     queryKey: ["products", key],
     queryFn: async () => {
-      const res = await axiosInstance.get(`products/${key}?limit=${limit}`);
+      const res = await axiosPublicInstance.get(
+        `products/${key}?limit=${limit}`
+      );
       return res.data.data;
     },
     staleTime: 5 * 60 * 1000,
