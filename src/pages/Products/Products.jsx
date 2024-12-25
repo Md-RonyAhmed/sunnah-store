@@ -7,8 +7,8 @@ import { Switch } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
+import { axiosInstance } from "../../api/axios_instance";
 import noProducts from "../../../src/assets/images/no.png";
-import usePublicAxios from "../../hooks/usePublicAxios";
 
 export const maxPrice = 100000;
 
@@ -27,8 +27,6 @@ const Products = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit] = useState(10);
 
-  const axiosPublicInstance = usePublicAxios();
-
   const { data: productsData, isLoading } = useQuery({
     queryKey: ["products", key, search, currentPage],
     queryFn: async () => {
@@ -45,14 +43,12 @@ const Products = () => {
         }
       }
 
-      const res = await axiosPublicInstance.get(url);
+      const res = await axiosInstance.get(url);
 
       setTotalPages(res.data.pagination.totalPages);
 
       return res.data.data;
     },
-    refetchInterval: 1000,
-    refetchIntervalInBackground: totalPages > 1 ? true : false,
   });
 
   useEffect(() => {
@@ -117,6 +113,7 @@ const Products = () => {
     setSortedProducts(filtered);
   }, [productsData, sortBy, inStock, price, key, selectedSubCategory]);
 
+ 
   // Update title with total count
   let title = "";
   if (search) {
@@ -200,7 +197,7 @@ const Products = () => {
 
       {/* Only show pagination if there are products */}
 
-      {!search && totalPages > 1 && (
+      {!search && (
         <div className="mx-auto mb-6">
           <ProductsPagination
             currentPage={currentPage}

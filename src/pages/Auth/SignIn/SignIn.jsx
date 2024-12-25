@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import { FaGoogle } from "react-icons/fa";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import {
@@ -19,9 +19,6 @@ const SignIn = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  console.log("state in the location login page", location.state);
 
   // State for form data
   const [formData, setFormData] = useState({
@@ -122,7 +119,8 @@ const SignIn = () => {
           captcha: "",
         });
 
-        navigate(from, { replace: true });
+        // Navigate to home page
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -150,7 +148,7 @@ const SignIn = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-      navigate(from, { replace: true });
+      navigate("/");
     } catch (error) {
       console.error(error);
       Swal.fire({

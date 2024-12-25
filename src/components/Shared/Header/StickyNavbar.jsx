@@ -15,7 +15,6 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Marquee from "./Marquee";
 import { CartContext } from "../../../contexts/CartContext";
 import Swal from "sweetalert2";
-import useAdmin from "../../../hooks/useAdmin";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false);
@@ -23,8 +22,6 @@ export function StickyNavbar() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [isAdmin] = useAdmin();
 
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -287,16 +284,14 @@ export function StickyNavbar() {
                           {user.displayName || "User"}
                         </div>
                       </Link>
-                      {isAdmin && (
-                        <Link
-                          to={"/sunnah-store/dashboard"}
-                          className="font-semibold"
-                        >
-                          <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
-                            Dashboard
-                          </div>
-                        </Link>
-                      )}
+                      <Link
+                        to={"/sunnah-store/dashboard"}
+                        className="font-semibold"
+                      >
+                        <div className="px-4 py-2 hover:bg-[#00BF63] hover:text-white  text-[#00BF63]">
+                          Dashboard
+                        </div>
+                      </Link>
                       <hr />
                       <button
                         onClick={handleLogout}
