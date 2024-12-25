@@ -113,6 +113,7 @@ const Checkout = () => {
         items: cartItems,
         orderDate: new Date().toISOString(),
         status: "pending", // You can add order status
+        estimatedDelivery: "3 to 5 days"
       };
 
       // Send order to database
@@ -182,8 +183,8 @@ const Checkout = () => {
                   <input
                     type="text"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    readOnly
+                    defaultValue={formData.name}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg
                       focus:ring-2 focus:ring-primary focus:border-transparent
                       transition-all duration-300"
@@ -201,8 +202,8 @@ const Checkout = () => {
                   <input
                     type="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    readOnly
+                    defaultValue={formData.email}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg
                       focus:ring-2 focus:ring-primary focus:border-transparent
                       transition-all duration-300"

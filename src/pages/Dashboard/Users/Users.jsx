@@ -33,12 +33,9 @@ const TABS = [
 ];
 
 const TABLE_HEAD = [
-  "Customer",
-  "ID/Phone No",
-  "S.Address/Order Notes",
-  "Payment",
-  "Date",
-  "",
+  "User",
+  "User ID",
+  "Phone No"
 ];
 
 const TABLE_ROWS = [
