@@ -31,10 +31,8 @@ const AddProductForm = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8 mt-10">
-      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-        Add New Product
-      </h2>
+    <div className="max-w-5xl mx-auto mt-2">
+      
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
         {/* Column 1 */}
         <div className="space-y-6">
