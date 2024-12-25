@@ -51,8 +51,7 @@ const Products = () => {
 
       return res.data.data;
     },
-    refetchInterval: 1000,
-    refetchIntervalInBackground: totalPages > 1 ? true : false,
+    staleTime: 1000,
   });
 
   useEffect(() => {
