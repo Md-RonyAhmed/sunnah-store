@@ -56,6 +56,7 @@ const AddProductForm = () => {
               required
             />
           </div>
+
           <div>
             <label
               htmlFor="productImage"
@@ -73,6 +74,7 @@ const AddProductForm = () => {
               required
             />
           </div>
+          
         </div>
 
         {/* Column 2 */}
@@ -129,11 +131,12 @@ const AddProductForm = () => {
             {formData.keyFeatures.map((feature, index) => (
               <input
                 key={index}
+                name={`${index === 1 ? "weight" : index === 2 ? "origin" : "quality"}`}
                 type="text"
                 value={feature}
                 onChange={(e) => handleFeatureChange(index, e.target.value)}
                 className="mt-2 rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                placeholder={`Key feature ${index + 1}`}
+                placeholder={`${index === 1 ? "weight" : index === 2 ? "origin" : "quality"}`}
               />
             ))}
           </div>
