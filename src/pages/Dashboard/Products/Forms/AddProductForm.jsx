@@ -7,22 +7,13 @@ const AddProductForm = () => {
     price: "",
     description: "",
     averageRating: "",
+    keyFeatures: ["", "", ""], // Fixed 3 fields for key features
   });
 
-  const [keyFeatures, setKeyFeatures] = useState([""]);
-
   const handleFeatureChange = (index, value) => {
-    const updatedFeatures = [...keyFeatures];
+    const updatedFeatures = [...formData.keyFeatures];
     updatedFeatures[index] = value;
-    setKeyFeatures(updatedFeatures);
-  };
-
-  const handleAddFeature = () => {
-    if (keyFeatures.length < 15) {
-      setKeyFeatures([...keyFeatures, ""]);
-    } else {
-      alert("You can only add up to 15 key features.");
-    }
+    setFormData({ ...formData, keyFeatures: updatedFeatures });
   };
 
   const handleChange = (e) => {
@@ -35,7 +26,7 @@ const AddProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...formData, keyFeatures });
+    console.log(formData);
     alert("Product added successfully!");
   };
 
@@ -135,7 +126,7 @@ const AddProductForm = () => {
             Key Features
           </label>
           <div className="grid grid-cols-3 gap-4">
-            {keyFeatures.map((feature, index) => (
+            {formData.keyFeatures.map((feature, index) => (
               <input
                 key={index}
                 type="text"
@@ -146,13 +137,6 @@ const AddProductForm = () => {
               />
             ))}
           </div>
-          <button
-            type="button"
-            onClick={handleAddFeature}
-            className="mt-4 text-blue-600 hover:underline font-medium"
-          >
-            Add More Features
-          </button>
         </div>
 
         {/* Description */}
@@ -179,7 +163,7 @@ const AddProductForm = () => {
         <div className="col-span-2">
           <button
             type="submit"
-            className="w-full rounded-lg bg-blue-600 py-3 text-white font-medium shadow-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            className="w-full rounded-lg bg-primary py-3 text-white font-medium shadow-lg hover:bg-primary/80 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
           >
             Add Product
           </button>
