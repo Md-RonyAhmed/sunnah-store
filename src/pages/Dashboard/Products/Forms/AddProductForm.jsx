@@ -19,6 +19,17 @@ const AddProductForm = ({ formData, setFormData }) => {
     alert("Product added successfully!");
   };
 
+  const handleAddFeature = () => {
+    if (formData.keyFeatures.length < 6) {
+      setFormData({
+        ...formData,
+        keyFeatures: [...formData.keyFeatures, ""],
+      });
+    } else {
+      alert("You can only add up to 6 key features.");
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto mt-2">
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
@@ -116,19 +127,21 @@ const AddProductForm = ({ formData, setFormData }) => {
             {formData.keyFeatures.map((feature, index) => (
               <input
                 key={index}
-                name={`${
-                  index === 1 ? "weight" : index === 2 ? "origin" : "quality"
-                }`}
                 type="text"
                 value={feature}
                 onChange={(e) => handleFeatureChange(index, e.target.value)}
                 className="mt-2 rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                placeholder={`${
-                  index === 1 ? "weight" : index === 2 ? "origin" : "quality"
-                }`}
+                placeholder={`Key feature ${index + 1}`}
               />
             ))}
           </div>
+          <button
+            type="button"
+            onClick={handleAddFeature}
+            className="mt-4 text-blue-600 hover:underline font-medium"
+          >
+            Add More Features
+          </button>
         </div>
 
         {/* Description */}
