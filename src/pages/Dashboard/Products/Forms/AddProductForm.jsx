@@ -1,15 +1,4 @@
-import { useState } from "react";
-
-const AddProductForm = () => {
-  const [formData, setFormData] = useState({
-    productName: "",
-    productImage: null,
-    price: "",
-    description: "",
-    averageRating: "",
-    keyFeatures: ["", "", ""], // Fixed 3 fields for key features
-  });
-
+const AddProductForm = ({ formData, setFormData }) => {
   const handleFeatureChange = (index, value) => {
     const updatedFeatures = [...formData.keyFeatures];
     updatedFeatures[index] = value;
@@ -32,7 +21,6 @@ const AddProductForm = () => {
 
   return (
     <div className="max-w-5xl mx-auto mt-2">
-      
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
         {/* Column 1 */}
         <div className="space-y-6">
@@ -72,7 +60,6 @@ const AddProductForm = () => {
               required
             />
           </div>
-          
         </div>
 
         {/* Column 2 */}
@@ -129,12 +116,16 @@ const AddProductForm = () => {
             {formData.keyFeatures.map((feature, index) => (
               <input
                 key={index}
-                name={`${index === 1 ? "weight" : index === 2 ? "origin" : "quality"}`}
+                name={`${
+                  index === 1 ? "weight" : index === 2 ? "origin" : "quality"
+                }`}
                 type="text"
                 value={feature}
                 onChange={(e) => handleFeatureChange(index, e.target.value)}
                 className="mt-2 rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                placeholder={`${index === 1 ? "weight" : index === 2 ? "origin" : "quality"}`}
+                placeholder={`${
+                  index === 1 ? "weight" : index === 2 ? "origin" : "quality"
+                }`}
               />
             ))}
           </div>

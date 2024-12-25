@@ -5,6 +5,14 @@ import AddProductForm from "./Forms/AddProductForm";
 
 const ManageProducts = () => {
   const [selectedCat, setSelectedCat] = useState("");
+  const [formData, setFormData] = useState({
+    productName: "",
+    productImage: null,
+    price: "",
+    description: "",
+    averageRating: "",
+    keyFeatures: ["", "", ""], // Fixed 3 fields for key features
+  });
 
   // Handle category selection change
   const handleCategoryChange = (e) => {
@@ -59,7 +67,7 @@ const ManageProducts = () => {
       {/* Add Product Form or Placeholder */}
       <div className="mt-8">
         {selectedCat ? (
-          <AddProductForm />
+          <AddProductForm formData={formData} setFormData={setFormData}/>
         ) : (
           <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
             <p className="text-gray-600 text-lg">
