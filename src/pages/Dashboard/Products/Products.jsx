@@ -22,6 +22,7 @@ const ManageProducts = () => {
       selectedPath = "Sunnah Products";
     }
     setSelectedCat(selectedPath);
+    console.log(selectedPath);
   };
 
   // Handle sub-category selection change
@@ -79,11 +80,22 @@ const ManageProducts = () => {
       {/* Add Product Form or Placeholder */}
       <div className="mt-8">
         {selectedCat ? (
-          <AddProductForm formData={formData} setFormData={setFormData} />
+          subCategories.length > 0 && !selectedSubCat ? (
+            // Sub-category required but not selected
+            <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
+              <p className="text-gray-600 text-lg">
+                Please select a <span className="text-orange-400">sub-category</span> to continue adding a product.
+              </p>
+            </div>
+          ) : (
+            // Both category and sub-category validated
+            <AddProductForm formData={formData} setFormData={setFormData} />
+          )
         ) : (
+          // Category not selected
           <div className="flex flex-col items-center justify-center h-40 bg-gray-50 border border-gray-300 rounded-lg shadow-sm">
             <p className="text-gray-600 text-lg">
-              Please select a category to continue adding a product.
+              Please select a <span className="text-red-400">category</span> to continue adding a product.
             </p>
           </div>
         )}
