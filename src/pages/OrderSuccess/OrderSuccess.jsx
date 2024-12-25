@@ -1,19 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CartContext } from "../../contexts/CartContext";
 import { Helmet } from "react-helmet-async";
 import { FaCheckCircle } from "react-icons/fa";
 
 const OrderSuccess = () => {
-  const { removeAllFromCart } = useContext(CartContext);
   const location = useLocation();
   const orderData = location?.state?.orderData;
-
-  useEffect(() => {
-    // Clear the cart after a successful order
-    removeAllFromCart();
-  }, []);
 
   if (!orderData) {
     return (

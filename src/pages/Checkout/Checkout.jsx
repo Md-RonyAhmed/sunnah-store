@@ -5,9 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
 import GoBack from "../../components/Shared/GoBack";
+import usePrivateAxios from "../../hooks/usePrivateAxios";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
-  const { cartItems, getTotalPrice } = useContext(CartContext);
+  const axiosPrivateInstance = usePrivateAxios();
+  const { cartItems, getTotalPrice, removeAllFromCart } =
+    useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -88,35 +92,66 @@ const Checkout = () => {
   };
 
   // Called when clicking "Place Order"
-  const handlePlaceOrder = () => {
-    // Validate the form
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return; // Stop submission, show errors
-    }
+  const handlePlaceOrder = async () => {
+    try {
+      // Validate the form
+      const validationErrors = validateForm();
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
 
-    // Build order data
-    const orderData = {
-      orderId: `ORD${Date.now()}`,
-      name: formData.name,
-      email: formData.email,
-      address: formData.address,
-      phone: formData.phone,
-      note: formData.note,
-      paymentMethod,
-      totalAmount: getTotalPrice(),
-      items: cartItems,
-      orderDate: new Date().toISOString(),
-    };
+      // Build order data
+      const orderData = {
+        name: formData.name,
+        email: formData.email,
+        address: formData.address,
+        phone: formData.phone,
+        note: formData.note,
+        paymentMethod,
+        totalAmount: getTotalPrice(),
+        items: cartItems,
+        orderDate: new Date().toISOString(),
+        status: "pending", // You can add order status
+      };
 
-    // If Cash on Delivery, finalize directly
-    if (paymentMethod === "cod") {
-      navigate("/sunnah-store/order-success", { state: { orderData } });
-    } else {
-      // If Online Payment, you'd call or redirect to a payment gateway
-      console.log("Initiate Online Payment flow for order:", orderData);
-      navigate("/sunnah-store/order-success", { state: { orderData } });
+      // Send order to database
+      const response = await axiosPrivateInstance.post("orders", orderData);
+      console.log(response);
+      if (response?.data?.success) {
+        const orderConfirmation = {
+          ...orderData,
+          orderId: response?.data?.order?._id,
+        };
+
+        removeAllFromCart();
+        // Show success message
+        await Swal.fire({
+          icon: "success",
+          title: "Order Placed!",
+          text: "Your order has been placed successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        // Then navigate to success page
+        navigate("/sunnah-store/order-success", {
+          state: {
+            orderData: orderConfirmation,
+          },
+          replace: true, // prevents going back to checkout page
+        });
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      // Error alert
+      await Swal.fire({
+        icon: "error",
+        title: "Order Failed!",
+        text: "Failed to place your order. Please try again.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#10B981", // green-500 color
+      });
     }
   };
 

@@ -111,7 +111,7 @@ const Invoice = () => {
             </div>
             <div className="text-right">
               <h3 className="font-semibold text-gray-700">Order Info:</h3>
-              <p className="text-gray-800">Order ID: #{orderData.orderId}</p>
+              <p className="text-gray-800">Order ID: {orderData.orderId}</p>
               <p className="text-gray-800">
                 Date: {new Date(orderData.orderDate).toLocaleDateString()}
               </p>

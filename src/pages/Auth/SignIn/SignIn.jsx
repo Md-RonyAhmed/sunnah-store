@@ -14,6 +14,7 @@ import {
 import { AuthContext } from "../../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import usePublicAxios from "../../../hooks/usePublicAxios";
 
 const SignIn = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -22,6 +23,8 @@ const SignIn = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   console.log("state in the location login page", location.state);
+
+  const axiosPublicInstance = usePublicAxios();
 
   // State for form data
   const [formData, setFormData] = useState({
@@ -142,7 +145,18 @@ const SignIn = () => {
   };
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      await signInWithGoogle().then(async (res)=>{
+        // create user entry in the database
+        const userInfo = {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+        };
+        axiosPublicInstance.post("users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added to the database");
+          }
+        });
+      });
       Swal.fire({
         position: "center",
         icon: "success",

@@ -20,7 +20,6 @@ const SignUp = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -169,7 +168,18 @@ const SignUp = () => {
   };
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      await signInWithGoogle().then(async (res) => {
+        // create user entry in the database
+        const userInfo = {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+        };
+        axiosPublicInstance.post("users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added to the database");
+          }
+        });
+      });
       Swal.fire({
         position: "center",
         icon: "success",
