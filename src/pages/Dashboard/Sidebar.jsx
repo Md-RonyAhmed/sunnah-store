@@ -9,8 +9,35 @@ import {
   MdSettings,
   MdExitToApp,
 } from "react-icons/md";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Sidebar = ({ isOpen }) => {
+  const { signOutUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure to Logout?",
+      text: "You can stay our site!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00BF63",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOutUser()
+          .then(() => {})
+          .catch((err) => console.log(err));
+        Swal.fire({
+          title: "Logout Successfully!",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <aside
       className={`${
@@ -67,7 +94,7 @@ const Sidebar = ({ isOpen }) => {
             Users
           </NavLink>
           <NavLink
-            to="/sunnah-store/dashboard/settings"
+            to="/"
             className={({ isActive }) =>
               `flex items-center py-2 px-4 hover:bg-gray-700 ${
                 isActive ? "bg-gray-700" : ""
@@ -81,17 +108,13 @@ const Sidebar = ({ isOpen }) => {
 
         {/* Logout Button */}
         <div className="absolute bottom-0 w-full">
-          <NavLink
-            to="/logout"
-            className={({ isActive }) =>
-              `flex items-center py-2 px-4 hover:bg-gray-700  ${
-                isActive ? "bg-gray-700" : ""
-              }`
-            }
+          <button
+            className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
+            onClick={handleLogout}
           >
             <MdExitToApp className="h-5 w-5 mr-3" />
             Logout
-          </NavLink>
+          </button>
         </div>
       </nav>
     </aside>

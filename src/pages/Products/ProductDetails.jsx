@@ -8,27 +8,28 @@ import {
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
-import { axiosInstance } from "../../api/axios_instance";
-import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { WishlistContext } from "../../contexts/WishlistContext";
 import { CartContext } from "../../contexts/CartContext";
 import GoBack from "../../components/Shared/GoBack";
+import { useQuery } from "@tanstack/react-query";
+import usePublicAxios from "../../hooks/usePublicAxios";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const axiosPublicInstance = usePublicAxios();
 
   const { data: product, isLoading } = useQuery({
     queryKey: [id],
     queryFn: async () => {
-      const res = await axiosInstance.get(`product/${id}`);
+      const res = await axiosPublicInstance.get(`product/${id}`);
       return res.data;
     },
-    staleTime: 5 * 60 * 1000,
   });
 
   const { addToCart } = useContext(CartContext);
-  const { removeFromWishlist, addToWishlist, wishlistItems } = useContext(WishlistContext);
+  const { removeFromWishlist, addToWishlist, wishlistItems } =
+    useContext(WishlistContext);
 
   const isWishlisted = wishlistItems.find((item) => item._id === id);
 
