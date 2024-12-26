@@ -8,16 +8,9 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { useState } from "react";
- 
-// Function to generate a random invoice ID
-const generateRandomInvoiceId = () => {
-  const prefixes = ["#MS-", "#RV-", "#QW-"];
-  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-  const randomNumber = Math.floor(Math.random() * 1000000); // Random number between 0 and 999999
-  return randomPrefix + randomNumber;
-};
-
+import { useState, useEffect, useContext } from "react";
+import usePrivateAxios from "../../../hooks/usePrivateAxios";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const TABLE_HEAD = [
   {
@@ -30,88 +23,66 @@ const TABLE_HEAD = [
     head: "Amount",
   },
   {
-    head: "Issued",
+    head: "Order Issued",
   },
   {
-    head: "Payment Date",
+    head: "Status",
   },
   {
     head: "Payment Method",
   },
   {
-    head: " View or Download",
+    head: "Total Items",
   },
   {
-    head: "Actions", 
+    head: "View or Download",
+  },
+  {
+    head: "Actions",
   },
 ];
- 
-const TABLE_ROWS = [
-  {
-    id: generateRandomInvoiceId(),
-    email: "demo@gmail.com",
-    amount: "$14,000",
-    issued: "31 Jan 2024",
-    date: "31 Feb 2024",
-    paymentMethod:"Cash On Delivery"
-  },
-  {
-    id: generateRandomInvoiceId(),
-    email: "demo@gmail.com",
-    amount: "$3,000",
-    issued: "24 Jan 2024",
-    date: "24 Feb 2024",
-    paymentMethod:"Cash On Delivery"
-  },
-  {
-    id: generateRandomInvoiceId(),
-    email: "demo@gmail.com",
-    amount: "$20,000",
-    issued: "12 Jan 2024",
-    date: "12 Feb 2024",
-    paymentMethod:"Cash On Delivery"
-  },
-  {
-    id: generateRandomInvoiceId(),
-    email: "demo@gmail.com",
-    amount: "$5,600",
-    issued: "10 Jan 2024",
-    date: "10 Feb 2024",
-    paymentMethod:"Cash On Delivery"
-  },
-  {
-    id: generateRandomInvoiceId(),
-    email: "demo@gmail.com",
-    amount: "$5,600",
-    issued: "10 Jan 2024",
-    date: "10 Feb 2024",
-    paymentMethod:"Cash On Delivery"
-  },
-];
- 
-const Orders = () =>  {
 
-  const [rows, setRows] = useState(TABLE_ROWS); 
-  const [searchTerm, setSearchTerm] = useState(""); 
+const Orders = () => {
+  const [rows, setRows] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const axiosPrivateInstance = usePrivateAxios();
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axiosPrivateInstance.get(
+          `orders?email=${user?.email}`
+        );
+        if (response.data.success) {
+          setRows(response.data.data); // অর্ডার ডেটা সেট করুন
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, [axiosPrivateInstance, user?.email]);
 
   // Function to handle row deletion
   const handleDelete = (id) => {
-    setRows(rows.filter(row => row.id !== id)); 
+    setRows(rows.filter((row) => row.id !== id));
   };
 
-   // Handle search term change and filter rows
-   const handleSearchChange = (event) => {
+  // Handle search term change and filter rows
+  const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-   // Filter rows based on the search term
-   const filteredRows = rows.filter(
+  // Filter rows based on the search term
+  const filteredRows = rows.filter(
     (row) =>
-      row.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      row._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       row.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      row.amount.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      row.issued.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      row.date.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      row.totalAmount.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      row.orderDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      row.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
       row.paymentMethod.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -123,22 +94,24 @@ const Orders = () =>  {
         className="mb-2 rounded-none p-2"
       >
         <div>
-          <h1 className="mt-32 text-black text-3xl text-center">Orders Invoice</h1>
+          <h1 className="mt-32 text-black text-3xl text-center">
+            Orders Invoice
+          </h1>
         </div>
         <div className="w-full md:w-96  mt-6">
           <Input
             className=" focus:text-primary"
             label="Search Invoice"
             icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-            value={searchTerm} 
-            onChange={handleSearchChange} 
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
         </div>
       </CardHeader>
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {TABLE_HEAD.map(({ head}) => (
+            {TABLE_HEAD.map(({ head }) => (
               <th key={head} className="border-b border-gray-300 p-4">
                 <div className="flex items-center gap-1">
                   <Typography
@@ -155,22 +128,23 @@ const Orders = () =>  {
         </thead>
         <tbody>
           {filteredRows.map(
-            ({ id, email, amount, issued, date, paymentMethod }, index) => {
+            (
+              { _id, email, totalAmount, orderDate, status, paymentMethod,items },
+              index
+            ) => {
               const isLast = index === filteredRows.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-gray-300";
- 
+
               return (
-                <tr key={id}>
+                <tr key={_id}>
                   <td className={classes}>
-                    <div className="flex items-center gap-1">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-bold"
-                      >
-                        {id}
-                      </Typography>
-                    </div>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-bold"
+                    >
+                      {_id}
+                    </Typography>
                   </td>
                   <td className={classes}>
                     <Typography
@@ -185,7 +159,7 @@ const Orders = () =>  {
                       variant="small"
                       className="font-normal text-gray-600"
                     >
-                      {amount}
+                      {totalAmount}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -193,7 +167,7 @@ const Orders = () =>  {
                       variant="small"
                       className="font-normal text-gray-600"
                     >
-                      {issued}
+                      {orderDate}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -201,7 +175,7 @@ const Orders = () =>  {
                       variant="small"
                       className="font-normal text-gray-600"
                     >
-                      {date}
+                      {status}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -209,7 +183,15 @@ const Orders = () =>  {
                       variant="small"
                       className="font-normal text-gray-600"
                     >
-                      {paymentMethod}
+                      {paymentMethod==="cod"?"Cash on delivery": "Online Payment"}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      className="font-normal text-gray-600"
+                    >
+                      {items.length}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -226,17 +208,21 @@ const Orders = () =>  {
                     </div>
                   </td>
                   <td className={classes}>
-                  <IconButton variant="text" size="sm" onClick={() => handleDelete(id)}>
-                    <TrashIcon className="h-4 w-4 text-red-600" />
-                  </IconButton>
-                </td>
+                    <IconButton
+                      variant="text"
+                      size="sm"
+                      onClick={() => handleDelete(_id)}
+                    >
+                      <TrashIcon className="h-4 w-4 text-red-600" />
+                    </IconButton>
+                  </td>
                 </tr>
               );
-            },
+            }
           )}
         </tbody>
       </table>
     </Card>
   );
-}
-export default Orders
+};
+export default Orders;

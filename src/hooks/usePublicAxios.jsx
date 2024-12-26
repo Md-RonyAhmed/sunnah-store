@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublicInstance = axios.create({
-  baseURL: "https://sunnah-store-server-azure.vercel.app/",
+  baseURL: "http://localhost:5000/",
 });
 
 const usePublicAxios = () => {

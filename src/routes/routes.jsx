@@ -21,9 +21,10 @@ import Invoice from "../pages/OrderSuccess/Invoice";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Orders from "../pages/Dashboard/Orders/Orders";
 import Users from "../pages/Dashboard/Users/Users";
-import ManageProducts from "../pages/Dashboard/Products/Products";
+import ManageProducts from "../pages/Dashboard/Products/DashboardProducts";
 import DashboardHome from "../pages/Dashboard/Home/DashboardHome";
 import AdminRoute from "./AdminRoute";
+import ManageDashboardProducts from "../pages/Dashboard/Products/ManageDashboardProducts";
 
 const router = createBrowserRouter([
   {
@@ -160,6 +161,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <ManageProducts />,
+      },
+      {
+        path: "manage-products",
+        element: <ManageDashboardProducts />,
       },
       {
         path: "users",

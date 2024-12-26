@@ -6,9 +6,9 @@ import {
   MdShoppingCart,
   MdInventory,
   MdPeople,
-  MdSettings,
   MdExitToApp,
 } from "react-icons/md";
+import { TbShoppingCartCog } from "react-icons/tb";
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -80,7 +80,18 @@ const Sidebar = ({ isOpen }) => {
             }
           >
             <MdInventory className="h-5 w-5 mr-3" />
-            Products
+            Add Products
+          </NavLink>
+          <NavLink
+            to="/sunnah-store/dashboard/manage-products"
+            className={({ isActive }) =>
+              `flex items-center py-2 px-4 hover:bg-gray-700 ${
+                isActive ? "bg-gray-700" : ""
+              }`
+            }
+          >
+            <TbShoppingCartCog className="h-5 w-5 mr-3" />
+            Manage Products
           </NavLink>
           <NavLink
             to="/sunnah-store/dashboard/users"
@@ -93,17 +104,7 @@ const Sidebar = ({ isOpen }) => {
             <MdPeople className="h-5 w-5 mr-3" />
             Users
           </NavLink>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `flex items-center py-2 px-4 hover:bg-gray-700 ${
-                isActive ? "bg-gray-700" : ""
-              }`
-            }
-          >
-            <MdSettings className="h-5 w-5 mr-3" />
-            Settings
-          </NavLink>
+          
         </div>
 
         {/* Logout Button */}

@@ -32,6 +32,7 @@
     "react-scroll-to-top": "^3.0.0",
     "react-simple-captcha": "^9.3.1",
     "react-slick": "^0.30.3",
+    "recharts": "^2.15.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.15.2"
   },
