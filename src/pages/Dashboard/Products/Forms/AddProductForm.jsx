@@ -1,7 +1,21 @@
 import { useState } from "react";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios";
 
-const AddProductForm = ({ formData, setFormData }) => {
+const emptyForm = (category = "", subCategory = "") => ({
+  productName: "",
+  productImage: null,
+  price: "",
+  description: "",
+  averageRating: "",
+  keyFeatures: ["", "", ""],
+  category: category,
+  subCategory: subCategory,
+});
+
+
+const AddProductForm = ({ category, subCategory }) => {
+  
+  const [formData, setFormData] = useState(() => emptyForm(category, subCategory));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const axiosPrivateInstance = usePrivateAxios();
   const handleFeatureChange = (index, value) => {
@@ -37,16 +51,7 @@ const AddProductForm = ({ formData, setFormData }) => {
       if (response.data.success) {
         alert("Product added successfully!");
         // Reset form
-        setFormData({
-          productName: "",
-          productImage: null,
-          price: "",
-          description: "",
-          averageRating: "",
-          keyFeatures: ["", "", ""],
-          category: "",
-          subCategory: "",
-        });
+        setFormData(emptyForm(category, subCategory));
       } else {
         alert("Failed to add product: " + response.data.message);
       }
