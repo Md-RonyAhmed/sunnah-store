@@ -1,27 +1,36 @@
 import { useState } from "react";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios";
 
-const emptyForm = (category = "", subCategory = "") => ({
+const emptyForm = (category = "", subCategory = "", features = []) => ({
   productName: "",
   productImage: null,
   price: "",
   description: "",
   averageRating: "",
-  keyFeatures: ["", "", ""],
+  keyFeatures: features.reduce(
+    (acc, feature) => ({ ...acc, [feature]: "" }),
+    {}
+  ),
   category: category,
   subCategory: subCategory,
 });
 
-
-const AddProductForm = ({ category, subCategory }) => {
-  
-  const [formData, setFormData] = useState(() => emptyForm(category, subCategory));
+const AddProductForm = ({ category, subCategory, features }) => {
+  const [formData, setFormData] = useState(() =>
+    emptyForm(category, subCategory)
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const axiosPrivateInstance = usePrivateAxios();
-  const handleFeatureChange = (index, value) => {
-    const updatedFeatures = [...formData.keyFeatures];
-    updatedFeatures[index] = value;
-    setFormData({ ...formData, keyFeatures: updatedFeatures });
+
+  const handleFeatureChange = (feature, value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      keyFeatures: {
+        ...prevFormData.keyFeatures,
+        [feature]: value,
+      },
+    }));
+    // console.log("checking....", formData);
   };
 
   const handleChange = (e) => {
@@ -35,23 +44,12 @@ const AddProductForm = ({ category, subCategory }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log(formData);
+    console.log("Submitting form data:", formData);
     try {
-      // Make POST request to backend
-      const response = await axiosPrivateInstance.post(
-        "add-product",
-        formData
-        // {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // }
-      );
-
+      const response = await axiosPrivateInstance.post("add-product", formData);
       if (response.data.success) {
         alert("Product added successfully!");
-        // Reset form
-        setFormData(emptyForm(category, subCategory));
+        setFormData(emptyForm(category, subCategory, features));
       } else {
         alert("Failed to add product: " + response.data.message);
       }
@@ -63,7 +61,7 @@ const AddProductForm = ({ category, subCategory }) => {
     }
   };
 
-  const handleAddFeature = () => {
+  /*const handleAddFeature = () => {
     if (formData.keyFeatures.length < 6) {
       setFormData({
         ...formData,
@@ -72,7 +70,7 @@ const AddProductForm = ({ category, subCategory }) => {
     } else {
       alert("You can only add up to 6 key features.");
     }
-  };
+  };*/
 
   return (
     <div className="max-w-5xl mx-auto mt-2">
@@ -168,24 +166,25 @@ const AddProductForm = ({ category, subCategory }) => {
             Key Features
           </label>
           <div className="grid grid-cols-3 gap-4">
-            {formData.keyFeatures.map((feature, index) => (
+            {features.map((feature) => (
               <input
-                key={index}
+                key={feature}
                 type="text"
-                value={feature}
-                onChange={(e) => handleFeatureChange(index, e.target.value)}
+                value={formData.keyFeatures[feature] || ""}
+                onChange={(e) => handleFeatureChange(feature, e.target.value)}
                 className="mt-2 rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                placeholder={`Key feature ${index + 1}`}
+                placeholder={`Enter ${feature}`}
               />
             ))}
           </div>
-          <button
+
+          {/* <button
             type="button"
             onClick={handleAddFeature}
             className="mt-4 text-blue-600 hover:underline font-medium"
           >
             Add More Features
-          </button>
+          </button> */}
         </div>
 
         {/* Description */}
