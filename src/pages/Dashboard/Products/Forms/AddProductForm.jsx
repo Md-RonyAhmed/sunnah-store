@@ -2,25 +2,37 @@ import { useState } from "react";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios";
 
 const emptyForm = (category = "", subCategory = "", features = []) => ({
-  productName: "",
-  productImage: null,
-  price: "",
-  description: "",
-  averageRating: "",
+  productName: "", // The name of the product
+  productImage: null, // The uploaded product image
+  price: "", // The price of the product
+  description: "", // The description of the product
+  averageRating: "", // The average customer rating (0-5)
   keyFeatures: features.reduce(
+    // Initialize keyFeatures as an object with feature names as keys and empty strings as values
     (acc, feature) => ({ ...acc, [feature]: "" }),
     {}
   ),
-  category: category,
-  subCategory: subCategory,
+  category: category, // The category of the product
+  subCategory: subCategory, // The subcategory of the product
 });
 
 const AddProductForm = ({ category, subCategory, features }) => {
+  // State to manage the form data
   const [formData, setFormData] = useState(() =>
-    emptyForm(category, subCategory)
+    emptyForm(category, subCategory, features)
   );
+
+  // State to manage the submission state of the form
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Axios instance for authenticated requests
   const axiosPrivateInstance = usePrivateAxios();
+
+  /**
+   * Updates the value of a specific feature in the keyFeatures object.
+   * @param {string} feature - The name of the feature to update.
+   * @param {string} value - The new value for the feature.
+   */
 
   const handleFeatureChange = (feature, value) => {
     setFormData((prevFormData) => ({
@@ -30,38 +42,47 @@ const AddProductForm = ({ category, subCategory, features }) => {
         [feature]: value,
       },
     }));
-    // console.log("checking....", formData);
+    // console.log("checking....", formData); // Debugging: Log the updated formData
   };
 
+  /**
+   * Handles changes to the form inputs and updates the corresponding state.
+   */
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "file" ? files[0] : value,
+      [name]: type === "file" ? files[0] : value, // Handle file uploads separately
     });
   };
 
+  /**
+   * Handles form submission by sending form data to the backend.
+   */
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    console.log("Submitting form data:", formData);
+    e.preventDefault(); // Prevent default form submission behavior
+    setIsSubmitting(true); // Set submission state to true
+    console.log("Submitting form data:", formData); // Debugging: Log form data being submitted
+
     try {
+      // Send a POST request to the "add-product" endpoint
       const response = await axiosPrivateInstance.post("add-product", formData);
       if (response.data.success) {
-        alert("Product added successfully!");
-        setFormData(emptyForm(category, subCategory, features));
+        alert("Product added successfully!"); // Notify user of success
+        setFormData(emptyForm(category, subCategory, features)); // Reset the form
       } else {
-        alert("Failed to add product: " + response.data.message);
+        alert("Failed to add product: " + response.data.message); // Notify user of failure
       }
     } catch (error) {
-      console.error("Error adding product:", error);
-      alert("An error occurred while adding the product.");
+      console.error("Error adding product:", error); // Log any errors
+      alert("An error occurred while adding the product."); // Notify user of error
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Reset submission state
     }
   };
 
-  /*const handleAddFeature = () => {
+  /* Uncomment to allow adding more key features dynamically
+  const handleAddFeature = () => {
     if (formData.keyFeatures.length < 6) {
       setFormData({
         ...formData,
@@ -70,7 +91,8 @@ const AddProductForm = ({ category, subCategory, features }) => {
     } else {
       alert("You can only add up to 6 key features.");
     }
-  };*/
+  };
+  */
 
   return (
     <div className="max-w-5xl mx-auto mt-2">
@@ -178,13 +200,15 @@ const AddProductForm = ({ category, subCategory, features }) => {
             ))}
           </div>
 
-          {/* <button
+          {/* Uncomment to allow adding more features dynamically
+          <button
             type="button"
             onClick={handleAddFeature}
             className="mt-4 text-blue-600 hover:underline font-medium"
           >
             Add More Features
-          </button> */}
+          </button>
+          */}
         </div>
 
         {/* Description */}
