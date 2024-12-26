@@ -1,4 +1,9 @@
+import { useState } from "react";
+import usePrivateAxios from "../../../../hooks/usePrivateAxios";
+
 const AddProductForm = ({ formData, setFormData }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const axiosPrivateInstance = usePrivateAxios();
   const handleFeatureChange = (index, value) => {
     const updatedFeatures = [...formData.keyFeatures];
     updatedFeatures[index] = value;
@@ -13,10 +18,44 @@ const AddProductForm = ({ formData, setFormData }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     console.log(formData);
-    alert("Product added successfully!");
+    try {
+      // Make POST request to backend
+      const response = await axiosPrivateInstance.post(
+        "add-product",
+        formData
+        // {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // }
+      );
+
+      if (response.data.success) {
+        alert("Product added successfully!");
+        // Reset form
+        setFormData({
+          productName: "",
+          productImage: null,
+          price: "",
+          description: "",
+          averageRating: "",
+          keyFeatures: ["", "", ""],
+          category: "",
+          subCategory: "",
+        });
+      } else {
+        alert("Failed to add product: " + response.data.message);
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert("An error occurred while adding the product.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleAddFeature = () => {
@@ -168,9 +207,12 @@ const AddProductForm = ({ formData, setFormData }) => {
         <div className="col-span-2">
           <button
             type="submit"
-            className="w-full rounded-lg bg-primary py-3 text-white font-medium shadow-lg hover:bg-primary/80 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            disabled={isSubmitting}
+            className={`w-full rounded-lg bg-primary py-3 text-white font-medium shadow-lg hover:bg-primary/80 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Add Product
+            {isSubmitting ? "Submitting..." : "Add Product"}
           </button>
         </div>
       </form>

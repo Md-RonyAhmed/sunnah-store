@@ -13,7 +13,7 @@ const ManageDashboardProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axiosPrivateInstance.get(
-          `products/all?email=${user?.email}`
+          `products/all`
         );
         if (response.data.status) {
           setProducts(response.data.data);

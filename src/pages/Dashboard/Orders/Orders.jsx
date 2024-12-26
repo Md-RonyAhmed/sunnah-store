@@ -11,6 +11,7 @@ import {
 import { useState, useEffect, useContext } from "react";
 import usePrivateAxios from "../../../hooks/usePrivateAxios";
 import { AuthContext } from "../../../contexts/AuthContext";
+import Loading from "../../../components/Shared/Loading";
 
 const TABLE_HEAD = [
   {
@@ -44,12 +45,14 @@ const TABLE_HEAD = [
 
 const Orders = () => {
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const axiosPrivateInstance = usePrivateAxios();
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchOrders = async () => {
+      setLoading(true);
       try {
         const response = await axiosPrivateInstance.get(
           `orders?email=${user?.email}`
@@ -59,6 +62,8 @@ const Orders = () => {
         }
       } catch (error) {
         console.error("Error fetching orders:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -67,7 +72,7 @@ const Orders = () => {
 
   // Function to handle row deletion
   const handleDelete = (id) => {
-    setRows(rows.filter((row) => row.id !== id));
+    setRows(rows.filter((row) => row._id !== id));
   };
 
   // Handle search term change and filter rows
@@ -80,11 +85,13 @@ const Orders = () => {
     (row) =>
       row._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       row.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      row.totalAmount.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      row.totalAmount.toString().includes(searchTerm.toLowerCase()) ||
       row.orderDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
       row.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
       row.paymentMethod.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) return <Loading />;
 
   return (
     <Card className="h-full w-full overflow-scroll ">
@@ -94,7 +101,7 @@ const Orders = () => {
         className="mb-2 rounded-none p-2"
       >
         <div>
-          <h1 className="mt-32 text-black text-3xl text-center">
+          <h1 className="mt-32 text-primary text-3xl text-center">
             Orders Invoice
           </h1>
         </div>
@@ -129,7 +136,15 @@ const Orders = () => {
         <tbody>
           {filteredRows.map(
             (
-              { _id, email, totalAmount, orderDate, status, paymentMethod,items },
+              {
+                _id,
+                email,
+                totalAmount,
+                orderDate,
+                status,
+                paymentMethod,
+                items,
+              },
               index
             ) => {
               const isLast = index === filteredRows.length - 1;
@@ -183,7 +198,9 @@ const Orders = () => {
                       variant="small"
                       className="font-normal text-gray-600"
                     >
-                      {paymentMethod==="cod"?"Cash on delivery": "Online Payment"}
+                      {paymentMethod === "cod"
+                        ? "Cash on delivery"
+                        : "Online Payment"}
                     </Typography>
                   </td>
                   <td className={classes}>
