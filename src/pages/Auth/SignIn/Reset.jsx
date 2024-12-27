@@ -10,6 +10,14 @@ const Reset = () => {
   const navigate = useNavigate();
 
   const handlePasswordReset = () => {
+    if (email === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter your email address!",
+      });
+      return;
+    }
     sendResetPassword(email).then(() => {
       Swal.fire({
         position: "center",
@@ -24,7 +32,7 @@ const Reset = () => {
 
   return (
     <div className="flex flex-col p-8 justify-center items-center min-h-screen">
-       <Helmet>
+      <Helmet>
         <title>Sunnah Store | Reset</title>
       </Helmet>
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-2xl">

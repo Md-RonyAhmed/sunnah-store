@@ -7,6 +7,7 @@ import Categories from "./categories/Categories";
 import Pride from "../../components/pride/Pride";
 import { Helmet } from "react-helmet-async";
 import PopularAuthors from "./PopularAuthors";
+import FaqLayout from "./FAQ/FaqLayout";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -52,6 +53,7 @@ const Home = () => {
       <Ebook />
       <Pride />
       <PopularAuthors />
+      <FaqLayout />
     </>
   );
 };
