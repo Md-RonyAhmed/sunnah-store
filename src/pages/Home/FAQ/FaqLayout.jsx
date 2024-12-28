@@ -21,11 +21,11 @@ const FaqLayout = () => {
       <h2 className="mb-5 text-3xl font-bold text-center capitalize text-primary">
         frequently ask questions
       </h2>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center w-1/2">
-          <img src={faqImage} alt="faqImage" className="w-3/4" />
+      <div className="flex flex-wrap items-center justify-between">
+        <div className="flex items-center justify-center w-full md:w-1/2">
+          <img src={faqImage} alt="faqImage" className="w-full md:w-3/4" />
         </div>
-        <ul className="w-1/2 space-y-6">
+        <ul className="w-full space-y-6 md:w-1/2">
           {faqData.map((correntFaq) => (
             <li key={correntFaq.id}>
               <FAQ
