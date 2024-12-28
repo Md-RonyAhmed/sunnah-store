@@ -7,6 +7,12 @@ import Categories from "./categories/Categories";
 import Pride from "../../components/pride/Pride";
 import { Helmet } from "react-helmet-async";
 import PopularAuthors from "./PopularAuthors";
+import FaqLayout from "./FAQ/FaqLayout";
+
+import ServicesList from "./ServicesList";
+
+import TopBrands from "./TopBrands";
+
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -46,12 +52,15 @@ const Home = () => {
         <title>Sunnah Store | Home</title>
       </Helmet>
       <Banner />
+      <ServicesList />
       <OfferTimer targetDate={targetDate} />
       <Categories />
       <AdvertisementModal showModal={showModal} setShowModal={setShowModal} />
       <Ebook />
       <Pride />
+      <TopBrands />
       <PopularAuthors />
+      <FaqLayout />
     </>
   );
 };

@@ -6,10 +6,10 @@ const SITEMAP = [
   {
     title: "Company",
     links: [
-      { catName: "About Us", path: "/about" },
-      { catName: "Contact Us", path: "/contact" },
-      { catName: "Careers", path: "/career" },
-      { catName: "Blog", path: "/blog" },
+      { catName: "About Us", path: "/sunnah-store/about" },
+      { catName: "Contact Us", path: "/sunnah-store/contact" },
+      { catName: "Careers", path: "/sunnah-store/career" },
+      { catName: "Blog", path: "/sunnah-store/blog" },
     ],
   },
   {
