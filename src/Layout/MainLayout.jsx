@@ -1,16 +1,16 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import Header from "../components/Shared/Header/Header";
 import Footer from "../components/Shared/Footer/Footer";
 import Loading from "../components/Shared/Loading";
 import ScrollToTopBtn from "../components/Shared/ScroollToTop/ScrollToTopBtn";
 import { StickyNavbar } from "../components/Shared/Header/StickyNavbar";
+import Marquee from "../components/Shared/Header/Marquee";
 
 const MainLayout = () => {
   const navigation = useNavigation();
   return (
     <div>
       <ScrollToTopBtn />
-      {/* <Header /> */}
+      <Marquee />
       <StickyNavbar/>
       <div className="container min-h-screen">
         {navigation.state === "loading" ? <Loading /> : <Outlet />}

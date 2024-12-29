@@ -18,7 +18,7 @@ const OrderSuccess = () => {
   }
 
   return (
-    <div className="mt-44 mb-6 mx-auto max-w-3xl px-4">
+    <div className="mt-5 mb-6 mx-auto max-w-3xl px-4">
       <Helmet>
         <title>Order Success | Sunnah Store</title>
       </Helmet>

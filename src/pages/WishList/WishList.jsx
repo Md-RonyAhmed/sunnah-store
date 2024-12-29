@@ -14,7 +14,7 @@ function Wishlist() {
 
   return (
     <>
-      <div className="mt-40 mb-6 w-fit">
+      <div className="mt-5 mb-6 w-fit">
         <GoBack />
       </div>
       <div className="max-w-full mx-auto p-4 bg-gray-50 rounded-lg shadow">

@@ -201,7 +201,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center mt-44">
+    <div className="flex justify-center mt-5">
       <Helmet>
         <title>Sunnah Store | Sign Up</title>
       </Helmet>

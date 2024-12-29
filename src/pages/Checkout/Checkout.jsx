@@ -157,7 +157,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="mt-44 mb-6 mx-auto max-w-7xl px-4">
+    <div className="mt-5 mb-6 mx-auto max-w-7xl px-4">
       <Helmet>
         <title>Sunnah Store | Checkout</title>
       </Helmet>

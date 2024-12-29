@@ -56,7 +56,7 @@ const ManageProducts = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8 mt-10">
+    <div className="max-w-5xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8">
       <h2 className="text-2xl font-semibold text-primary text-center mb-6">
         Add New Product
       </h2>

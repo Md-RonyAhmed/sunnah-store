@@ -178,7 +178,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex justify-center mt-44">
+    <div className="flex justify-center mt-5">
       <div>
         <Helmet>
           <title>Sunnah Store | Sign In</title>

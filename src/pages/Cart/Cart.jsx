@@ -19,7 +19,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="mt-44 mb-6 w-fit">
+      <div className="my-5 mb-6 w-fit">
         <GoBack />
       </div>
       
