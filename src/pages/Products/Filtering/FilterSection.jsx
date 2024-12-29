@@ -132,7 +132,7 @@ const FilterSection = ({
 
         {/* Slider */}
         <div className="mx-5">
-          <Box sx={{ width: { xs: '100%', md: '20px' } }}>
+          <Box sx={{ width: { xs: '100%', md: '220px' } }}>
             <div className="flex justify-center text-sm text-gray-700 ">
               <span>Select Price Range</span>
             </div>
