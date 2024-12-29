@@ -201,7 +201,8 @@ export function StickyNavbar() {
   };
   // console.log(user?.photoURL);
   return (
-    <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
+    <div className="w-full sticky top-0 z-50 bg-[#FBFFFF] shadow-sm">
+      {/*fixed top-0 z-40  */}
       <Marquee />
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
