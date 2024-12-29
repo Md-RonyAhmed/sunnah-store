@@ -72,97 +72,98 @@ const FilterSection = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-start gap-2 items-center pb-4 mb-4 bg-white rounded-lg space-y-3 lg:space-y-0">
-      <h3 className="text-xl">Filter Items</h3>
+    <div>
+      <h3 className="text-xl mt-52 md:mt-0 mb-4 md:mb-0">Filter Items</h3>
+      <div className="grid grid-cols-2 md:grid-cols-5 lg:flex-row justify-start gap-3 items-center pb-4 mb-4 bg-white rounded-lg">
+        {/* Category Dropdown */}
+        {!search && (
+          <div className="relative">
+            <select
+              id="categories"
+              className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+              onChange={handleCategoryChange}
+              value={`/${key}`}
+            >
+              <option value="">Select Category</option>
+              {categoryData.map((category) => (
+                <option key={category.path} value={category.path}>
+                  {category?.catName && category?.catName === "Sunnah"
+                    ? "Sunnah Products"
+                    : category?.catName}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-      {/* Category Dropdown */}
-      {!search && (
+        {/* Sub-Category Dropdown */}
+        {subCategories.length > 0 && (
+          <div className="relative">
+            <select
+              className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
+              onChange={(e) => setSelectedSubCategory(e.target.value)}
+              value={selectedSubCategory}
+            >
+              <option value="">Select Sub-Categories</option>
+              {subCategories.map((scat) => (
+                <option key={scat} value={scat}>
+                  {scat}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Sorting Dropdown */}
         <div className="relative">
           <select
-            id="categories"
+            id="sortBy"
             className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-            onChange={handleCategoryChange}
-            value={`/${key}`}
+            onChange={handleSortChange}
+            value={sortBy}
           >
-            <option value="">Select Category</option>
-            {categoryData.map((category) => (
-              <option key={category.path} value={category.path}>
-                {category?.catName && category?.catName === "Sunnah"
-                  ? "Sunnah Products"
-                  : category?.catName}
+            {sortOptions.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label}
               </option>
             ))}
           </select>
         </div>
-      )}
 
-      {/* Sub-Category Dropdown */}
-      {subCategories.length > 0 && (
-        <div className="relative">
-          <select
-            className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-            onChange={(e) => setSelectedSubCategory(e.target.value)}
-            value={selectedSubCategory}
-          >
-            <option value="">Select Sub-Categories</option>
-            {subCategories.map((scat) => (
-              <option key={scat} value={scat}>
-                {scat}
-              </option>
-            ))}
-          </select>
+        {/* Slider */}
+        <div className="mx-5">
+          <Box sx={{ width: { xs: '100%', md: '20px' } }}>
+            <div className="flex justify-center text-sm text-gray-700 ">
+              <span>Select Price Range</span>
+            </div>
+            <Slider
+              getAriaLabel={() => "Price range"}
+              value={tempPrice} // Temporary value for smooth interaction
+              onChange={handleTempChange} // Update temporary value on scroll
+              onChangeCommitted={handlePriceChangeCommitted} // Update actual price when done
+              valueLabelDisplay="auto"
+              getAriaValueText={priceText}
+              min={0} // Set minimum price
+              max={maxPrice} // Set maximum price
+              sx={{
+                color: "#00bf63", // Equivalent to bg-green-700
+                "& .MuiSlider-thumb": {
+                  backgroundColor: "#00bf63", // Thumb color
+                },
+                "& .MuiSlider-track": {
+                  backgroundColor: "#00bf63", // Track color
+                },
+                "& .MuiSlider-rail": {
+                  backgroundColor: "#a7f3d0", // Rail color (lighter green for contrast)
+                },
+              }}
+            />
+            <div className="flex justify-between text-sm text-gray-700 ">
+              <span>Min: {tempPrice[0]}</span>
+              <span>Max: {tempPrice[1]}</span>
+            </div>
+          </Box>
         </div>
-      )}
-
-      {/* Sorting Dropdown */}
-      <div className="relative">
-        <select
-          id="sortBy"
-          className="block w-full px-4 py-2 text-sm border rounded-lg shadow-sm bg-white border-gray-300 text-gray-700 focus:outline-none"
-          onChange={handleSortChange}
-          value={sortBy}
-        >
-          {sortOptions.map((option) => (
-            <option key={option.id} value={option.id}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Slider */}
-      <div className="mx-5">
-        <Box sx={{ width: 200 }}>
-          <div className="flex justify-center text-sm text-gray-700 ">
-            <span>Select Price Range</span>
-          </div>
-          <Slider
-            getAriaLabel={() => "Price range"}
-            value={tempPrice} // Temporary value for smooth interaction
-            onChange={handleTempChange} // Update temporary value on scroll
-            onChangeCommitted={handlePriceChangeCommitted} // Update actual price when done
-            valueLabelDisplay="auto"
-            getAriaValueText={priceText}
-            min={0} // Set minimum price
-            max={maxPrice} // Set maximum price
-            sx={{
-              color: "#00bf63", // Equivalent to bg-green-700
-              "& .MuiSlider-thumb": {
-                backgroundColor: "#00bf63", // Thumb color
-              },
-              "& .MuiSlider-track": {
-                backgroundColor: "#00bf63", // Track color
-              },
-              "& .MuiSlider-rail": {
-                backgroundColor: "#a7f3d0", // Rail color (lighter green for contrast)
-              },
-            }}
-          />
-          <div className="flex justify-between text-sm text-gray-700 ">
-            <span>Min: {tempPrice[0]}</span>
-            <span>Max: {tempPrice[1]}</span>
-          </div>
-        </Box>
       </div>
     </div>
   );
