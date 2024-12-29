@@ -101,7 +101,7 @@ const Orders = () => {
         className="mb-2 rounded-none p-2"
       >
         <div>
-          <h1 className="mt-32 text-primary text-3xl text-center">
+          <h1 className="mt-2 text-primary text-3xl text-center">
             Orders Invoice
           </h1>
         </div>

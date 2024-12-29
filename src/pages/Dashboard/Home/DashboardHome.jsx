@@ -14,7 +14,7 @@ const data = [
 
 const DashboardHome = () => {
   return (
-    <div className="mt-32 text-2xl text-center">
+    <div className="mt-5 text-2xl text-center">
       <Typography variant="h4" className="mb-6">Dashboard Home</Typography>
       
       <Card className="p-4 mb-6">

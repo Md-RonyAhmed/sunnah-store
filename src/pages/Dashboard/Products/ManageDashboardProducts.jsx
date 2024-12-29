@@ -36,7 +36,7 @@ const ManageDashboardProducts = () => {
   };
 
   return (
-    <div className="mt-32">
+    <div className="mt-2">
       <Typography variant="h4" className="text-center mb-6">
         Manage Products
       </Typography>

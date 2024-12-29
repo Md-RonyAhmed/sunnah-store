@@ -11,7 +11,7 @@ import img7 from "../../../../assets/images/cover/image.png";
 const Banner = () => {
   return (
     <Carousel
-      className="h-[450px] mt-32 mb-6"
+      className="h-[450px] my-3"
       autoplay
       autoplayDelay={4000}
       loop={true}

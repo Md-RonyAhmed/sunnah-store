@@ -103,13 +103,13 @@ export function DashNav() {
   };
   // console.log(user?.photoURL);
   return (
-    <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
+    <div className="w-full sticky top-0 z-50 bg-[#FBFFFF] shadow-sm">
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}
           <div className="order-1 font-medium cursor-pointer invisible lg:visible">
             <div className="">
-              <Link to="/sunnah-store/dashboard">
+              <Link to="/">
                 <div className="flex items-center justify-center">
                   <img src={logo} alt="logo" className="w-20" />
                   <span className="text-2xl font-semibold text-primary">

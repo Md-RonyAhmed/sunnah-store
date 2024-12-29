@@ -12,7 +12,7 @@ import logo from "../../../assets/images/logo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../../contexts/AuthContext";
-import Marquee from "./Marquee";
+// import Marquee from "./Marquee"; Moved to MainLayout.jsx
 import { CartContext } from "../../../contexts/CartContext";
 import Swal from "sweetalert2";
 import useAdmin from "../../../hooks/useAdmin";
@@ -201,8 +201,9 @@ export function StickyNavbar() {
   };
   // console.log(user?.photoURL);
   return (
-    <div className="w-full fixed top-0 z-40 bg-[#FBFFFF] shadow-sm">
-      <Marquee />
+    <div className="w-full sticky top-0 z-50 bg-[#FBFFFF] shadow-sm">
+      {/*fixed top-0 z-40  */}
+      {/* <Marquee /> Moved to MainLayout.jsx*/} 
       <Navbar className="px-0 py-1 mx-auto rounded-none shadow-none">
         <div className="flex flex-wrap items-center justify-between text-blue-gray-900">
           {/* Logo & Search Bar */}

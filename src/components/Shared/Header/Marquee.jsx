@@ -40,9 +40,9 @@ const Marquee = () => {
   return (
     <section
       aria-label="scrolling text"
-      className="overflow-hidden relative"
+      className="overflow-hidden relative bg-[#f2f2f2] "
     >
-      <div className="container mx-auto bg-[#f2f2f2] py-3 rounded-sm relative overflow-hidden">
+      <div className="container mx-auto py-3 rounded-sm relative overflow-hidden">
         <div className="flex justify-between space-x-8 min-w-max  px-0">
           {marqueeContent}
         </div>

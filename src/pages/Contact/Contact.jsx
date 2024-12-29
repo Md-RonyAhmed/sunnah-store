@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
@@ -20,9 +19,11 @@ export function Contact() {
 
   const validate = () => {
     let newErrors = {};
-    if (!formData.firstName.trim()) newErrors.firstName = "First name is required.";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required.";
-    if (!formData.email.trim()) newErrors.email = "Email is required."
+    if (!formData.firstName.trim())
+      newErrors.firstName = "First name is required.";
+    if (!formData.lastName.trim())
+      newErrors.lastName = "Last name is required.";
+    if (!formData.email.trim()) newErrors.email = "Email is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -40,15 +41,11 @@ export function Contact() {
   };
 
   return (
-    <section className="px-8 py-8 lg:py-20">
+    <section className="px-8 py-5">
       <Helmet>
         <title>Sunnah Store | Contact</title>
       </Helmet>
       <div className="container mx-auto text-center">
-        <h5
-          color="blue-gray"
-          className="mb-4 mt-20 !text-base lg:!text-2xl"
-        ></h5>
         <Typography
           variant="h1"
           color="blue-gray"
@@ -72,7 +69,6 @@ export function Contact() {
             </Typography>
             <div className="grid grid-cols-2 gap-4">
               <div>
-
                 <Input
                   color="gray"
                   size="lg"
@@ -87,11 +83,12 @@ export function Contact() {
                   }}
                 />
                 {errors.firstName && (
-                  <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.firstName}
+                  </p>
                 )}
               </div>
               <div>
-
                 <Input
                   color="gray"
                   size="lg"
@@ -111,7 +108,6 @@ export function Contact() {
               </div>
             </div>
             <div>
-
               <Input
                 color="gray"
                 size="lg"
@@ -130,7 +126,6 @@ export function Contact() {
               )}
             </div>
             <div>
-
               <Textarea
                 rows={6}
                 color="gray"

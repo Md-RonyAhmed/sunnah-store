@@ -81,7 +81,7 @@ const Invoice = () => {
 
   if (!orderData) {
     return (
-      <div className="mt-44 mb-6 text-center">
+      <div className="mt-5 mb-6 text-center">
         <p>No invoice information found.</p>
         <Link to="/sunnah-store/cart" className="text-primary hover:underline">
           Return to Cart
@@ -91,7 +91,7 @@ const Invoice = () => {
   }
 
   return (
-    <div className="mt-44 mb-6 mx-auto max-w-3xl px-4">
+    <div className="mt-5 mb-6 mx-auto max-w-3xl px-4">
       {/* Invoice Content */}
       <div ref={invoiceRef} className="bg-white p-6 rounded-lg shadow-lg">
         {/* Store Logo and Header */}
