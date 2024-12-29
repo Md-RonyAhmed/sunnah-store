@@ -1,14 +1,17 @@
+/* eslint-disable react-refresh/only-export-components */
 import { NavLink, useParams, Navigate, Link } from "react-router-dom";
 import Loading from "../../../components/Shared/Loading";
 import { Button } from "@material-tailwind/react";
 import ProductCard from "../../Products/ProductCard";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useState } from "react";
+import usePublicAxios from "../../../hooks/usePublicAxios";
 
 // Sample product data (to be replaced with actual data, ideally coming from an API or a prop)
 export const categoryData = [
   { catName: "Books", path: "/books" },
   { catName: "Electronics", path: "/electronics" },
+  { catName: "Sunnah", path: "/sunnah" },
   { catName: "Groceries & Foods", path: "/groceries" },
   { catName: "Clothing", path: "/clothing" },
   { catName: "Offers", path: "/offers" },
@@ -17,12 +20,15 @@ export const categoryData = [
 
 function Categories() {
   const { key } = useParams(); // Get the dynamic key from the URL
+  const [limit] = useState(5);
+
+  const axiosPublicInstance = usePublicAxios();
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", key],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://sunnah-store-server-azure.vercel.app/products"
+      const res = await axiosPublicInstance.get(
+        `products/${key}?limit=${limit}`
       );
       return res.data.data;
     },
@@ -30,6 +36,7 @@ function Categories() {
   });
 
   const category = categoryData.find((cat) => cat.path === `/${key}`); // Match the key with a category
+
   // Redirect to /books if no key is provided
   if (!key) {
     return <Navigate to="/books" replace />;
@@ -41,10 +48,7 @@ function Categories() {
   }
 
   // Filter products based on the selected category
-  const filteredProducts = products?.filter(
-    (product) =>
-      product.category.toLowerCase() === category?.catName.toLowerCase()
-  );
+  const filteredProducts = products || [];
 
   if (isLoading) {
     return <Loading />;
@@ -67,7 +71,9 @@ function Categories() {
                 }`
               }
             >
-              {category.catName}
+              {category?.catName && category?.catName === "Sunnah"
+                ? "Sunnah Products"
+                : category?.catName}
             </NavLink>
           ))}
         </div>
@@ -76,18 +82,25 @@ function Categories() {
       {/* Categories content */}
       <div className="p-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
-          {category?.catName}
+          {category?.catName && category?.catName === "Sunnah"
+            ? "Sunnah Products"
+            : category?.catName}
         </h2>
         {/* Products list */}
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {filteredProducts.length > 0 ? (
-            filteredProducts
-              .slice(0, 5)
-              .map((product) => (
-                <ProductCard key={product?._id} product={product} />
-              ))
+            filteredProducts.map((product) => (
+              <ProductCard key={product?._id} product={product} />
+            ))
           ) : (
-            <p>No products available in this category.</p>
+            <div className="col-span-full flex flex-col items-center justify-center py-20 px-4">
+              <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                No Products Available
+              </h3>
+              <p className="text-gray-500 text-center">
+                We couldn&apos;t find any products matching this category.
+              </p>
+            </div>
           )}
         </div>
         {filteredProducts && (

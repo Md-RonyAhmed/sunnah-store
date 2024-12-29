@@ -1,156 +1,402 @@
+import { useState, useContext } from "react";
 import { Button, Card, Input } from "@material-tailwind/react";
 import ScrollToTopBtn from "../../../components/Shared/ScroollToTop/ScrollToTopBtn";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import { useEffect, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import {} from "react-simple-captcha";
 import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Swal from "sweetalert2";
+import { auth } from "../../../firebase/firebase.config";
+import { signOut } from "firebase/auth";
+import usePublicAxios from "../../../hooks/usePublicAxios";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const axiosPublicInstance = usePublicAxios();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [disabled, setDisabled] = useState(true);
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-  const handleValidateCaptcha = (e) => {
-    const captchaValue = e.target.value;
-    if (validateCaptcha(captchaValue)) {
-      setDisabled(false);
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name Validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required.";
     } else {
-      setDisabled(true);
+      const nameRegex = /^[A-Z.a-z.\s]+$/;
+      if (!nameRegex.test(formData.name.trim())) {
+        newErrors.name = "Name can only contain letters and spaces.";
+      }
+    }
+
+    // Email Validation
+    if (!formData.email) {
+      newErrors.email = "Email is required.";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address.";
+      }
+    }
+
+    // Password Validation
+    if (!formData.password) {
+      newErrors.password = "Password is required.";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+    }
+
+    // Confirm Password Validation
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password.";
+    } else if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
+      return; // Stop execution here since we have errors
+    }
+
+    // If we reach here, we have no validation errors
+    createUser(formData.email, formData.password)
+      .then(() => {
+        // Update user profile
+        updateUserProfile(formData.name)
+          .then(async () => {
+            // create user entry in the database
+            const userInfo = {
+              name: formData.name,
+              email: formData.email,
+            };
+            axiosPublicInstance.post("users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the database");
+              }
+            });
+            await signOut(auth);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Registration successful, ${formData.name}`,
+              text: "Please login first!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+            // Reset the form
+            setFormData({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
+            setErrors({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
+
+            navigate("/sunnah-store/signin");
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: err.message,
+              showConfirmButton: true,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        // If createUser fails, show an error message
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: true,
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle().then(async (res) => {
+        // create user entry in the database
+        const userInfo = {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+        };
+        axiosPublicInstance.post("users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added to the database");
+          }
+        });
+      });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Logged in with Google!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Google Sign In Failed",
+        text: error.message,
+        showConfirmButton: true,
+      });
     }
   };
 
   return (
-    <div className="flex justify-center mt-32">
+    <div className="flex justify-center mt-44">
       <Helmet>
         <title>Sunnah Store | Sign Up</title>
       </Helmet>
       <div>
         <Card color="transparent" shadow={false}>
           <div className="text-3xl font-bold text-primary">Sign Up</div>
-          <div color="gray" className="mt-1 font-normal">
+          <div className="mt-1 font-normal text-gray-700">
             Enter your details to Register or Sign Up.
           </div>
-          <form className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-[450px]">
+          <form
+            className="w-full max-w-screen-lg p-6 mt-8 mb-2 rounded-md shadow-md sm:w-[480px]"
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <div className="flex flex-col gap-6 mb-2">
-              <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Name
-              </div>
-              <Input
-                size="lg"
-                name="name"
-                placeholder="enter your name..."
-                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-              />
-              <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Email
-              </div>
-              <Input
-                name="email"
-                size="lg"
-                placeholder="name@mail.com"
-                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-              />
-              <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Password
-              </div>
-              <div className="relative">
-                <Input
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  size="lg"
-                  placeholder="enter your password"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
-                <div
-                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
+              {/* Name Field */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="name"
+                  className="mb-1 text-base font-bold text-blue-gray-700"
                 >
-                  {showPassword ? (
-                    <VscEyeClosed size={24} />
-                  ) : (
-                    <VscEye size={24} />
-                  )}
-                </div>
-              </div>
-              <div color="blue-gray" className="-mb-3 text-base font-bold">
-                Confirm Password
-              </div>
-              <div className="relative">
-                <Input
-                  name="c-password"
-                  type={showPassword ? "text" : "password"}
-                  size="lg"
-                  placeholder="confirm your password"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
-                <div
-                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <VscEyeClosed size={24} />
-                  ) : (
-                    <VscEye size={24} />
-                  )}
-                </div>
-              </div>
-              <div>
-                <label className="label">
-                  <LoadCanvasTemplate reloadColor="#00BF63" />
+                  Name
                 </label>
                 <Input
-                  onBlur={handleValidateCaptcha}
+                  id="name"
+                  name="name"
                   type="text"
-                  name="captcha"
-                  placeholder="type the captcha above"
                   size="lg"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                  placeholder="Enter your name..."
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
+                    errors.name ? "!border-red-500  focus:!border-red-500" : ""
+                  }`}
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
                 />
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                )}
+              </div>
+
+              {/* Email Field */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="email"
+                  className="mb-1 text-base font-bold text-blue-gray-700"
+                >
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  size="lg"
+                  placeholder="name@mail.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
+                    errors.email ? "!border-red-500  focus:!border-red-500" : ""
+                  }`}
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                )}
+              </div>
+
+              {/* Password Field */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="password"
+                  className="mb-1 text-base font-bold text-blue-gray-700"
+                >
+                  Password
+                </label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    size="lg"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
+                      errors.password
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
+                    }`}
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                  />
+                  <div
+                    className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <VscEyeClosed size={24} />
+                    ) : (
+                      <VscEye size={24} />
+                    )}
+                  </div>
+                </div>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                )}
+              </div>
+
+              {/* Confirm Password Field */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="confirmPassword"
+                  className="mb-1 text-base font-bold text-blue-gray-700"
+                >
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showPassword ? "text" : "password"}
+                    size="lg"
+                    placeholder="Confirm your password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className={`!border-t-blue-gray-200 focus:!border-t-gray-900 ${
+                      errors.confirmPassword
+                        ? "!border-red-500  focus:!border-red-500"
+                        : ""
+                    }`}
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                  />
+                  <div
+                    className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <VscEyeClosed size={24} />
+                    ) : (
+                      <VscEye size={24} />
+                    )}
+                  </div>
+                </div>
+                {errors.confirmPassword && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.confirmPassword}
+                  </p>
+                )}
               </div>
             </div>
-            <Button className="mt-6 bg-primary" fullWidth disabled={disabled}>
-              sign up
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              className="mt-6 bg-primary"
+              fullWidth
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Signing Up..." : "Sign Up"}
             </Button>
+
+            {/* Divider */}
             <div className="flex items-center justify-center gap-2 my-5">
               <hr className="w-1/4 h-1 bg-gray-600" />
               <p>Or Continue</p>
               <hr className="w-1/4 h-1 bg-gray-600" />
             </div>
+
+            {/* Google Sign-Up */}
             <div className="w-full">
-              <Button className="bg-red-600 w-full flex justify-center items-center gap-2">
+              <Button
+                className="bg-red-600 w-full flex justify-center items-center gap-2"
+                onClick={handleGoogleSignIn}
+              >
                 <span>
                   <FaGoogle className="text-xl" />
                 </span>
                 <span>Continue with Google</span>
               </Button>
             </div>
-            <div color="gray" className="mt-4 font-normal text-center">
+
+            {/* Sign In Link */}
+            <div className="mt-4 font-normal text-center">
               Already have an account?
-              <Link to={"/signin"} className="ml-2 font-medium text-primary">
+              <Link
+                to={"/sunnah-store/signin"}
+                className="ml-2 font-medium text-primary"
+              >
                 Sign In
               </Link>
             </div>

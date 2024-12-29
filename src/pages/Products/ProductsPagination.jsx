@@ -1,27 +1,33 @@
-import { useState } from "react";
+
 import { Button, IconButton } from "@material-tailwind/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
-export default function ProductsPagination() {
-  const [active, setActive] = useState(1);
-
+export default function ProductsPagination({ currentPage, totalPages, setCurrentPage }) {
   const getItemProps = (index) => ({
-    variant: active === index ? "filled" : "text",
+    variant: currentPage === index ? "filled" : "text",
     color: "gray",
-    onClick: () => setActive(index),
+    onClick: () => setCurrentPage(index),
   });
 
   const next = () => {
-    if (active === 5) return;
-
-    setActive(active + 1);
+    if (currentPage === totalPages) return;
+    setCurrentPage(currentPage + 1);
   };
 
   const prev = () => {
-    if (active === 1) return;
-
-    setActive(active - 1);
+    if (currentPage === 1) return;
+    setCurrentPage(currentPage - 1);
   };
+
+  // Generate page numbers dynamically
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(
+      <IconButton key={i} {...getItemProps(i)}>
+        {i}
+      </IconButton>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center gap-4">
@@ -29,23 +35,20 @@ export default function ProductsPagination() {
         variant="text"
         className="flex items-center gap-2"
         onClick={prev}
-        disabled={active === 1}
+        disabled={currentPage === 1}
       >
         <FaArrowLeft strokeWidth={2} className="h-4 w-4" /> Previous
       </Button>
+      
       <div className="flex items-center gap-2">
-        <IconButton {...getItemProps(1)}>1</IconButton>
-        <IconButton {...getItemProps(2)}>2</IconButton>
-        <IconButton {...getItemProps(3)}>3</IconButton>
-        <IconButton {...getItemProps(4)}>4</IconButton>
-        <IconButton {...getItemProps(5)}>5</IconButton>
+        {pageNumbers}
       </div>
 
       <Button
         variant="text"
         className="flex items-center gap-2"
         onClick={next}
-        disabled={active === 5}
+        disabled={currentPage === totalPages}
       >
         Next
         <FaArrowRight strokeWidth={2} className="h-4 w-4" />

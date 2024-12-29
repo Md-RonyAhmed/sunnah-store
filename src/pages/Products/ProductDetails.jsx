@@ -5,34 +5,35 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loading from "../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
+import { useContext } from "react";
+import { WishlistContext } from "../../contexts/WishlistContext";
+import { CartContext } from "../../contexts/CartContext";
+import GoBack from "../../components/Shared/GoBack";
+import { useQuery } from "@tanstack/react-query";
+import usePublicAxios from "../../hooks/usePublicAxios";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
+  const axiosPublicInstance = usePublicAxios();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(
-          `https://sunnah-store-server-azure.vercel.app/product/${id}`
-        );
-        setProduct(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [id]);
+  const { data: product, isLoading } = useQuery({
+    queryKey: [id],
+    queryFn: async () => {
+      const res = await axiosPublicInstance.get(`product/${id}`);
+      return res.data;
+    },
+  });
 
-  if (loading) {
+  const { addToCart } = useContext(CartContext);
+  const { removeFromWishlist, addToWishlist, wishlistItems } =
+    useContext(WishlistContext);
+
+  const isWishlisted = wishlistItems.find((item) => item._id === id);
+
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -55,18 +56,29 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="flex relative justify-center items-center mt-44 py-10 px-4">
+    <div className="flex flex-col items-center relative mt-40 py-10 px-4">
+      <Helmet>
+        <title>{`Sunnah Store | ${name}`}</title>
+      </Helmet>
+
+      <div className="mb-6 relative w-full max-w-6xl lg:flex-row bg-white">
+        <GoBack />
+      </div>
+
       <Card className="relative border p-6 shadow-lg w-full max-w-6xl lg:flex-row bg-white">
         <CardHeader
           shadow={false}
           floated={false}
-          className="flex-1 flex justify-center items-center shadow-sm"
+          className="flex-1 flex justify-center items-center"
         >
-          <img
-            src={image}
-            alt={name}
-            className="w-80 object-contain transition-transform duration-200 hover:scale-105"
-          />
+          <div className="group w-80 overflow-hidden cursor-zoom-in">
+            <img
+              loading="lazy"
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-150"
+            />
+          </div>
         </CardHeader>
         <CardBody className="flex-1 lg:ml-8 p-0 pt-6 lg:pt-0 lg:p-6">
           <Typography
@@ -162,21 +174,27 @@ const ProductDetails = () => {
               size="md"
               variant="outlined"
               className="border-green-500 text-green-500 hover:bg-green-50 transition duration-500"
+              onClick={() => {
+                addToWishlist(product);
+              }}
             >
-              Add to Wishlist
+              {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
             </Button>
-            <Link to={"/cart"}>
-              <button
-                className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
-                  status
-                    ? "bg-green-600 hover:bg-green-400 cursor-pointer"
-                    : "cursor-not-allowed bg-gray-400"
-                }`}
-                disabled={!status}
-              >
-                Add to Cart
-              </button>
-            </Link>
+
+            <button
+              className={`py-3 px-6 rounded-lg text-white uppercase text-sm ${
+                status
+                  ? "bg-green-600 hover:bg-green-400 cursor-pointer"
+                  : "cursor-not-allowed bg-gray-400"
+              }`}
+              disabled={!status}
+              onClick={() => {
+                addToCart(product);
+                removeFromWishlist(product._id);
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </CardBody>
       </Card>

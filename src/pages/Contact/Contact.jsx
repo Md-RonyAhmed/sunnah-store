@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
+import { Helmet } from "react-helmet-async";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,10 @@ export function Contact() {
   };
 
   return (
-    <section className="px-8 py-8 lg:py-16">
+    <section className="px-8 py-8 lg:py-20">
+      <Helmet>
+        <title>Sunnah Store | Contact</title>
+      </Helmet>
       <div className="container mx-auto text-center">
         <h5
           color="blue-gray"
@@ -48,7 +52,7 @@ export function Contact() {
         <Typography
           variant="h1"
           color="blue-gray"
-          className="mb-4 !text-3xl lg:!text-5xl"
+          className="mb-4 !text-3xl lg:!text-4xl"
         >
           Contact Us
         </Typography>
@@ -68,17 +72,13 @@ export function Contact() {
             </Typography>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Typography
-                  variant="small"
-                  className="mb-2 text-left font-medium !text-gray-900"
-                >
-                  First Name
-                </Typography>
+
                 <Input
                   color="gray"
                   size="lg"
                   placeholder="First Name"
                   name="firstName"
+                  label="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
                   error={!!errors.firstName}
@@ -91,17 +91,13 @@ export function Contact() {
                 )}
               </div>
               <div>
-                <Typography
-                  variant="small"
-                  className="mb-2 text-left font-medium !text-gray-900"
-                >
-                  Last Name
-                </Typography>
+
                 <Input
                   color="gray"
                   size="lg"
                   placeholder="Last Name"
                   name="lastName"
+                  label="Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
                   error={!!errors.lastName}
@@ -115,17 +111,13 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <Typography
-                variant="small"
-                className="mb-2 text-left font-medium !text-gray-900"
-              >
-                Your Email
-              </Typography>
+
               <Input
                 color="gray"
                 size="lg"
                 placeholder="name@email.com"
                 name="email"
+                label="Your Email"
                 value={formData.email}
                 onChange={handleChange}
                 error={!!errors.email}
@@ -138,17 +130,13 @@ export function Contact() {
               )}
             </div>
             <div>
-              <Typography
-                variant="small"
-                className="mb-2 text-left font-medium !text-gray-900"
-              >
-                Your Message
-              </Typography>
+
               <Textarea
                 rows={6}
                 color="gray"
-                placeholder="Message"
+                size="regular"
                 name="message"
+                label="Message"
                 value={formData.message}
                 onChange={handleChange}
                 error={!!errors.message}
