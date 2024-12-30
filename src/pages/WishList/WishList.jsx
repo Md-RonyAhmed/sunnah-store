@@ -14,7 +14,7 @@ function Wishlist() {
 
   return (
     <>
-      <div className="mt-40 mb-6 w-fit">
+      <div className="mt-56 md:mt-44 mb-6 w-fit">
         <GoBack />
       </div>
       <div className="max-w-full mx-auto p-4 bg-gray-50 rounded-lg shadow">
@@ -32,36 +32,38 @@ function Wishlist() {
                 key={item._id}
                 className="flex-col md:flex-row flex items-center justify-between p-4 bg-white mb-4 rounded-lg shadow-sm"
               >
-                {/* Image */}
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-24 h-24 object-contain rounded-md"
-                />
+                <div className="flex items-center gap-2">
+                  {/* Image */}
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-24 h-24 object-contain rounded-md"
+                  />
 
-                {/* Product Details */}
-                <div className="flex-1 px-4">
-                  <div className="text-lg font-medium text-gray-800 truncate flex-col flex md:flex-row items-center gap-4">
-                    <Link to={`/product/${item._id}`}>
-                      <div className="text-lg font-semibold text-gray-800 hover:text-primary transition duration-200">
-                        {item.name}
-                      </div>
-                    </Link>
-                    <Typography className="text-sm">
-                      {item.status ? (
-                        <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">
-                          In stock
-                        </span>
-                      ) : (
-                        <span className="text-red-600 bg-gray-200 py-1 px-2.5 rounded-2xl">
-                          Out of stock
-                        </span>
-                      )}
-                    </Typography>
+                  {/* Product Details */}
+                  <div className="flex-1 px-4">
+                    <div className="text-lg font-medium text-gray-800 truncate flex-col flex md:flex-row items-center gap-4">
+                      <Link to={`/product/${item._id}`}>
+                        <div className="text-lg font-semibold text-gray-800 hover:text-primary transition duration-200">
+                          {item.name}
+                        </div>
+                      </Link>
+                      <Typography className="text-sm">
+                        {item.status ? (
+                          <span className="text-primary bg-gray-200 py-1 px-2.5 rounded-2xl">
+                            In stock
+                          </span>
+                        ) : (
+                          <span className="text-red-600 bg-gray-200 py-1 px-2.5 rounded-2xl">
+                            Out of stock
+                          </span>
+                        )}
+                      </Typography>
+                    </div>
+                    <p className="text-lg font-bold text-primary mt-2">
+                      ৳ {item.price}
+                    </p>
                   </div>
-                  <p className="text-lg font-bold text-primary mt-2">
-                    ৳ {item.price}
-                  </p>
                 </div>
 
                 {/* Actions */}
