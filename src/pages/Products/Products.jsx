@@ -132,7 +132,7 @@ const Products = () => {
   }
 
   return (
-    <div className="mt-44">
+    <div className="pt-5">
       <Helmet>
         <title>Sunnah Store | Products</title>
       </Helmet>

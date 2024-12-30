@@ -4,7 +4,7 @@ import { GrDeliver } from "react-icons/gr";
 import { Link } from "react-router-dom";
 const About = () => {
   return (
-    <div className="flex flex-col items-center py-20 justify-center mt-20 ">
+    <div className="flex flex-col items-center py-5 justify-center ">
        <Helmet>
         <title>Sunnah Store | About</title>
       </Helmet>
