@@ -41,7 +41,7 @@ export function Contact() {
   };
 
   return (
-    <section className="px-0 mt-[250px] md:mt-[180px] lg:mt-10 lg:py-20 mb-20">
+    <section className="-mt-6 md:mt-6 mb-20">
       <Helmet>
         <title>Sunnah Store | Contact</title>
       </Helmet>

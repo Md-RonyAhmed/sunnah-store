@@ -73,7 +73,7 @@ const FilterSection = ({
 
   return (
     <div>
-      <h3 className="text-xl mt-52 md:mt-0 mb-4 md:mb-0">Filter Items</h3>
+      <h3 className="text-xl mt-2 md:mt-4 mb-4 md:mb-0">Filter Items</h3>
       <div className="grid grid-cols-2 md:grid-cols-5 lg:flex-row justify-start gap-3 items-center pb-4 mb-4 bg-white rounded-lg">
         {/* Category Dropdown */}
         {!search && (
