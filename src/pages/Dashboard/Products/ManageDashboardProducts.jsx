@@ -40,7 +40,7 @@ const ManageDashboardProducts = () => {
       <Typography variant="h4" className="text-center mb-6">
         Manage Products
       </Typography>
-      <Card className="p-4">
+      <Card className="p-4 overflow-x-auto">
         <table className="min-w-full">
           <thead>
             <tr>
