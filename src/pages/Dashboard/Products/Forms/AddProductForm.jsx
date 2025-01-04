@@ -95,10 +95,10 @@ const AddProductForm = ({ category, subCategory, features }) => {
   */
 
   return (
-    <div className="max-w-5xl mx-auto mt-2">
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+    <div className="max-w-5xl mx-auto p-0">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
         {/* Column 1 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div>
             <label
               htmlFor="productName"
@@ -117,7 +117,7 @@ const AddProductForm = ({ category, subCategory, features }) => {
               required
             />
           </div>
-
+  
           <div>
             <label
               htmlFor="productImage"
@@ -136,9 +136,9 @@ const AddProductForm = ({ category, subCategory, features }) => {
             />
           </div>
         </div>
-
+  
         {/* Column 2 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div>
             <label
               htmlFor="price"
@@ -181,13 +181,13 @@ const AddProductForm = ({ category, subCategory, features }) => {
             />
           </div>
         </div>
-
+  
         {/* Key Features */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <label className="block text-sm font-medium text-gray-700">
             Key Features
           </label>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
               <input
                 key={feature}
@@ -199,20 +199,10 @@ const AddProductForm = ({ category, subCategory, features }) => {
               />
             ))}
           </div>
-
-          {/* Uncomment to allow adding more features dynamically
-          <button
-            type="button"
-            onClick={handleAddFeature}
-            className="mt-4 text-blue-600 hover:underline font-medium"
-          >
-            Add More Features
-          </button>
-          */}
         </div>
-
+  
         {/* Description */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700"
@@ -230,9 +220,9 @@ const AddProductForm = ({ category, subCategory, features }) => {
             required
           />
         </div>
-
+  
         {/* Submit Button */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <button
             type="submit"
             disabled={isSubmitting}
@@ -246,6 +236,7 @@ const AddProductForm = ({ category, subCategory, features }) => {
       </form>
     </div>
   );
+  
 };
 
 export default AddProductForm;
