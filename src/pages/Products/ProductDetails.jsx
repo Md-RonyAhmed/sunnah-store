@@ -56,7 +56,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="flex flex-col items-center relative mt-40 py-10 px-4">
+    <div className="flex flex-col items-center relative lg:mt-10 py-10 px-4">
       <Helmet>
         <title>{`Sunnah Store | ${name}`}</title>
       </Helmet>
