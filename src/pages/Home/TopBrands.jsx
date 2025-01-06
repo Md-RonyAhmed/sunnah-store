@@ -21,7 +21,7 @@ const TopBrands = () => {
   return (
     <section className="my-10">
       <h2 className="my-5 text-2xl text-primary">Top Brands</h2>
-      <div className="grid w-full grid-cols-1 gap-5 place-content-between place-items-center md:grid-cols-6">
+      <div className="grid w-full grid-cols-3 gap-3 md:gap-5 place-content-between place-items-center lg:grid-cols-6">
         <div className="p-8 border-2 rounded-md ">
           <img src={image1} alt="image1" />
         </div>

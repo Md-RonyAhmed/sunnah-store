@@ -6,8 +6,8 @@ import { GiWallet } from "react-icons/gi";
 
 const ServicesList = () => {
   return (
-    <section className="flex flex-wrap items-center justify-between gap-2 p-2 my-10 border-2 rounded-md ">
-      <div className="flex items-center justify-start gap-5">
+    <section className="grid grid-cols-1 space-y-2 lg:space-y-0 md:grid-cols-3 lg:grid-cols-5 items-center justify-between gap-2 my-10  ">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center justify-center w-16 h-16 text-5xl text-white bg-red-500 rounded-md ">
           <MdOutlineRocketLaunch />
         </div>
@@ -17,7 +17,7 @@ const ServicesList = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-start gap-5">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center justify-center w-16 h-16 text-5xl text-white bg-green-500 rounded-md ">
           <FaHandsHoldingCircle />
         </div>
@@ -27,7 +27,7 @@ const ServicesList = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-start gap-5">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center justify-center w-16 h-16 text-5xl text-white bg-purple-500 rounded-md ">
           <GiGearHammer />
         </div>
@@ -37,7 +37,7 @@ const ServicesList = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-start gap-5">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center justify-center w-16 h-16 text-5xl text-white bg-orange-500 rounded-md ">
           <BsGift />
         </div>
@@ -47,7 +47,7 @@ const ServicesList = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-start gap-5">
+      <div className="flex items-center justify-start gap-4">
         <div className="flex items-center justify-center w-16 h-16 text-5xl text-white bg-blue-500 rounded-md ">
           <GiWallet />
         </div>

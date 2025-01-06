@@ -350,11 +350,11 @@ export function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <Collapse open={openNav}>
+        <Collapse className="px-4" open={openNav}>
           {navList}
-          <div className="flex items-center gap-x-1 mt-4">
+          <div className="flex items-center gap-x-4 mt-4">
             <NavLink to={"/sunnah-store/signin"} className="w-full">
-              <Button fullWidth variant="text" size="sm" className="">
+              <Button fullWidth variant="text" size="sm" className="bg-gray-200">
                 <span>Sign In</span>
               </Button>
             </NavLink>

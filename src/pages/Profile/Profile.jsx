@@ -221,7 +221,7 @@ const Profile = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end gap-4 mt-8">
+          <div className="flex justify-start md:justify-end gap-4 mt-8">
             {isEditing ? (
               <>
                 <Button
@@ -258,7 +258,7 @@ const Profile = () => {
         <div className="space-y-4">
           <h3 className="text-xl font-semibold mb-4">Order History</h3>
           {orders.length > 0 ? (
-            <div className="overflow-x-auto">
+            <div className="overflow-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -340,18 +340,18 @@ const Profile = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 mt-2 mb-8 ">
+    <div className="container mx-auto px-2 md:px-4 mt-2 mb-8 ">
       <Helmet>
         <title>Sunnah Store | Profile</title>
       </Helmet>
 
-      <Card className="max-w-4xl mx-auto p-8">
+      <Card className="max-w-4xl mx-auto p-4 md:p-8">
         <Tabs value="profile">
           <TabsHeader>
             {data.map(({ label, value, icon: Icon }) => (
               <Tab key={value} value={value}>
                 <div className="flex items-center gap-2">
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5 hidden md:block"  />
                   {label}
                 </div>
               </Tab>

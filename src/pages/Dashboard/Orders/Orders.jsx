@@ -94,11 +94,11 @@ const Orders = () => {
   if (loading) return <Loading />;
 
   return (
-    <Card className="h-full w-full overflow-scroll ">
+    <Card className="w-full">
       <CardHeader
         floated={false}
         shadow={false}
-        className="mb-2 rounded-none p-2"
+        className="mb-2 rounded-none p-2 md:p-0"
       >
         <div>
           <h1 className="mt-2 text-primary text-3xl text-center">
@@ -115,130 +115,132 @@ const Orders = () => {
           />
         </div>
       </CardHeader>
-      <table className="w-full min-w-max table-auto text-left">
-        <thead>
-          <tr>
-            {TABLE_HEAD.map(({ head }) => (
-              <th key={head} className="border-b border-gray-300 p-4">
-                <div className="flex items-center gap-1">
-                  <Typography
-                    color="blue-gray"
-                    variant="small"
-                    className="!font-bold text-primary"
-                  >
-                    {head}
-                  </Typography>
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredRows.map(
-            (
-              {
-                _id,
-                email,
-                totalAmount,
-                orderDate,
-                status,
-                paymentMethod,
-                items,
-              },
-              index
-            ) => {
-              const isLast = index === filteredRows.length - 1;
-              const classes = isLast ? "p-4" : "p-4 border-b border-gray-300";
-
-              return (
-                <tr key={_id}>
-                  <td className={classes}>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              {TABLE_HEAD.map(({ head }) => (
+                <th key={head} className="border-b border-gray-300 p-4">
+                  <div className="flex items-center gap-1">
                     <Typography
-                      variant="small"
                       color="blue-gray"
-                      className="font-bold"
-                    >
-                      {_id}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
                       variant="small"
-                      className="font-normal text-gray-600"
+                      className="!font-bold text-primary"
                     >
-                      {email}
+                      {head}
                     </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {totalAmount}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {orderDate}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {status}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {paymentMethod === "cod"
-                        ? "Cash on delivery"
-                        : "Online Payment"}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {items.length}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <div className="flex items-center gap-2">
-                      <IconButton variant="text" size="sm">
-                        <DocumentIcon className="h-4 w-4 text-gray-900" />
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredRows.map(
+              (
+                {
+                  _id,
+                  email,
+                  totalAmount,
+                  orderDate,
+                  status,
+                  paymentMethod,
+                  items,
+                },
+                index
+              ) => {
+                const isLast = index === filteredRows.length - 1;
+                const classes = isLast ? "p-4" : "p-4 border-b border-gray-300";
+
+                return (
+                  <tr key={_id}>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-bold"
+                      >
+                        {_id}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {email}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {totalAmount}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {orderDate}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {status}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {paymentMethod === "cod"
+                          ? "Cash on delivery"
+                          : "Online Payment"}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        className="font-normal text-gray-600"
+                      >
+                        {items.length}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex items-center gap-2">
+                        <IconButton variant="text" size="sm">
+                          <DocumentIcon className="h-4 w-4 text-gray-900" />
+                        </IconButton>
+                        <IconButton variant="text" size="sm">
+                          <ArrowDownTrayIcon
+                            strokeWidth={3}
+                            className="h-4 w-4 text-gray-900"
+                          />
+                        </IconButton>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <IconButton
+                        variant="text"
+                        size="sm"
+                        onClick={() => handleDelete(_id)}
+                      >
+                        <TrashIcon className="h-4 w-4 text-red-600" />
                       </IconButton>
-                      <IconButton variant="text" size="sm">
-                        <ArrowDownTrayIcon
-                          strokeWidth={3}
-                          className="h-4 w-4 text-gray-900"
-                        />
-                      </IconButton>
-                    </div>
-                  </td>
-                  <td className={classes}>
-                    <IconButton
-                      variant="text"
-                      size="sm"
-                      onClick={() => handleDelete(_id)}
-                    >
-                      <TrashIcon className="h-4 w-4 text-red-600" />
-                    </IconButton>
-                  </td>
-                </tr>
-              );
-            }
-          )}
-        </tbody>
-      </table>
+                    </td>
+                  </tr>
+                );
+              }
+            )}
+          </tbody>
+        </table>
+      </div>
     </Card>
   );
 };

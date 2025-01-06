@@ -28,8 +28,8 @@ const Users = () => {
 
   return (
     <>
-      <Card className="h-full w-full shadow-none">
-        <CardBody>
+      <Card className="h-full w-full shadow-none mt-6 md:mt-0">
+        <CardBody className="overflow-x-auto p-0 mt-6">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
